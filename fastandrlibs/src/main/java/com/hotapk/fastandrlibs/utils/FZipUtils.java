@@ -21,11 +21,11 @@ import java.util.zip.ZipOutputStream;
  * @Copyright (C)上午12:08 , www.hotapk.cn
  * 文件解压缩类
  */
-public final class ZipUtils {
+public final class FZipUtils {
 
     private static final int BUFFER_LEN = 8192;
 
-    private ZipUtils() {
+    private FZipUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
