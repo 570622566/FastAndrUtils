@@ -62,8 +62,8 @@ public class FResourcesUtils {
      * context.getResources().getIdentifier 无法获取到 styleable 的数据
      *
      * @param name
+     * @param context
      * @return
-     * @paramcontext
      */
 
     public static int getStyleable(Context context, String name) {
@@ -72,12 +72,13 @@ public class FResourcesUtils {
 
     }
 
+
     /**
      * 获取 styleable 的 ID 号数组
      *
+     * @param context
      * @param name
      * @return
-     * @paramcontext
      */
     public static int[] getStyleableArray(Context context, String name) {
 
@@ -86,16 +87,13 @@ public class FResourcesUtils {
     }
 
     /**
-     * 对于 context.getResources().getIdentifier 无法获取的数据 , 或者数组
-     * <p/>
-     * 资源反射值
+     * 对于 context.getResources().getIdentifier 无法获取的数据 , 或者数组资源反射值
      *
+     * @param context
      * @param name
      * @param type
      * @return
-     * @paramcontext
      */
-
     private static Object getResourceId(Context context, String name, String type) {
 
         String className = context.getPackageName() + ".R";

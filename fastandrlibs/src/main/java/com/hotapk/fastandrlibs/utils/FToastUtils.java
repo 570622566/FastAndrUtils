@@ -101,7 +101,7 @@ public class FToastUtils {
         GradientDrawable gd = new GradientDrawable();// 创建drawable
         gd.setCornerRadius(roundRadius == -1 ? FScreenUtils.dip2px(context, 8) : FScreenUtils.dip2px(context, roundRadius));
         int fillColor = Color.parseColor(bgcolor == null ? "#66000000" : bgcolor);// 内部填充颜色
-        gd.setColor(fillColor);
+        gd.setColor(fillColor);//添加背景颜色
         bglayout.setBackground(gd);
         mTvToast.setTextSize(textSize != -1 ? textSize : 14);
         mTvToast.setTextColor(textColorId != -1 ? textColorId : Color.WHITE);
