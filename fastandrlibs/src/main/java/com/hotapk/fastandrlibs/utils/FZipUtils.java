@@ -93,7 +93,7 @@ public final class FZipUtils {
             return zipFile(resFile, "", zos, comment);
         } finally {
             if (zos != null) {
-                CloseUtils.closeIO(zos);
+                FCloseUtils.closeIO(zos);
             }
         }
     }
@@ -142,7 +142,7 @@ public final class FZipUtils {
                 }
                 zos.closeEntry();
             } finally {
-                CloseUtils.closeIO(is);
+                FCloseUtils.closeIO(is);
             }
         }
         return true;
@@ -246,7 +246,7 @@ public final class FZipUtils {
                     out.write(buffer, 0, len);
                 }
             } finally {
-                CloseUtils.closeIO(in, out);
+                FCloseUtils.closeIO(in, out);
             }
         }
         return true;

@@ -8,9 +8,9 @@ import java.io.IOException;
  * @version 2017/9/13
  * @Copyright (C)上午12:09 , www.hotapk.cn
  */
-public final class CloseUtils {
+public final class FCloseUtils {
 
-    private CloseUtils() {
+    private FCloseUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
