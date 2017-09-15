@@ -1,10 +1,10 @@
 package com.hotapk.fastandrlibs.utils;
 
+import android.content.Context;
 import android.util.Log;
 
-import com.hotapk.fastandrlibs.config.FLogConf;
-
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
@@ -48,15 +48,12 @@ public class FLogUtils {
     private boolean savesd = false;//是否存log到sd卡
     private int CHUNK_SIZE = 106; //设置字节数
     private String logDir = "";//设置文件存储目录
-    private long logSize = 2 * 1024 * 1024L;//设置log文件大小 k
+    private long logSize = 1 * 1024 * 1024L;//设置log文件大小 k
     private ExecutorService execu = Executors.newFixedThreadPool(1);
 
     private volatile static FLogUtils fLogUtils;
 
-    private FLogUtils() {
-        Log.e("www.hotapk.cn_log", TOP_LINE);
-        initLogFile();
-    }
+    private LogNetServer testHttpd;
 
     public static FLogUtils getInstance() {
         if (fLogUtils == null) {
@@ -69,86 +66,164 @@ public class FLogUtils {
         return fLogUtils;
     }
 
-    public FLogUtils setConf(FLogConf fLogConf) {
-        debug = fLogConf.isDebug();
-        savesd = fLogConf.isSavesd();
-        logSize = fLogConf.getLogSize();
-        logDir = fLogConf.getLogDir();
-        return this;
+    private FLogUtils() {
+        Log.e("www.hotapk.cn_log", TOP_LINE);
+        initLogFile();
     }
 
     private void initLogFile() {
-        logDir = FFileUtils.getRootDir() + "/hotapk.cn";
+        logDir = FFileUtils.getRootDir() + "/FastAndrUtils_log";
         FFileUtils.mkDir(logDir);
     }
 
-
-    private void saveToSd(final String tag, final String msg) {
-        if (!savesd) {
-            return;
-        }
-
-        execu.submit(new Runnable() {
-            @Override
-            public void run() {
-                String data = FTimeUtils.dateToString(new Date(), "yyyy-MM-dd");
-                File[] files = FFileUtils.orderByDate(new File(logDir), true);
-                List<File> filels = FFileUtils.filter(files, data);
-                String filepath;
-                if (filels.size() > 0) {
-                    Long length = FFileUtils.getLeng(filels.get(0));
-                    if (length > logSize) {
-                        int index = Integer.parseInt(filels.get(0).getName().replace(data + "_", "").replace(".log", ""));
-                        int id = index + 1;
-                        filepath = logDir + data + "_" + id + ".log";
-                        FFileUtils.creatFile(filepath);
-                    } else {
-                        filepath = filels.get(0).getAbsolutePath();
-                    }
-
-                } else {
-                    filepath = logDir + data + "_1.log";
-                    FFileUtils.creatFile(filepath);
+    /**
+     * 启动log的WebServer服务
+     *
+     * @param port
+     * @param context
+     */
+    public void startLogServer(int port, Context context) {
+        if (testHttpd == null) {
+            synchronized (FLogUtils.class) {
+                if (testHttpd == null) {
+                    testHttpd = new LogNetServer(port, context.getApplicationContext());
                 }
-                FFileUtils.appendText(new File(filepath), "\r\n" + tag + "\n" + msg);
-
             }
-        });
-
-
-    }
-
-    private String msgFormat(String msg) {
-        byte[] bytes = new byte[0];
+        }
         try {
-            bytes = msg.getBytes("utf-8");
-        } catch (UnsupportedEncodingException e) {
+            testHttpd.start();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        int length = bytes.length;
-        String newMsg = TOP_BORDER + "\n" + LEFT_BORDER + "\t" + FTimeUtils.dateToString(new Date()) + "\n" + LEFT_BORDER + "\t" + targetStackTraceMSg();
-        if (length > CHUNK_SIZE) {
-            int i = 0;
-            while (i < length) {
-                int count = Math.min(length - i, CHUNK_SIZE);
-                String tempStr = new String(bytes, i, count);
-                newMsg += "\n" + LEFT_BORDER + "\t" + tempStr;
-                i += CHUNK_SIZE;
-            }
-        } else {
-            newMsg += "\n" + LEFT_BORDER + "\t" + msg;
-        }
-        newMsg += "\n" + BOTTOM_BORDER;
-        return newMsg;
 
     }
 
+    /**
+     * 关闭log的WebServer服务
+     */
+    public void stopLogServer() {
+        if (testHttpd != null && testHttpd.isAlive()) {
+            testHttpd.stop();
+        }
+    }
+
+    public void v(String msg) {
+        v("www.hotapk.cn", msg);
+    }
+
+    public void d(String msg) {
+        d("www.hotapk.cn", msg);
+    }
+
+    public void i(String msg) {
+        i("www.hotapk.cn", msg);
+    }
+
+    public void w(String msg) {
+        w("www.hotapk.cn", msg);
+    }
+
+    public void e(String msg) {
+        e("www.hotapk.cn", msg);
+    }
+
+    public void v(String tag, String msg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.v(tag, msgFormat(stackstr, msg));
+        }
+        saveToSd(stackstr, msg);
+    }
+
+    public void d(String tag, String msg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.d(tag, msgFormat(stackstr, msg));
+        }
+        saveToSd(stackstr, msg);
+    }
+
+    public void i(String tag, String msg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.i(tag, msgFormat(stackstr, msg));
+        }
+        saveToSd(stackstr, msg);
+    }
+
+    public void w(String tag, String msg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.w(tag, msgFormat(stackstr, msg));
+        }
+        saveToSd(stackstr, msg);
+    }
+
+
+    public void e(String tag, String msg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.e(tag, msgFormat(stackstr, msg));
+        }
+        saveToSd(stackstr, msg);
+
+    }
+
+    /**
+     * 是否开启bebug模式
+     *
+     * @param debug
+     * @return
+     */
+    public FLogUtils debug(boolean debug) {
+        this.debug = debug;
+        return this;
+    }
+
+    /**
+     * 是否保存到sd卡
+     *
+     * @param savesd
+     * @return
+     */
+    public FLogUtils saveSD(boolean savesd) {
+        this.savesd = savesd;
+        return this;
+    }
+
+    /**
+     * 设置log文件大小
+     *
+     * @param logSize
+     * @return
+     */
+    public FLogUtils setLogSize(int logSize) {
+        this.logSize = logSize;
+        return this;
+    }
+
+    /**
+     * 设置log文件目录
+     *
+     * @param logDir
+     * @return
+     */
+    public FLogUtils setlogDir(String logDir) {
+        if (!logDir.isEmpty()) {
+            this.logDir = logDir;
+        }
+        return this;
+    }
+
+    public String getLogFileDir() {
+        return logDir;
+    }
 
     private String targetStackTraceMSg() {
         StackTraceElement targetStackTraceElement = getTargetStackTraceElement();
         if (targetStackTraceElement != null) {
-            return "at " + targetStackTraceElement.getClassName() +"."+ targetStackTraceElement.getMethodName()+
-                   "(" + targetStackTraceElement.getFileName() + ":" + targetStackTraceElement.getLineNumber()+")";
+            return "at " + targetStackTraceElement.getClassName() + "." + targetStackTraceElement.getMethodName() +
+                    "(" + targetStackTraceElement.getFileName() + ":" + targetStackTraceElement.getLineNumber() + ")";
 
         } else {
             return "";
@@ -171,61 +246,64 @@ public class FLogUtils {
         return targetStackTrace;
     }
 
-
-    public void v(String msg) {
-        v("www.hotapk.cn_log", msg);
-    }
-
-    public void d(String msg) {
-        d("www.hotapk.cn_log", msg);
-    }
-
-    public void i(String msg) {
-        i("www.hotapk.cn_log", msg);
-    }
-
-    public void w(String msg) {
-        w("www.hotapk.cn_log", msg);
-    }
-
-    public void e(String msg) {
-        e("www.hotapk.cn_log", msg);
-    }
-
-    public void v(String tag, String msg) {
-        if (debug) {
-            Log.v(tag, msgFormat(msg));
+    private String msgFormat(String stackstr, String msg) {
+        byte[] bytes = new byte[0];
+        try {
+            bytes = msg.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        saveToSd(tag, msg);
-    }
-
-    public void d(String tag, String msg) {
-        if (debug) {
-            Log.d(tag, msgFormat(msg));
+        int length = bytes.length;
+        String newMsg = TOP_BORDER + "\n" + LEFT_BORDER + "\t" + FTimeUtils.dateToString(new Date()) + "\n" + LEFT_BORDER + "\t" + stackstr;
+        if (length > CHUNK_SIZE) {
+            int i = 0;
+            while (i < length) {
+                int count = Math.min(length - i, CHUNK_SIZE);
+                String tempStr = new String(bytes, i, count);
+                newMsg += "\n" + LEFT_BORDER + "\t" + tempStr;
+                i += CHUNK_SIZE;
+            }
+        } else {
+            newMsg += "\n" + LEFT_BORDER + "\t" + msg;
         }
-        saveToSd(tag, msg);
+        newMsg += "\n" + BOTTOM_BORDER;
+        return newMsg;
+
     }
 
-    public void i(String tag, String msg) {
-        if (debug) {
-            Log.i(tag, msgFormat(msg));
+    private void saveToSd(final String stackstr, final String msg) {
+        if (!savesd) {
+            return;
         }
-        saveToSd(tag, msg);
+
+        execu.submit(new Runnable() {
+            @Override
+            public void run() {
+                String data = FTimeUtils.dateToString(new Date(), "yyyy-MM-dd");
+                File[] files = FFileUtils.orderByDate(new File(logDir), true);
+                List<File> filels = FFileUtils.filter(files, data);
+                String filepath;
+                if (filels.size() > 0) {
+                    Long length = FFileUtils.getLeng(filels.get(0));
+                    if (length > logSize) {
+                        int index = Integer.parseInt(filels.get(0).getName().replace("log_" + data + "_", "").replace(".html", ""));
+                        int id = index + 1;
+                        filepath = logDir + "/" + "log_" + data + "_" + id + ".html";
+                        FFileUtils.creatFile(filepath);
+                    } else {
+                        filepath = filels.get(0).getAbsolutePath();
+                    }
+
+                } else {
+                    filepath = logDir + "/" + "log_" + data + "_1.html";
+                    FFileUtils.creatFile(filepath);
+                }
+                FFileUtils.appendText(filepath, "<div class=\"dotted\">" + "\n<div class=\"exp\">\n" + FTimeUtils.dateToString(new Date()) + "\n</div><div>\n" + stackstr + "\n</div><div class=\"redcolor\">\n" + msg + "\n</div></div>", true);
+            }
+        });
+
+
     }
 
-    public void w(String tag, String msg) {
-        if (debug) {
-            Log.w(tag, msgFormat(msg));
-        }
-        saveToSd(tag, msg);
-    }
-
-
-    public void e(String tag, String msg) {
-        if (debug) {
-            Log.e(tag, msgFormat(msg));
-        }
-        saveToSd(tag, msg);
-    }
 
 }

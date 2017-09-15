@@ -6,27 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <TextView
-        android:id="@+id/show_toast_bt"
+        android:id="@+id/open_bt"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
-        android:text="显示Toast" />
-
+        android:text="打开bug" />
     <TextView
-        android:id="@+id/show_file_bt"
+        android:id="@+id/ipaddr_tv"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
-        android:text="文件工具" />
 
-    <TextView
-        android:id="@+id/show_net_bt"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="网络" />
-
+        />
 
 </LinearLayout>

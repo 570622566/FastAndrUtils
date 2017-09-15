@@ -7,12 +7,14 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -46,7 +48,7 @@ public class FFileUtils {
         String pathTemp = "";
         boolean mkdir = false;
         for (int i = 0; i < dirArray.length; i++) {
-            pathTemp = pathTemp + dirArray[i];
+            pathTemp = pathTemp + "/" + dirArray[i];
             File newF = new File(dirArray[0] + pathTemp);
             if (!newF.exists()) {
                 mkdir = newF.mkdir();
@@ -548,6 +550,77 @@ public class FFileUtils {
         return true;
     }
 
+
+    /**
+     * 追加数据
+     *
+     * @param filePath
+     * @param content
+     * @param header   是否在头部追加数据
+     */
+    public static void appendText(String filePath, String content, boolean header) {
+        RandomAccessFile raf = null;
+        FileOutputStream tmpOut = null;
+        FileInputStream tmpIn = null;
+        try {
+            File tmp = File.createTempFile("tmp", null);
+            tmp.deleteOnExit();//在JVM退出时删除
+
+            raf = new RandomAccessFile(filePath, "rw");
+            //创建一个临时文件夹来保存插入点后的数据
+            tmpOut = new FileOutputStream(tmp);
+            tmpIn = new FileInputStream(tmp);
+            long fileLength = 0;
+            if (!header) {
+                fileLength = raf.length();
+            }
+            raf.seek(fileLength);
+            /**将插入点后的内容读入临时文件夹**/
+
+            byte[] buff = new byte[1024];
+            //用于保存临时读取的字节数
+            int hasRead = 0;
+            //循环读取插入点后的内容
+            while ((hasRead = raf.read(buff)) > 0) {
+                // 将读取的数据写入临时文件中
+                tmpOut.write(buff, 0, hasRead);
+            }
+            //插入需要指定添加的数据
+            raf.seek(fileLength);//返回原来的插入处
+            //追加需要追加的内容
+            raf.write(content.getBytes());
+            //最后追加临时文件中的内容
+            while ((hasRead = tmpIn.read(buff)) > 0) {
+                raf.write(buff, 0, hasRead);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (tmpOut!=null){
+                try {
+                    tmpOut.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (tmpIn!=null){
+                try {
+                    tmpIn.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (raf!=null){
+                try {
+                    raf.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     /**
      * 获取文件大小
      *
@@ -685,6 +758,51 @@ public class FFileUtils {
         return filels;
     }
 
+    /**
+     * 文件筛选
+     *
+     * @param file
+     * @param filterName
+     * @return
+     */
+    public static File[] fileNameFilter(File file, final String filterName) {
+        if (!file.isDirectory()) {
+            return null;
+        }
+        File[] files = file.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                if (pathname.getName().contains(filterName)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        return files;
+
+    }
+
+    /**
+     * 获取文件列表
+     *
+     * @param fileDir
+     */
+    public static File[] getFiles(String fileDir) {
+        return getFiles(new File(fileDir));
+    }
+
+    /**
+     * 获取文件列表
+     *
+     * @param fileDir
+     */
+    public static File[] getFiles(File fileDir) {
+        if (!fileDir.isDirectory()) {
+            return null;
+        }
+        return fileDir.listFiles();
+    }
 
 
 }

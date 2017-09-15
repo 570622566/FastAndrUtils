@@ -24,7 +24,7 @@ public class FAssetsARawUtils {
      */
     public static boolean assetsDataToSD(String filePath, String assetsName, Context context) throws IOException {
         InputStream myInput;
-        myInput = context.getAssets().open(assetsName);
+        myInput = context.getApplicationContext().getAssets().open(assetsName);
         return FFileUtils.inputStreamToFile(myInput, filePath);
     }
 
@@ -38,7 +38,7 @@ public class FAssetsARawUtils {
      */
     public static String getAssetsToString(String assetsName, Context context) {
         try {
-            return FFileUtils.readInp(context.getAssets().open(assetsName));
+            return FFileUtils.readInp(context.getApplicationContext().getAssets().open(assetsName));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class FAssetsARawUtils {
         InputStream inputStream = null;
 
         try {
-            inputStream = context.getAssets().open(assetsName);
+            inputStream = context.getApplicationContext().getAssets().open(assetsName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,7 +74,7 @@ public class FAssetsARawUtils {
      * @return
      */
     public static String getRawToString(int rawId, Context context) {
-        return FFileUtils.readInp(context.getResources().openRawResource(rawId));
+        return FFileUtils.readInp(context.getApplicationContext().getResources().openRawResource(rawId));
     }
 
 
@@ -88,7 +88,7 @@ public class FAssetsARawUtils {
     public static byte[] readRawFileToByteArray(int rawId, Context context) {
         InputStream inputStream = null;
 
-        inputStream = context.getResources().openRawResource(rawId);
+        inputStream = context.getApplicationContext().getResources().openRawResource(rawId);
 
         return inputStream != null ? FFileUtils.inputStreamToByteArray(inputStream) : null;
     }
@@ -104,7 +104,7 @@ public class FAssetsARawUtils {
     public static void copyRawFileToSdcard(int rawId, Context context, String outPutFileAbs) {
         InputStream inputStream = null;
 
-        inputStream = context.getResources().openRawResource(rawId);
+        inputStream = context.getApplicationContext().getResources().openRawResource(rawId);
         if (inputStream != null) {
             FFileUtils.inputStreamToFile(inputStream, outPutFileAbs);
         }
