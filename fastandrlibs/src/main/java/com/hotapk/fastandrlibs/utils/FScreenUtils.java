@@ -24,7 +24,7 @@ public class FScreenUtils {
      * @return
      */
     public static int[] getScreen(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) FUtils.getAppContext().getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(displayMetrics);
         return new int[]{displayMetrics.widthPixels, displayMetrics.heightPixels};

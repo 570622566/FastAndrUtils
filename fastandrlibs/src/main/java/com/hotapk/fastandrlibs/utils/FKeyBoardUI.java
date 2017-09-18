@@ -54,10 +54,10 @@ public class FKeyBoardUI implements FKeyBoardHeightUtils.KeyBoardVisiableListene
 
     private void initDialog() {
         LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popuView = inflater.inflate(FResourcesUtils.getLayoutResources(activity, "f_popuwindow"), null);
-        RelativeLayout populay = (RelativeLayout) popuView.findViewById(FResourcesUtils.getIdResources(activity, "popu_lay"));
-        popuEdtext = (FNullMenuEditText) popuView.findViewById(FResourcesUtils.getIdResources(activity, "ed_text"));
-        mDialog = new Dialog(activity, FResourcesUtils.getStyleResources(activity, "f_dialog"));
+        View popuView = inflater.inflate(FResourcesUtils.getLayoutResources("f_popuwindow"), null);
+        RelativeLayout populay = (RelativeLayout) popuView.findViewById(FResourcesUtils.getIdResources("popu_lay"));
+        popuEdtext = (FNullMenuEditText) popuView.findViewById(FResourcesUtils.getIdResources("ed_text"));
+        mDialog = new Dialog(activity, FResourcesUtils.getStyleResources("f_dialog"));
         mDialog.setContentView(popuView);
         populay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +140,7 @@ public class FKeyBoardUI implements FKeyBoardHeightUtils.KeyBoardVisiableListene
                         p.height = heigth; // 高度设置为屏幕的0.6，根据实际情况调整
                         p.width = screenWeight; // 宽度设置为屏幕的0.65，根据实际情况调整
                         dialogWindow.setAttributes(p);
-                        dialogWindow.setWindowAnimations(FResourcesUtils.getStyleResources(activity, "f_popupAnimation"));
+                        dialogWindow.setWindowAnimations(FResourcesUtils.getStyleResources("f_popupAnimation"));
                         onEdChange();
                         FKeyBoardUtils.openKeybord(edtextVew, activity);
                     } else {

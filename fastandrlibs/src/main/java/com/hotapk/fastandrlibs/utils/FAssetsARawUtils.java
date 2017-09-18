@@ -19,12 +19,11 @@ public class FAssetsARawUtils {
      *
      * @param filePath   sd文件路径
      * @param assetsName
-     * @param context
      * @throws IOException
      */
-    public static boolean assetsDataToSD(String filePath, String assetsName, Context context) throws IOException {
+    public static boolean assetsDataToSD(String filePath, String assetsName) throws IOException {
         InputStream myInput;
-        myInput = context.getApplicationContext().getAssets().open(assetsName);
+        myInput = FUtils.getAppContext().getAssets().open(assetsName);
         return FFileUtils.inputStreamToFile(myInput, filePath);
     }
 
@@ -33,12 +32,11 @@ public class FAssetsARawUtils {
      * 读取assets文件内容
      *
      * @param assetsName
-     * @param context
      * @return
      */
-    public static String getAssetsToString(String assetsName, Context context) {
+    public static String getAssetsToString(String assetsName) {
         try {
-            return FFileUtils.readInp(context.getApplicationContext().getAssets().open(assetsName));
+            return FFileUtils.readInp(FUtils.getAppContext().getAssets().open(assetsName));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,14 +48,13 @@ public class FAssetsARawUtils {
      * 读取assets文件 转byte数组
      *
      * @param assetsName
-     * @param context
      * @return
      */
-    public static byte[] readAssetsByteArray(String assetsName, Context context) {
+    public static byte[] readAssetsByteArray(String assetsName) {
         InputStream inputStream = null;
 
         try {
-            inputStream = context.getApplicationContext().getAssets().open(assetsName);
+            inputStream = FUtils.getAppContext().getAssets().open(assetsName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,11 +67,10 @@ public class FAssetsARawUtils {
      * 读取raw文件内容
      *
      * @param rawId
-     * @param context
      * @return
      */
-    public static String getRawToString(int rawId, Context context) {
-        return FFileUtils.readInp(context.getApplicationContext().getResources().openRawResource(rawId));
+    public static String getRawToString(int rawId) {
+        return FFileUtils.readInp(FUtils.getAppContext().getResources().openRawResource(rawId));
     }
 
 
@@ -82,14 +78,11 @@ public class FAssetsARawUtils {
      * 读取raw文件 转byte数组
      *
      * @param rawId
-     * @param context
      * @return
      */
-    public static byte[] readRawFileToByteArray(int rawId, Context context) {
+    public static byte[] readRawFileToByteArray(int rawId) {
         InputStream inputStream = null;
-
-        inputStream = context.getApplicationContext().getResources().openRawResource(rawId);
-
+        inputStream = FUtils.getAppContext().getResources().openRawResource(rawId);
         return inputStream != null ? FFileUtils.inputStreamToByteArray(inputStream) : null;
     }
 
@@ -98,13 +91,12 @@ public class FAssetsARawUtils {
      * 复制raw文件到sd卡
      *
      * @param rawId
-     * @param context
      * @param outPutFileAbs
      */
-    public static void copyRawFileToSdcard(int rawId, Context context, String outPutFileAbs) {
+    public static void copyRawFileToSdcard(int rawId, String outPutFileAbs) {
         InputStream inputStream = null;
 
-        inputStream = context.getApplicationContext().getResources().openRawResource(rawId);
+        inputStream = FUtils.getAppContext().getResources().openRawResource(rawId);
         if (inputStream != null) {
             FFileUtils.inputStreamToFile(inputStream, outPutFileAbs);
         }

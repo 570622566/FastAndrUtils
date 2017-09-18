@@ -40,22 +40,22 @@ public class FToastUtils {
     private TextView mTvToast;
     private ImageView toastImg;
 
-    private FToastUtils(Context context) {
-        this.context = context;
-        rootView = LayoutInflater.from(context.getApplicationContext()).inflate(FResourcesUtils.getLayoutResources(context.getApplicationContext(), "f_toast_layout"), null);//自定义样式，自定义布局文件
+    private FToastUtils() {
+        this.context = FUtils.getAppContext();
+        rootView = LayoutInflater.from(context.getApplicationContext()).inflate(FResourcesUtils.getLayoutResources("f_toast_layout"), null);//自定义样式，自定义布局文件
         bglayout = (LinearLayout) rootView.findViewById(
-                FResourcesUtils.getIdResources(context.getApplicationContext(), "f_toast_bg"));
+                FResourcesUtils.getIdResources("f_toast_bg"));
         mTvToast = (TextView) rootView.findViewById(
-                FResourcesUtils.getIdResources(context.getApplicationContext(), "f_toast_tv"));
+                FResourcesUtils.getIdResources("f_toast_tv"));
         toastImg = (ImageView) rootView.findViewById(
-                FResourcesUtils.getIdResources(context.getApplicationContext(), "f_toast_iv"));
+                FResourcesUtils.getIdResources("f_toast_iv"));
     }
 
-    public static FToastUtils getInstant(Context context) {
+    public static FToastUtils getInstant() {
         if (toastUtils == null) {
             synchronized (FToastUtils.class) {
                 if (toastUtils == null) {
-                    toastUtils = new FToastUtils(context);
+                    toastUtils = new FToastUtils();
                 }
             }
         }

@@ -1,6 +1,5 @@
 package com.hotapk.fastandrlibs.utils;
 
-import android.content.Context;
 import android.content.res.Resources;
 
 import java.lang.reflect.Field;
@@ -13,62 +12,61 @@ import java.lang.reflect.Field;
  */
 public class FResourcesUtils {
 
-    public static int getAnimResources(Context context, String animName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(animName, "anim", context.getPackageName());
+    public static int getAnimResources( String animName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(animName, "anim", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getMipmapResources(Context context, String mipmapName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(mipmapName, "mipmap", context.getPackageName());
+    public static int getMipmapResources( String mipmapName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(mipmapName, "mipmap", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getIdResources(Context context, String idName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(idName, "id", context.getPackageName());
+    public static int getIdResources( String idName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(idName, "id", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getDrawableResources(Context context, String drawableName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(drawableName, "drawable", context.getPackageName());
+    public static int getDrawableResources( String drawableName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(drawableName, "drawable", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getColorResources(Context context, String colorName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(colorName, "color", context.getPackageName());
+    public static int getColorResources(  String colorName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(colorName, "color", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getStringResources(Context context, String stringName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(stringName, "string", context.getPackageName());
+    public static int getStringResources( String stringName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(stringName, "string", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getLayoutResources(Context context, String LayoutName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(LayoutName, "layout", context.getPackageName());
+    public static int getLayoutResources( String LayoutName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(LayoutName, "layout", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getAttrResources(Context context, String attrName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(attrName, "attr", context.getPackageName());
+    public static int getAttrResources( String attrName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(attrName, "attr", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getStyleResources(Context context, String attrName) {
-        Resources res = context.getResources();
-        return res.getIdentifier(attrName, "style", context.getPackageName());
+    public static int getStyleResources(String attrName) {
+        Resources res = FUtils.getAppContext().getResources();
+        return res.getIdentifier(attrName, "style", FUtils.getAppContext().getPackageName());
     }
 
     /**
      * context.getResources().getIdentifier 无法获取到 styleable 的数据
      *
      * @param name
-     * @param context
      * @return
      */
 
-    public static int getStyleable(Context context, String name) {
+    public static int getStyleable( String name) {
 
-        return ((Integer) getResourceId(context, name, "styleable")).intValue();
+        return ((Integer) getResourceId( name, "styleable")).intValue();
 
     }
 
@@ -76,27 +74,25 @@ public class FResourcesUtils {
     /**
      * 获取 styleable 的 ID 号数组
      *
-     * @param context
      * @param name
      * @return
      */
-    public static int[] getStyleableArray(Context context, String name) {
+    public static int[] getStyleableArray( String name) {
 
-        return (int[]) getResourceId(context, name, "styleable");
+        return (int[]) getResourceId( name, "styleable");
 
     }
 
     /**
      * 对于 context.getResources().getIdentifier 无法获取的数据 , 或者数组资源反射值
      *
-     * @param context
      * @param name
      * @param type
      * @return
      */
-    private static Object getResourceId(Context context, String name, String type) {
+    private static Object getResourceId( String name, String type) {
 
-        String className = context.getPackageName() + ".R";
+        String className = FUtils.getAppContext().getPackageName() + ".R";
 
         try {
 

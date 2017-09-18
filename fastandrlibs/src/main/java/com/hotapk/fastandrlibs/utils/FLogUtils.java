@@ -1,6 +1,5 @@
 package com.hotapk.fastandrlibs.utils;
 
-import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
@@ -79,14 +78,13 @@ public class FLogUtils {
     /**
      * 启动log的WebServer服务
      *
-     * @param port
-     * @param context
+     * @param port 端口号
      */
-    public void startLogServer(int port, Context context) {
+    public void startLogServer(int port) {
         if (testHttpd == null) {
             synchronized (FLogUtils.class) {
                 if (testHttpd == null) {
-                    testHttpd = new FLogNetServer(port, context.getApplicationContext());
+                    testHttpd = new FLogNetServer(port);
                 }
             }
         }

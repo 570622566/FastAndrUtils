@@ -11,7 +11,6 @@ import java.util.Map;
  * @Copyright (C)下午4:00 , www.hotapk.cn
  */
 public class FLogNetServer extends NanoHTTPD {
-    private Context context;
 
     public FLogNetServer(int port) {
         super(port);
@@ -21,17 +20,12 @@ public class FLogNetServer extends NanoHTTPD {
         super(hostname, port);
     }
 
-    public FLogNetServer(int port, Context context) {
-        super(port);
-        this.context = context;
-    }
-
 
     @Override
     public Response serve(IHTTPSession session) {
         String file_name = session.getUri().substring(1);
         StringBuffer br = new StringBuffer();
-        String header = FAssetsARawUtils.getAssetsToString("index.html", context);
+        String header = FAssetsARawUtils.getAssetsToString("index.html");
         br.append(header);
         String filedir = FLogUtils.getInstance().getLogFileDir();
         if (file_name.isEmpty()) {

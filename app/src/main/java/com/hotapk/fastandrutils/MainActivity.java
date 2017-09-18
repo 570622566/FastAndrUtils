@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 FToastConf fToastConf = new FToastConf();
                 fToastConf.setGrivity(Gravity.TOP);
                 fToastConf.setRoundRadius(100);
-                FToastUtils.getInstant(MainActivity.this).setConf(fToastConf).showMessage(i + "Dddddddddddddddddddddddddddddddddddcdd");
+                FToastUtils.getInstant().setConf(fToastConf).showMessage(i + "Dddddddddddddddddddddddddddddddddddcdd");
             }
         });
         findViewById(R.id.show_net_bt).setOnClickListener(new View.OnClickListener() {

@@ -29,8 +29,8 @@ public class FNetworkUtils {
     /**
      * 打开网络设置界面
      */
-    public static void openWirelessSettings(Context context) {
-        context.getApplicationContext().startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    public static void openWirelessSettings() {
+        FUtils.getAppContext().startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     /**
@@ -39,8 +39,8 @@ public class FNetworkUtils {
      *
      * @return NetworkInfo
      */
-    private static NetworkInfo getActiveNetworkInfo(Context context) {
-        return ((ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+    private static NetworkInfo getActiveNetworkInfo() {
+        return ((ConnectivityManager) FUtils.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
     }
 
     /**
@@ -49,8 +49,8 @@ public class FNetworkUtils {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean isConnected(Context context) {
-        NetworkInfo info = getActiveNetworkInfo(context);
+    public static boolean isConnected() {
+        NetworkInfo info = getActiveNetworkInfo();
         return info != null && info.isConnected();
     }
 
@@ -61,20 +61,19 @@ public class FNetworkUtils {
      *
      * @return 运营商名称
      */
-    public static String getNetworkOperatorName(Context context) {
-        TelephonyManager tm = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+    public static String getNetworkOperatorName() {
+        TelephonyManager tm = (TelephonyManager) FUtils.getAppContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getNetworkOperatorName() : null;
     }
 
     /**
      * 判断网络连接是否打开,包括移动数据连接
      *
-     * @param context 上下文
      * @return 是否联网
      */
-    public static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable() {
         boolean netstate = false;
-        ConnectivityManager connectivity = (ConnectivityManager) context.getApplicationContext()
+        ConnectivityManager connectivity = (ConnectivityManager) FUtils.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
 
@@ -97,11 +96,10 @@ public class FNetworkUtils {
     /**
      * 检测当前打开的网络类型是否WIFI
      *
-     * @param context 上下文
      * @return 是否是Wifi上网
      */
-    public static boolean isWifi(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext()
+    public static boolean isWifi() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) FUtils.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetInfo != null
@@ -111,11 +109,10 @@ public class FNetworkUtils {
     /**
      * 检测当前打开的网络类型是否3G
      *
-     * @param context 上下文
      * @return 是否是3G上网
      */
-    public static boolean is3G(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext()
+    public static boolean is3G() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) FUtils.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetInfo != null
@@ -125,11 +122,10 @@ public class FNetworkUtils {
     /**
      * 检测当前开打的网络类型是否4G
      *
-     * @param context 上下文
      * @return 是否是4G上网
      */
-    public static boolean is4G(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext()
+    public static boolean is4G() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) FUtils.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetInfo != null && activeNetInfo.isConnectedOrConnecting()) {
@@ -143,11 +139,10 @@ public class FNetworkUtils {
     /**
      * 只是判断WIFI
      *
-     * @param context 上下文
      * @return 是否打开Wifi
      */
-    public static boolean isWiFi(Context context) {
-        ConnectivityManager manager = (ConnectivityManager) context.getApplicationContext()
+    public static boolean isWiFi() {
+        ConnectivityManager manager = (ConnectivityManager) FUtils.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo.State wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
                 .getState();
@@ -161,9 +156,9 @@ public class FNetworkUtils {
      *
      * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
-    public static void setDataEnabled(final boolean enabled, Context context) {
+    public static void setDataEnabled(final boolean enabled) {
         try {
-            TelephonyManager tm = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) FUtils.getAppContext().getSystemService(Context.TELEPHONY_SERVICE);
             Method setMobileDataEnabledMethod = tm.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
             if (null != setMobileDataEnabledMethod) {
                 setMobileDataEnabledMethod.invoke(tm, enabled);
@@ -179,8 +174,8 @@ public class FNetworkUtils {
      *
      * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
-    public static void setWifiEnabled(final boolean enabled, Context context) {
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    public static void setWifiEnabled(final boolean enabled) {
+        WifiManager wifiManager = (WifiManager) FUtils.getAppContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (enabled) {
             if (!wifiManager.isWifiEnabled()) {
                 wifiManager.setWifiEnabled(true);
@@ -204,12 +199,11 @@ public class FNetworkUtils {
     /**
      * 判断当前是否网络连接
      *
-     * @param context 上下文
      * @return 状态码
      */
-    public NetState getNetworkType(Context context) {
+    public NetState getNetworkType() {
         NetState stateCode = NetState.NET_NO;
-        ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext()
+        ConnectivityManager cm = (ConnectivityManager) FUtils.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         if (ni != null && ni.isConnectedOrConnecting()) {
@@ -285,8 +279,8 @@ public class FNetworkUtils {
     /**
      * 获取ip地址
      */
-    private String getIPAddress(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    private String getIPAddress() {
+        WifiManager wifiManager = (WifiManager) FUtils.getAppContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
         final String formatedIpAddress = String.format("%d.%d.%d.%d", (ipAddress & 0xff), (ipAddress >> 8 & 0xff), (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));
         return formatedIpAddress;
