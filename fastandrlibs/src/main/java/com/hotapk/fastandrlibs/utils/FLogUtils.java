@@ -53,7 +53,7 @@ public class FLogUtils {
 
     private volatile static FLogUtils fLogUtils;
 
-    private LogNetServer testHttpd;
+    private FLogNetServer testHttpd;
 
     public static FLogUtils getInstance() {
         if (fLogUtils == null) {
@@ -86,7 +86,7 @@ public class FLogUtils {
         if (testHttpd == null) {
             synchronized (FLogUtils.class) {
                 if (testHttpd == null) {
-                    testHttpd = new LogNetServer(port, context.getApplicationContext());
+                    testHttpd = new FLogNetServer(port, context.getApplicationContext());
                 }
             }
         }
@@ -284,7 +284,7 @@ public class FLogUtils {
                 List<File> filels = FFileUtils.filter(files, data);
                 String filepath;
                 if (filels.size() > 0) {
-                    Long length = FFileUtils.getLeng(filels.get(0));
+                    Long length = FFileUtils.getLength(filels.get(0));
                     if (length > logSize) {
                         int index = Integer.parseInt(filels.get(0).getName().replace("log_" + data + "_", "").replace(".html", ""));
                         int id = index + 1;

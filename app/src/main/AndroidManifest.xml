@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".FileUtilsActivity" />
-        <activity android:name=".HttpdActivity"></activity>
+        <activity android:name=".HttpdActivity" />
+        <activity android:name=".KeyBoardActivity" android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

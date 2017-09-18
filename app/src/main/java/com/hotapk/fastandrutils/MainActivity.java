@@ -38,12 +38,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, HttpdActivity.class));
             }
         });
+        findViewById(R.id.show_keyboard_bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, KeyBoardActivity.class));
+            }
+        });
+
+
+
 
         PermissionGen.needPermission(this, 200, new String[]{
                 Manifest.permission.CAMERA,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE
         });
+
+        FLogUtils.getInstance().e("ddd");
 
     }
 

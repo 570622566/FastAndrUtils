@@ -58,7 +58,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -69,13 +68,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.logging.Level;
@@ -91,7 +88,8 @@ import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
-import static com.hotapk.fastandrlibs.utils.NanoHTTPD.Response.*;
+import static com.hotapk.fastandrlibs.utils.NanoHTTPD.Response.IStatus;
+import static com.hotapk.fastandrlibs.utils.NanoHTTPD.Response.Status;
 
 
 /**
@@ -1655,38 +1653,39 @@ public abstract class NanoHTTPD {
     public static Map<String, String> mimeTypes() {
         if (MIME_TYPES == null) {
             MIME_TYPES = new HashMap<String, String>();
-            loadMimeTypes(MIME_TYPES, "META-INF/nanohttpd/default-mimetypes.properties");
-            loadMimeTypes(MIME_TYPES, "META-INF/nanohttpd/mimetypes.properties");
-            if (MIME_TYPES.isEmpty()) {
-                LOG.log(Level.WARNING, "no mime types found in the classpath! please provide mimetypes.properties");
-            }
+            MIME_TYPES.put("css", "text/css");
+            MIME_TYPES.put("htm", "text/html");
+            MIME_TYPES.put("html", "text/html");
+            MIME_TYPES.put("xml", "text/xml");
+            MIME_TYPES.put("java", "text/x-java-source, text/java");
+            MIME_TYPES.put("md", "text/plain");
+            MIME_TYPES.put("txt", "text/plain");
+            MIME_TYPES.put("asc", "text/plain");
+            MIME_TYPES.put("gif", "image/gif");
+            MIME_TYPES.put("jpg", "image/jpeg");
+            MIME_TYPES.put("jpeg", "image/jpeg");
+            MIME_TYPES.put("png", "image/png");
+            MIME_TYPES.put("svg", "image/svg+xml");
+            MIME_TYPES.put("mp3", "audio/mpeg");
+            MIME_TYPES.put("m3u", "audio/mpeg-url");
+            MIME_TYPES.put("mp4", "video/mp4");
+            MIME_TYPES.put("ogv", "video/ogg");
+            MIME_TYPES.put("flv", "video/x-flv");
+            MIME_TYPES.put("mov", "video/quicktime");
+            MIME_TYPES.put("swf", "application/x-shockwave-flash");
+            MIME_TYPES.put("js", "application/javascript");
+            MIME_TYPES.put("pdf", "application/pdf");
+            MIME_TYPES.put("doc", "application/msword");
+            MIME_TYPES.put("ogg", "application/x-ogg");
+            MIME_TYPES.put("zip", "application/octet-stream");
+            MIME_TYPES.put("exe", "application/octet-stream");
+            MIME_TYPES.put("class", "application/octet-stream");
+            MIME_TYPES.put("m3u8", "application/vnd.apple.mpegurl");
+            MIME_TYPES.put("ts", "video/mp2t");
         }
         return MIME_TYPES;
     }
 
-    private static void loadMimeTypes(Map<String, String> result, String resourceName) {
-        try {
-            Enumeration<URL> resources = NanoHTTPD.class.getClassLoader().getResources(resourceName);
-            while (resources.hasMoreElements()) {
-                URL url = (URL) resources.nextElement();
-                Properties properties = new Properties();
-                InputStream stream = null;
-                try {
-                    stream = url.openStream();
-                    properties.load(url.openStream());
-                } catch (IOException e) {
-                    LOG.log(Level.SEVERE, "could not load mimetypes from " + url, e);
-                } finally {
-                    safeClose(stream);
-                }
-                result.putAll((Map) properties);
-            }
-        } catch (IOException e) {
-            LOG.log(Level.INFO, "no mime types available at " + resourceName);
-        }
-    }
-
-    ;
 
     /**
      * Creates an SSLSocketFactory for HTTPS. Pass a loaded KeyStore and an

@@ -10,18 +10,18 @@ import java.util.Map;
  * @version 2017/9/15
  * @Copyright (C)下午4:00 , www.hotapk.cn
  */
-public class LogNetServer extends NanoHTTPD {
+public class FLogNetServer extends NanoHTTPD {
     private Context context;
 
-    public LogNetServer(int port) {
+    public FLogNetServer(int port) {
         super(port);
     }
 
-    public LogNetServer(String hostname, int port) {
+    public FLogNetServer(String hostname, int port) {
         super(hostname, port);
     }
 
-    public LogNetServer(int port, Context context) {
+    public FLogNetServer(int port, Context context) {
         super(port);
         this.context = context;
     }
@@ -31,10 +31,9 @@ public class LogNetServer extends NanoHTTPD {
     public Response serve(IHTTPSession session) {
         String file_name = session.getUri().substring(1);
         StringBuffer br = new StringBuffer();
-        String header = FAssetsARawUtils.getAssetsToString("baidu.html", context);
+        String header = FAssetsARawUtils.getAssetsToString("index.html", context);
         br.append(header);
         String filedir = FLogUtils.getInstance().getLogFileDir();
-        FLogUtils.getInstance().e("测试下效果-----");
         if (file_name.isEmpty()) {
             File[] files = FFileUtils.getFiles(filedir);
             if (files != null) {

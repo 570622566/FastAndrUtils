@@ -28,5 +28,12 @@
         android:gravity="center"
         android:text="网络" />
 
+    <TextView
+        android:id="@+id/show_keyboard_bt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="软键盘" />
+
 
 </LinearLayout>

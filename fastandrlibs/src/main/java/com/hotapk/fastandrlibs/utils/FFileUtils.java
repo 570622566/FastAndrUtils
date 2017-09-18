@@ -1,6 +1,5 @@
 package com.hotapk.fastandrlibs.utils;
 
-import android.content.res.AssetManager;
 import android.os.Environment;
 
 import java.io.BufferedReader;
@@ -596,7 +595,7 @@ public class FFileUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (tmpOut!=null){
+            if (tmpOut != null) {
                 try {
                     tmpOut.close();
                 } catch (IOException e) {
@@ -604,14 +603,14 @@ public class FFileUtils {
                 }
             }
 
-            if (tmpIn!=null){
+            if (tmpIn != null) {
                 try {
                     tmpIn.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if (raf!=null){
+            if (raf != null) {
                 try {
                     raf.close();
                 } catch (IOException e) {
@@ -627,7 +626,7 @@ public class FFileUtils {
      * @param filePath
      * @return
      */
-    public static long getLeng(File filePath) {
+    public static long getLength(File filePath) {
         if (!filePath.exists()) {
             return -1;
         } else {
@@ -635,6 +634,42 @@ public class FFileUtils {
         }
     }
 
+    /**
+     * 获取文件大小
+     * @param filePath
+     * @return
+     */
+    public static long getLength(String filePath) {
+        return getLength(new File(filePath));
+    }
+
+    /**
+     * 获取文件名
+     *
+     * @param filePath
+     * @return
+     */
+    public static String getFileName(String filePath) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return null;
+        }
+        return file.getName();
+
+    }
+
+    /**
+     * 判断文件是否存在
+     *
+     * @param filePath
+     * @return
+     */
+    public static boolean exists(String filePath) {
+        if (new File(filePath).exists()) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * 按文件时间排序

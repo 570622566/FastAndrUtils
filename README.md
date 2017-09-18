@@ -1,4 +1,7 @@
 ## android快速开发工具类
+
+![](http://upload-images.jianshu.io/upload_images/2383936-04e12f5855b6771e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ### [FResourcesUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrlibs/src/main/java/com/hotapk/fastandrlibs/utils/FResourcesUtils.java)  获取R资源相关类
   
   FResourcesUtils.getStringResources(context,"title") 获取字符串资源id
