@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.hotapk.fastandrlibs.config.FToastConf;
 import com.hotapk.fastandrlibs.utils.FLogUtils;
@@ -17,11 +18,14 @@ import kr.co.namee.permissiongen.PermissionGen;
 public class MainActivity extends AppCompatActivity {
     int i = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FLogUtils.getInstance().saveSD(true);
+
+
         findViewById(R.id.show_toast_bt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, KeyBoardActivity.class));
             }
         });
-
-
 
 
         PermissionGen.needPermission(this, 200, new String[]{

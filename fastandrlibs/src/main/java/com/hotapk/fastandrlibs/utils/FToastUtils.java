@@ -99,7 +99,7 @@ public class FToastUtils {
 
     private void setLayoutConf() {
         GradientDrawable gd = new GradientDrawable();// 创建drawable
-        gd.setCornerRadius(roundRadius == -1 ? FScreenUtils.dip2px(context, 8) : FScreenUtils.dip2px(context, roundRadius));
+        gd.setCornerRadius(roundRadius == -1 ? FConvertUtils.dip2px(8) : FConvertUtils.dip2px(roundRadius));
         int fillColor = Color.parseColor(bgcolor == null ? "#66000000" : bgcolor);// 内部填充颜色
         gd.setColor(fillColor);//添加背景颜色
         bglayout.setBackground(gd);

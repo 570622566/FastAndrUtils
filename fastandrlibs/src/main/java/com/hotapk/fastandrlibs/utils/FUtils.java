@@ -16,6 +16,9 @@ public class FUtils {
 
     private FUtils(Application application) {
         this.application = application;
+        FActivityLifecycleCallbacks.init(this.application);
+        FCrashUtils.getInstance();
+
     }
 
     public static void init(Application application) {

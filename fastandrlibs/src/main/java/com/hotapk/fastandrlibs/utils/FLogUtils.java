@@ -178,6 +178,11 @@ public class FLogUtils {
         return this;
     }
 
+
+    public boolean isDebug() {
+        return debug;
+    }
+
     /**
      * 是否保存到sd卡
      *

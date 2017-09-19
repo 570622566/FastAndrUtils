@@ -2,12 +2,14 @@ package com.hotapk.fastandrlibs.utils;
 
 import android.os.Environment;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -192,6 +194,11 @@ public class FFileUtils {
         File oldFile = new File(oldFilePath);
         File newFile = new File(newFilePath);
         return oldFile.renameTo(newFile);
+    }
+
+    public static boolean copyFileTo(String srcFile, String destFile) {
+        return copyFileTo(new File(srcFile), new File(destFile));
+
     }
 
     /**
@@ -405,14 +412,11 @@ public class FFileUtils {
     public static byte[] inputStreamToByteArray(InputStream inputStream) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         byte[] buf = new byte[1024];
-        boolean len = false;
-
         try {
             int len1;
             while ((len1 = inputStream.read(buf)) != -1) {
                 outputStream.write(buf, 0, len1);
             }
-
             outputStream.close();
             inputStream.close();
         } catch (IOException var5) {
@@ -474,6 +478,37 @@ public class FFileUtils {
     }
 
     /**
+     * 文件转InputStream
+     *
+     * @param absPath
+     * @return
+     */
+    public static InputStream file2Inp(String absPath) {
+        File file = new File(absPath);
+        if (!file.exists()) {
+            return null;
+        }
+        InputStream is = null;
+        try {
+            is = new BufferedInputStream(new FileInputStream(file));
+            return is;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
+    /**
      * 写入数据到文件
      *
      * @param filePath
@@ -501,6 +536,11 @@ public class FFileUtils {
         return true;
     }
 
+    public static boolean writeText(String filePath, String content) {
+        return writeText(filePath, content);
+    }
+
+
     /**
      * byte数组转文件
      *
@@ -518,6 +558,7 @@ public class FFileUtils {
         }
         return true;
     }
+
 
     /**
      * 追加数据
@@ -636,6 +677,7 @@ public class FFileUtils {
 
     /**
      * 获取文件大小
+     *
      * @param filePath
      * @return
      */
