@@ -7,11 +7,11 @@ import java.io.IOException;
  * @author laijian
  * @version 2017/9/13
  * @Copyright (C)上午12:09 , www.hotapk.cn
+ * 关闭流
  */
 public final class FCloseUtils {
 
     private FCloseUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**

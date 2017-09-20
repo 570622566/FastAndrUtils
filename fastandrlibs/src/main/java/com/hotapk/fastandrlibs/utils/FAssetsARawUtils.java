@@ -1,7 +1,5 @@
 package com.hotapk.fastandrlibs.utils;
 
-import android.content.Context;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,8 +9,10 @@ import java.io.InputStream;
  * @Copyright (C)上午11:18 , www.hotapk.cn
  * assets raw 相关操作类
  */
-public class FAssetsARawUtils {
+public final class FAssetsARawUtils {
+    private FAssetsARawUtils() {
 
+    }
 
     /**
      * 拷贝assets下的文件的方法

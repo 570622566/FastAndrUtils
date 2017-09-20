@@ -1,7 +1,5 @@
 package com.hotapk.fastandrlibs.utils;
 
-import android.content.Context;
-
 import java.io.File;
 import java.util.Map;
 
@@ -9,6 +7,7 @@ import java.util.Map;
  * @author laijian
  * @version 2017/9/15
  * @Copyright (C)下午4:00 , www.hotapk.cn
+ * log内网webservers
  */
 public class FLogNetServer extends NanoHTTPD {
 

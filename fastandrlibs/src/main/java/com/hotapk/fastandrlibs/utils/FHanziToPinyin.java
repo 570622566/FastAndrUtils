@@ -10,7 +10,9 @@ import java.util.Locale;
  * @author laijian
  * @version 2017/9/19
  * @Copyright (C)下午3:06 , www.hotapk.cn
+ * 汉字转拼音
  */
+
 public class FHanziToPinyin {
     private static final boolean DEBUG = true;
     private static final String TAG = "HanziToPinyin";

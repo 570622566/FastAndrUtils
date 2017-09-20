@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
  * @author laijian
  * @version 2017/8/31
  * @Copyright (C)上午11:11 , Suntektech
+ * 获取键盘高度
  */
 public class FKeyBoardHeightUtils {
     private View mChildOfContent;//activity 的布局View

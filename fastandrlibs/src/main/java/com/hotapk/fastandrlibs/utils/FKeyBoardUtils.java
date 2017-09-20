@@ -12,6 +12,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
  * @author laijian
  * @version 2017/8/29
  * @Copyright (C)下午2:55 , Suntektech
+ * 键盘类
  */
 public class FKeyBoardUtils {
     /**

@@ -20,7 +20,11 @@ import android.view.WindowManager;
  * @Copyright (C)上午10:23 , www.hotapk.cn
  * 获取分辨率 及 分辨率转换 工具类
  */
-public class FScreenUtils {
+public final class FScreenUtils {
+
+    private FScreenUtils() {
+
+    }
 
     /**
      * 获得屏幕宽高pix
@@ -113,7 +117,6 @@ public class FScreenUtils {
         view.destroyDrawingCache();
         return bp;
     }
-
 
 
     /**

@@ -164,7 +164,7 @@ public final class FCrashUtils implements UncaughtExceptionHandler {
         printWriter.close();
         String result = writer.toString();
         sb.append(result);
-        FLogUtils.getInstance().e(sb.toString());
+        FLogUtils.getInstance().setCrash(sb.toString());
 
     }
 }

@@ -1,6 +1,5 @@
 package com.hotapk.fastandrlibs.utils;
 
-import android.content.Context;
 import android.util.Base64;
 
 import java.io.ByteArrayInputStream;
@@ -10,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.HashMap;
@@ -21,9 +21,16 @@ import java.util.Map;
  * @author laijian
  * @version 2017/9/19
  * @Copyright (C)上午11:37 , www.hotapk.cn
+ * 数据转换
  */
-public class FConvertUtils {
+public final class FConvertUtils {
+
     private static final int KB = 1024;
+
+    private FConvertUtils() {
+
+    }
+
 
     /**
      * 对字符串md5加密
@@ -334,6 +341,43 @@ public class FConvertUtils {
     }
 
     /**
+     * 格式化单位
+     *
+     * @param size
+     * @return
+     */
+    public static String getFormatSize(double size) {
+        double kiloByte = size / 1024;
+        if (kiloByte < 1) {
+            return size + "Byte";
+        }
+
+        double megaByte = kiloByte / 1024;
+        if (megaByte < 1) {
+            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .toPlainString() + "KB";
+        }
+
+        double gigaByte = megaByte / 1024;
+        if (gigaByte < 1) {
+            BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .toPlainString() + "MB";
+        }
+
+        double teraBytes = gigaByte / 1024;
+        if (teraBytes < 1) {
+            BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .toPlainString() + "GB";
+        }
+        BigDecimal result4 = new BigDecimal(teraBytes);
+        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
+                + "TB";
+    }
+
+    /**
      * 判断字符串是否为null或全为空白字符
      *
      * @param s 待校验字符串
@@ -348,5 +392,6 @@ public class FConvertUtils {
         }
         return true;
     }
+
 
 }

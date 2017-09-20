@@ -14,8 +14,9 @@ import java.util.regex.Pattern;
  * @Copyright (C)下午3:47 , www.hotapk.cn
  * 时间操作类
  */
-public class FTimeUtils {
-
+public final class FTimeUtils {
+    private FTimeUtils() {
+    }
 
     // 格式：年－月－日 小时：分钟：秒
     private static String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";

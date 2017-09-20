@@ -41,7 +41,6 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,9 +50,13 @@ import java.io.OutputStream;
  * @author laijian
  * @version 2017/9/18
  * @Copyright (C)下午10:30 , www.hotapk.cn
+ * 图片工具类
  */
-public class FImageUtils {
+public final class FImageUtils {
 
+    private FImageUtils() {
+
+    }
 
     /**
      * bitmap转byteArr
@@ -1316,7 +1319,6 @@ public class FImageUtils {
     }
 
 
-
     /**
      * 图片锐化（拉普拉斯变换）
      *
@@ -1410,6 +1412,7 @@ public class FImageUtils {
         }
         return binarymap;
     }
+
     /**
      * 保存图片
      *

@@ -24,6 +24,7 @@ import com.hotapk.fastandrlibs.widget.FNullMenuEditText;
  * @author laijian
  * @version 2017/8/31
  * @Copyright (C)上午11:57 , Suntektech
+ * 软件键盘结合EditText
  */
 public class FKeyBoardUI implements FKeyBoardHeightUtils.KeyBoardVisiableListener {
 

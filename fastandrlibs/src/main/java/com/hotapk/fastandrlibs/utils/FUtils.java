@@ -1,7 +1,6 @@
 package com.hotapk.fastandrlibs.utils;
 
 import android.app.Application;
-import android.content.Context;
 
 /**
  * @author laijian

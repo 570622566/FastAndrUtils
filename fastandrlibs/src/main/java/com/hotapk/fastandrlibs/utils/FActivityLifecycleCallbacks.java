@@ -5,21 +5,21 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  * @author laijian
  * @version 2017/9/19
  * @Copyright (C)下午7:39 , www.hotapk.cn
+ * activity生命周期
  */
 public class FActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
-    private List<Activity> activities = new LinkedList<>();
+    private Stack<Activity> activities;
     @SuppressLint("StaticFieldLeak")
     private volatile static FActivityLifecycleCallbacks fActivityLifecycleCallbacks;
     private static int sAnimationId = 0;
     private Application application;
-
+    private LifecycleListener lifecycleListener;
 
     private FActivityLifecycleCallbacks(Application application) {
         this.application = application;
@@ -34,6 +34,10 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
                 }
             }
         }
+    }
+
+    public void setLifecycleListener(LifecycleListener lifecycleListener) {
+        this.lifecycleListener = lifecycleListener;
     }
 
     public static FActivityLifecycleCallbacks getfActivityLifecycle() {
@@ -55,12 +59,17 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
 
     @Override
     public void onActivityResumed(Activity activity) {
+        if (lifecycleListener != null) {
+            lifecycleListener.onActivityResumed(activity);
+        }
 
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-
+        if (lifecycleListener != null) {
+            lifecycleListener.onActivityPaused(activity);
+        }
     }
 
     @Override
@@ -83,12 +92,19 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
      */
     public void addActivity(Activity activity) {
         if (activities == null) {
-            activities = new LinkedList<>();
+            activities = new Stack<>();
         }
-
         if (!activities.contains(activity)) {
             activities.add(activity);//把当前Activity添加到集合中
         }
+    }
+
+    /**
+     * get current Activity 获取当前Activity（栈中最后一个压入的）
+     */
+    public Activity currentActivity() {
+        Activity activity = activities.lastElement();
+        return activity;
     }
 
     /**
@@ -97,6 +113,7 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
     public void removeActivity(Activity activity) {
         if (activities.contains(activity)) {
             activities.remove(activity);
+            activity.finish();
         }
 
         if (activities.size() == 0) {
@@ -104,6 +121,16 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
         }
     }
 
+    /**
+     * 结束指定类名的Activity
+     */
+    public void finishActivity(Class<?> cls) {
+        for (Activity activity : activities) {
+            if (activity.getClass().equals(cls)) {
+                removeActivity(activity);
+            }
+        }
+    }
 
     /**
      * 销毁所有activity
@@ -115,5 +142,11 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
                 activity.overridePendingTransition(0, sAnimationId);
             }
         }
+        activities.clear();
+    }
+
+    public interface LifecycleListener {
+        void onActivityResumed(Activity activity);
+        void onActivityPaused(Activity activity);
     }
 }

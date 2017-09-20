@@ -1,7 +1,6 @@
 package com.hotapk.fastandrlibs.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.Set;
@@ -12,7 +11,10 @@ import java.util.Set;
  * @Copyright (C)下午2:32 , www.hotapk.cn
  * SharedPreferences 工具类
  */
-public class FSharedPreferencesUtils {
+public final class FSharedPreferencesUtils {
+    private FSharedPreferencesUtils() {
+
+    }
 
     private static String name = "hotapk.cn";
 

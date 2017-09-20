@@ -22,9 +22,14 @@ import java.util.Map;
  * @author laijian
  * @version 2017/9/15
  * @Copyright (C)下午2:09 , www.hotapk.cn
+ * <p>
+ * 网络类
  */
-public class FNetworkUtils {
+public final class FNetworkUtils {
 
+    private FNetworkUtils() {
+
+    }
 
     /**
      * 打开网络设置界面

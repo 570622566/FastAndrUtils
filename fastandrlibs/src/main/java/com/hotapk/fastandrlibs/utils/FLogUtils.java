@@ -45,6 +45,7 @@ public class FLogUtils {
     private String BOTTOM_BORDER = "╚══════════════════════════════════════════════════════════════════════════════════════════════════════════";
     private boolean debug = true;//是否打印log
     private boolean savesd = false;//是否存log到sd卡
+    private boolean savecrash = true;//是否存crash信息到sd卡
     private int CHUNK_SIZE = 106; //设置字节数
     private String logDir = "";//设置文件存储目录
     private long logSize = 1 * 1024 * 1024L;//设置log文件大小 k
@@ -130,7 +131,9 @@ public class FLogUtils {
         if (debug) {
             Log.v(tag, msgFormat(stackstr, msg));
         }
-        saveToSd(stackstr, msg);
+        if (savesd) {
+            saveToSd(stackstr, msg);
+        }
     }
 
     public void d(String tag, String msg) {
@@ -138,7 +141,9 @@ public class FLogUtils {
         if (debug) {
             Log.d(tag, msgFormat(stackstr, msg));
         }
-        saveToSd(stackstr, msg);
+        if (savesd) {
+            saveToSd(stackstr, msg);
+        }
     }
 
     public void i(String tag, String msg) {
@@ -146,7 +151,9 @@ public class FLogUtils {
         if (debug) {
             Log.i(tag, msgFormat(stackstr, msg));
         }
-        saveToSd(stackstr, msg);
+        if (savesd) {
+            saveToSd(stackstr, msg);
+        }
     }
 
     public void w(String tag, String msg) {
@@ -154,7 +161,9 @@ public class FLogUtils {
         if (debug) {
             Log.w(tag, msgFormat(stackstr, msg));
         }
-        saveToSd(stackstr, msg);
+        if (savesd) {
+            saveToSd(stackstr, msg);
+        }
     }
 
 
@@ -163,8 +172,19 @@ public class FLogUtils {
         if (debug) {
             Log.e(tag, msgFormat(stackstr, msg));
         }
-        saveToSd(stackstr, msg);
+        if (savesd) {
+            saveToSd(stackstr, msg);
+        }
+    }
 
+    public void setCrash(String msg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.e("www.hotapk.cn", msgFormat(stackstr, msg));
+        }
+        if (savecrash) {
+            saveToSd(stackstr, msg);
+        }
     }
 
     /**
@@ -191,6 +211,17 @@ public class FLogUtils {
      */
     public FLogUtils saveSD(boolean savesd) {
         this.savesd = savesd;
+        return this;
+    }
+
+    /**
+     * 是否保存crash信息
+     *
+     * @param savecrash
+     * @return
+     */
+    public FLogUtils saveCrash(boolean savecrash) {
+        this.savecrash = savecrash;
         return this;
     }
 
@@ -275,10 +306,6 @@ public class FLogUtils {
     }
 
     private void saveToSd(final String stackstr, final String msg) {
-        if (!savesd) {
-            return;
-        }
-
         execu.submit(new Runnable() {
             @Override
             public void run() {
