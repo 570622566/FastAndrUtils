@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:paddingTop="2dp">
 
-        <com.hotapk.fastandrlibs.widget.FNullMenuEditText
+        <cn.hotapk.fastandrlibs.widget.FNullMenuEditText
             android:id="@+id/ed_text"
             android:layout_width="match_parent"
             android:layout_height="36dp"

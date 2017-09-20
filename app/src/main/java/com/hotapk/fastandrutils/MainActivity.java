@@ -7,11 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.TextView;
 
-import com.hotapk.fastandrlibs.config.FToastConf;
-import com.hotapk.fastandrlibs.utils.FLogUtils;
-import com.hotapk.fastandrlibs.utils.FToastUtils;
+import cn.hotapk.fastandrlibs.config.FToastConf;
+import cn.hotapk.fastandrlibs.utils.FLogUtils;
+import cn.hotapk.fastandrlibs.utils.FToastUtils;
 
 import kr.co.namee.permissiongen.PermissionGen;
 

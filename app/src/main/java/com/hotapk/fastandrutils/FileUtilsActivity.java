@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hotapk.fastandrlibs.utils.FFileUtils;
+import cn.hotapk.fastandrlibs.utils.FFileUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
