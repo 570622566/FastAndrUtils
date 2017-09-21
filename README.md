@@ -2,33 +2,44 @@
 
 ## 关于
 Fastandrutils 是一套整理修改整合的android开发常用的工具类。 
+
 这样可以减少复制粘贴代码，从而减少重复代码，也不用为了一个常用的功能去谷歌百度，让代码更简洁，让开发更高效。
+
 同时希望您的添加完善，让android开发变得更简单。
 
-[github地址,感兴趣的话，就点赞支持下](https://github.com/570622566/FastAndrUtils)
+感兴趣的话，就点赞支持下
+
 [个人博客](http://www.hotapk.cn)
 
 ## 使用
 1. Gradle 添加
+
     compile 'cn.hotapk:fastandrutils:0.4.0'（还在审核中，过几天才能用）
 
 2. androidmanifest.xml 的 application 添加
+
     android:name="cn.hotapk.fastandrutils.utils.FApplication"
+    
     或者
+    
      ```
      public class 你的application extends FApplication {
       ...
      }
      ```
+     
      或者 在你的application 添加
+     
      FUtils.init(this);
 
 ## API
 
 - 类名
+
 [FActivityLifecycleCallbacks.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FActivityLifecycleCallbacks.java)
 
 - 说明
+
     activity 生命周期管理
 
 - 方法描述
@@ -42,9 +53,11 @@ Fastandrutils 是一套整理修改整合的android开发常用的工具类。
     | removeAllActivities | 销毁所有activity |
 
 - 类名
+
 [FAppUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FAppUtils.java)
 
 - 说明 
+
     app相关信息
 
 - 方法描述
@@ -63,18 +76,23 @@ Fastandrutils 是一套整理修改整合的android开发常用的工具类。
     | hexdigest |签名byte数组转32位签名字符串 |
 
 - 类名
+
 [FApplication.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FApplication.java)
 
 - 说明 
+
 Application 
 
 - 方法描述
+
     无
 
 - 类名
+
 [FAssetsARawUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FAssetsARawUtils.java)
 
 - 说明 
+
     assets raw 相关操作
 
 - 方法描述
@@ -89,9 +107,11 @@ Application
     | copyRawFileToSdcard |复制raw文件到sd卡|
 
 - 类名
+
 [FCleanUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCleanUtils.java)
 
 - 说明 
+
    清理app缓存
 
 - 方法描述
@@ -108,18 +128,23 @@ Application
     | cleanApplicationData | 清除本应用所有及自定义文件路径的数据 |
 
 - 类名
+
 [FClickProxy.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FClickProxy.java)
 
 - 说明 
+
    防止重复点击
 
 - 方法描述
+
    无
 
 - 类名
+
 [FCloseUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCloseUtils.java)
 
 - 说明 
+
 关闭数据流
 
 - 方法描述
@@ -129,9 +154,11 @@ Application
     | closeIO|关闭IO|
 
 - 类名
+
 [FConvertUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FConvertUtils.java)
 
 - 说明 
+
    数据转换
 
 - 方法描述
@@ -160,18 +187,23 @@ Application
     | getFormatSize | 格式化KB MB GB 单位 |
 
 - 类名
+
 [FCrashUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCrashUtils.java)
 
 - 说明 
+
    app异常退出捕获
 
 - 方法描述
+
    无
 
 - 类名
+
 [FDBExprotUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FDBExprotUtils.java)
 
 - 说明 
+
    数据库导出到sd卡
 
 - 方法描述
@@ -181,9 +213,11 @@ Application
     | startExportDatabase | 导出数据库 |
 
 - 类名
+
 [FEncryptUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FEncryptUtils.java)
 
 - 说明 
+
    加密相关
 
 - 方法描述
@@ -214,9 +248,11 @@ Application
     | decryptAES | AES解密 |
 
 - 类名
+
 [FFileUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FFileUtils.java)
 
 - 说明 
+
    文件操作工具
 
 - 方法描述
@@ -249,9 +285,11 @@ Application
     | getFiles | 获取文件列表 |
 
 - 类名
+
 [FHanziToPinyin.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FHanziToPinyin.java)
 
 - 说明 
+
    汉字转拼音
 
 - 方法描述
@@ -261,9 +299,11 @@ Application
     | get | 汉字转拼音 |
 
 - 类名
+
 [FImageUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FImageUtils.java)
 
 - 说明 
+
    图片工具
 
 - 方法描述
@@ -305,30 +345,39 @@ Application
     | compressBySampleSize | 按采样大小压缩 |
 
 - 类名
+
 [FKeyBoardHeightUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardHeightUtils.java)
 
 - 说明 
+
    获取键盘高度
 
 - 方法描述
+
    无
 
 - 类名
+
 [FKeyBoardUI.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardUI.java)
 
 - 说明 
+
    软键盘上方显示EditText
 
 - 方法描述
+
    无
 
 - 使用方法
- **  FKeyBoardUI. buildKeyBoardUI(Activity) **
+
+**FKeyBoardUI. buildKeyBoardUI(Activity)**
 
 - 类名
+
 [FKeyBoardUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardUtils.java)
 
 - 说明 
+
    软键盘显示隐藏
 
 - 方法描述
@@ -341,21 +390,27 @@ Application
     | showInput | 打开键盘 |
 
 - 类名
+
 [FLogNetServer.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FLogNetServer.java)
 
 - 说明 
-访问手机log内网webservers
+
+  访问手机log内网webservers
 
 - 方法描述
+
    无
 
 - 使用
+
    结合FLogUtils使用
 
 - 类名
+
 [FLogUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FLogUtils.java)
 
 - 说明 
+
 日志操作
 
 - 方法描述
@@ -373,9 +428,11 @@ Application
     | setlogDir | 设置log文件目录 |
 
 - 类名
+
 [FNetworkUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FNetworkUtils.java)
 
 - 说明 
+
 网络相关
 
 - 方法描述
@@ -398,9 +455,11 @@ Application
     | getIPAddress | 获取ip地址 |
 
 - 类名
+
 [FPermissionUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FPermissionUtils.java)
 
 - 说明 
+
    权限申请
 
 - 方法描述
@@ -414,13 +473,16 @@ Application
     | requestPermissions |  请求权限|
 
 - 使用
+
   该方法 onRequestPermissionsResult() 对应到Activity中的  onRequestPermissionsResult()方法。
 
 
 - 类名
+
 [FPhoneUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FPhoneUtils.java)
 
 - 说明 
+
    设备相关
 
 - 方法描述
@@ -439,9 +501,11 @@ Application
     | getAllSMS | 获取手机短信并保存到xml中 |
 
 - 类名
+
 [FResourcesUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FResourcesUtils.java)
 
 - 说明 
+
    获取资源相关
 
 - 方法描述
@@ -461,9 +525,11 @@ Application
 
 
 - 类名
+
 [FScreenUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FScreenUtils.java)
 
 - 说明 
+
    屏幕相关
 
 - 方法描述
@@ -487,9 +553,11 @@ Application
     | isTablet | 判断是否是平板 |
 
 - 类名
+
 [FSharedPreferencesUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FSharedPreferencesUtils.java)
 
 - 说明 
+
    SharedPreferences
 
 - 方法描述
@@ -506,9 +574,11 @@ Application
     | clearByKey | 清除key中的数据 |
 
 - 类名
+
 [FTimeUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FTimeUtils.java)
 
 - 说明 
+
    时间操作
 
 - 方法描述
@@ -538,21 +608,12 @@ Application
 
 
 - 类名
+
 [FToastUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FToastUtils.java)
 
 - 说明 
+
 Toast
-
-- 方法描述
-
-    | 方法 | 描述 |
-    | ----|----|
-    | openWirelessSettings | 打开网络设置界面 |
-
-- 类名
-[]()
-
-- 说明 
 
 - 方法描述
 
@@ -563,25 +624,31 @@ Toast
     | showLongMsg | 显示长时间的Toast |
 
 - 使用
- ***  FToastUtils. getInstant(). showMessage();***
- ***  FToastUtils. getInstant(). setConf(conf).showMessage();***
+
+ ***FToastUtils. getInstant(). showMessage();***
+ ***FToastUtils. getInstant(). setConf(conf).showMessage();***
 
 - 类名
+
 [FUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FUtils.java)
 
 - 说明 
+
     初始化框架
 
 - 方法描述
+
    无
 
 - 使用
-*** FUtils.init(Application)***
+***FUtils.init(Application)***
 
 - 类名
+
 [FValidatorUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FValidatorUtils.java)
 
 - 说明 
+
    验证相关
 
 - 方法描述
@@ -602,9 +669,11 @@ Toast
     | isIP | 验证IP地址 |
 
 - 类名
+
 [FZipUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FZipUtils.java)
 
 - 说明 
+
    文件解压缩类
 
 - 方法描述
@@ -615,14 +684,19 @@ Toast
     | unzipFile | 解压文件 |
 
 - 类名
+
 [NanoHTTPD.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/NanoHTTPD.java)
 
 - 说明 
+
   android 使用的小型简单的webservers
 
 - 方法描述
+
    无
 
 - 使用
+
    参照
+   
 [FLogNetServer.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FLogNetServer.java)
