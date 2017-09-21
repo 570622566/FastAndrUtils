@@ -1,1 +1,1 @@
-include ':app', ':fastandrlibs'
+include ':app', ':fastandrutils'

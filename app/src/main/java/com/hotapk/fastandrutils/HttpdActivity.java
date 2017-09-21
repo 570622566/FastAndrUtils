@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import cn.hotapk.fastandrlibs.utils.FLogUtils;
-import cn.hotapk.fastandrlibs.utils.FNetworkUtils;
+import cn.hotapk.fastandrutils.utils.FLogUtils;
+import cn.hotapk.fastandrutils.utils.FNetworkUtils;
 
 public class HttpdActivity extends AppCompatActivity {
 

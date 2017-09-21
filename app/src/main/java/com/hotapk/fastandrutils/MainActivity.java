@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 
-import cn.hotapk.fastandrlibs.config.FToastConf;
-import cn.hotapk.fastandrlibs.utils.FLogUtils;
-import cn.hotapk.fastandrlibs.utils.FToastUtils;
+import cn.hotapk.fastandrutils.config.FToastConf;
+import cn.hotapk.fastandrutils.utils.FLogUtils;
+import cn.hotapk.fastandrutils.utils.FToastUtils;
 
 import kr.co.namee.permissiongen.PermissionGen;
 

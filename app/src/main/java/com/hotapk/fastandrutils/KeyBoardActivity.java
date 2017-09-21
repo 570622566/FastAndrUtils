@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import cn.hotapk.fastandrlibs.utils.FKeyBoardUI;
+import cn.hotapk.fastandrutils.utils.FKeyBoardUI;
 
 public class KeyBoardActivity extends AppCompatActivity {
 
