@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00000000"
     android:orientation="vertical">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_height="40dp"
         android:gravity="center"
         android:text="打开bug" />
+
     <TextView
         android:id="@+id/ipaddr_tv"
         android:layout_width="match_parent"
