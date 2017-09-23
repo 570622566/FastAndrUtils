@@ -34,67 +34,69 @@ Fastandrutils 是一套整理修改整合的android开发常用的工具类。
      
      ## 类说明
      
-     [FActivityLifecycleCallbacks.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FActivityLifecycleCallbacks.java)  activity 生命周期管理
+     类 | 描述
+     --- | ---
+     [FActivityLifecycleCallbacks.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FActivityLifecycleCallbacks.java) | activity 生命周期管理
     
-     [FAppUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FAppUtils.java)  app相关信息
+     [FAppUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FAppUtils.java) | app相关信息
    
-     [FApplication.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FApplication.java)  Application
+     [FApplication.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FApplication.java) | Application
     
-     [FAssetsARawUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FAssetsARawUtils.java)  assets raw 相关操作
+     [FAssetsARawUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FAssetsARawUtils.java) | assets raw 相关操作
     
-     [FCleanUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCleanUtils.java)  清理app缓存
+     [FCleanUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCleanUtils.java) | 清理app缓存
    
-     [FClickProxy.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FClickProxy.java)  防止重复点击
+     [FClickProxy.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FClickProxy.java) | 防止重复点击
    
-     [FCloseUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCloseUtils.java)  关闭数据流
+     [FCloseUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCloseUtils.java) | 关闭数据流
    
-     [FConvertUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FConvertUtils.java)  数据转换
+     [FConvertUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FConvertUtils.java) | 数据转换
    
-     [FCrashUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCrashUtils.java)  app异常退出捕获
+     [FCrashUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FCrashUtils.java) | app异常退出捕获
    
-     [FDBExprotUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FDBExprotUtils.java)  数据库导出到sd卡
+     [FDBExprotUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FDBExprotUtils.java) | 数据库导出到sd卡
    
-     [FEncryptUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FEncryptUtils.java)  加密相关
+     [FEncryptUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FEncryptUtils.java) | 加密相关
    
-     [FFileUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FFileUtils.java)  文件操作工具
+     [FFileUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FFileUtils.java) | 文件操作工具
    
-     [FHanziToPinyin.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FHanziToPinyin.java)  汉字转拼音
+     [FHanziToPinyin.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FHanziToPinyin.java) | 汉字转拼音
    
-     [FImageUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FImageUtils.java)  图片工具
+     [FImageUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FImageUtils.java) | 图片工具
    
-     [FKeyBoardHeightUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardHeightUtils.java)  获取键盘高度
+     [FKeyBoardHeightUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardHeightUtils.java) | 获取键盘高度
    
-     [FKeyBoardUI.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardUI.java)  软键盘上方显示EditText
+     [FKeyBoardUI.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardUI.java) | 软键盘上方显示EditText
    
-     [FKeyBoardUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardUtils.java)  软键盘显示隐藏
+     [FKeyBoardUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FKeyBoardUtils.java) | 软键盘显示隐藏
    
-     [FLogNetServer.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FLogNetServer.java)  访问手机log内网webservers
+     [FLogNetServer.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FLogNetServer.java) | 访问手机log内网webservers
    
-     [FLogUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FLogUtils.java)  日志操作
+     [FLogUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FLogUtils.java) | 日志操作
    
-     [FNetworkUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FNetworkUtils.java)  网络相关
+     [FNetworkUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FNetworkUtils.java) | 网络相关
    
-     [FPermissionUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FPermissionUtils.java)  权限申请
+     [FPermissionUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FPermissionUtils.java) | 权限申请
    
-     [FPhoneUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FPhoneUtils.java)  设备相关
+     [FPhoneUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FPhoneUtils.java) | 设备相关
    
-     [FResourcesUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FResourcesUtils.java)  获取资源相关
+     [FResourcesUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FResourcesUtils.java) | 获取资源相关
    
-     [FScreenUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FScreenUtils.java)  屏幕相关
+     [FScreenUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FScreenUtils.java) | 屏幕相关
    
-     [FSharedPreferencesUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FSharedPreferencesUtils.java)  SharedPreferences相关
+     [FSharedPreferencesUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FSharedPreferencesUtils.java) | SharedPreferences相关
    
-     [FTimeUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FTimeUtils.java)  时间操作
+     [FTimeUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FTimeUtils.java) | 时间操作
    
-     [FToastUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FToastUtils.java)  Toast
+     [FToastUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FToastUtils.java) | Toast
    
-     [FUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FUtils.java)  初始化该框架
+     [FUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FUtils.java) | 初始化该框架
    
-     [FValidatorUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FValidatorUtils.java)  验证相关
+     [FValidatorUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FValidatorUtils.java) | 验证相关
    
-     [FZipUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FZipUtils.java)  文件解压缩类
+     [FZipUtils.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/FZipUtils.java) | 文件解压缩类
    
-     [NanoHTTPD.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/NanoHTTPD.java)  android 使用的小型简单的webservers
+     [NanoHTTPD.java](https://github.com/570622566/FastAndrUtils/blob/master/fastandrutils/src/main/java/cn/hotapk/fastandrutils/utils/NanoHTTPD.java) | android 使用的小型简单的webservers
      
 
 
