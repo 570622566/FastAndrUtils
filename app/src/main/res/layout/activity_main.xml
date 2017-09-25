@@ -35,5 +35,12 @@
         android:gravity="center"
         android:text="软键盘" />
 
+    <TextView
+        android:id="@+id/show_emptyview_bt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="空布局" />
+
 
 </LinearLayout>

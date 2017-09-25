@@ -30,6 +30,7 @@
         <activity
             android:name=".KeyBoardActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".EmptyViewActivity"></activity>
     </application>
 
 </manifest>

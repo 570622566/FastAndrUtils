@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, KeyBoardActivity.class));
             }
         });
+        findViewById(R.id.show_emptyview_bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, EmptyViewActivity.class));
+            }
+        });
 
 
         PermissionGen.needPermission(this, 200, new String[]{

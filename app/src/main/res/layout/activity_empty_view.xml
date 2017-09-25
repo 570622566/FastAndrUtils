@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--<cn.hotapk.fastandrutils.widget.FEmptyView-->
+        <!--android:id="@+id/empty_lay"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+
+    <cn.hotapk.fastandrutils.widget.FEmptyView
+        android:id="@+id/empty_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:empty_button="@+id/custom_empty_bt"
+        app:empty_imageView="@+id/custom_empty_img"
+        app:empty_layout="@+layout/custom_empty_layout"
+        app:empty_textView="@+id/custom_empty_tv"
+        app:include_layout="@+layout/data_layout" />
+
+ <!--<cn.hotapk.fastandrutils.widget.FEmptyView-->
+        <!--android:id="@+id/empty_lay"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:include_layout="@+layout/data_layout" />-->
+
+</LinearLayout>
