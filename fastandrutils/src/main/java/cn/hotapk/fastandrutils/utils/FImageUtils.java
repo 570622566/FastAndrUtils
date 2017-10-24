@@ -94,12 +94,22 @@ public final class FImageUtils {
      * @return base64 编码的图片
      */
     public static String bitmap2StrByBase64(Bitmap bit) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bit.compress(Bitmap.CompressFormat.JPEG, 40, bos);//参数100表示不压缩
-        byte[] bytes = bos.toByteArray();
+        if (bit == null) return null;
+        byte[] bytes = bitmap2Bytes(bit, Bitmap.CompressFormat.JPEG);
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
+
+    /**
+     * Base64字符串转bitmap
+     *
+     * @param base64
+     * @return
+     */
+    public static Bitmap base64ToBitmap(String base64) {
+        byte[] base64ToByte = FConvertUtils.base64ToByte(base64);
+        return bytes2Bitmap(base64ToByte);
+    }
 
     /**
      * drawable转byteArr

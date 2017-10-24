@@ -2,19 +2,20 @@ package com.hotapk.fastandrutils;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 
 import cn.hotapk.fastandrutils.config.FToastConf;
 import cn.hotapk.fastandrutils.utils.FLogUtils;
+import cn.hotapk.fastandrutils.utils.FManifestUtils;
+import cn.hotapk.fastandrutils.utils.FPermissionUtils;
 import cn.hotapk.fastandrutils.utils.FToastUtils;
 
-import kr.co.namee.permissiongen.PermissionGen;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FPermissionUtils.OnPermissionListener {
     int i = 0;
 
 
@@ -54,20 +55,64 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FPermissionUtils.requestPermissions(this, 200, new String[]{
+                Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, this);
 
-        PermissionGen.needPermission(this, 200, new String[]{
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE
-        });
+//        FLogUtils.getInstance().e(FManifestUtils.getActivityMetaData("d", MainActivity.class));
 
-        FLogUtils.getInstance().e("ddd");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FLogUtils.getInstance().e("MainActivity====>onStart");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FLogUtils.getInstance().e("MainActivity====>onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FLogUtils.getInstance().e("MainActivity====>onPause");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FLogUtils.getInstance().e("MainActivity====>onStop");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FLogUtils.getInstance().e("MainActivity====>onDestroy");
 
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionGen.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        FPermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onPermissionGranted() {
+    }
+
+    @Override
+    public void onPermissionDenied(String[] deniedPermissions) {
+
+    }
+
+    @Override
+    public void manifestUnPermission(String[] unpermission) {
 
     }
 }

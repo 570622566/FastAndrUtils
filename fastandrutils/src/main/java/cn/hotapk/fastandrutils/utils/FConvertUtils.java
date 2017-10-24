@@ -53,12 +53,12 @@ public final class FConvertUtils {
     }
 
     /**
-     * Bytes转 Base64字符串
+     * String转Base64字符串
      *
      * @param message the message
      * @return the string
      */
-    public static String encodedMessage(String message) {
+    public static String stringToBase64(String message) {
         return Base64.encodeToString(message.getBytes(), Base64.DEFAULT);
     }
 
@@ -68,7 +68,7 @@ public final class FConvertUtils {
      * @param base64Message the message
      * @return the string
      */
-    public static byte[] decodedMessage(String base64Message) {
+    public static byte[] base64ToByte(String base64Message) {
         return Base64.decode(base64Message, Base64.DEFAULT);
     }
 

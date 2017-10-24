@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 
+import cn.hotapk.fastandrutils.utils.FLogUtils;
 import cn.hotapk.fastandrutils.widget.FEmptyView;
 
 public class EmptyViewActivity extends AppCompatActivity {
@@ -76,5 +76,40 @@ public class EmptyViewActivity extends AppCompatActivity {
         }, 1500);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FLogUtils.getInstance().e("EmptyViewActivity====>onStart");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FLogUtils.getInstance().e("EmptyViewActivity====>onStop");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FLogUtils.getInstance().e("EmptyViewActivity====>onDestroy");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FLogUtils.getInstance().e("EmptyViewActivity====>onPause");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FLogUtils.getInstance().e("EmptyViewActivity====>onResume");
+    }
 
 }

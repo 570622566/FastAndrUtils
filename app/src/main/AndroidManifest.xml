@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />
@@ -19,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,8 +31,12 @@
         <activity android:name=".HttpdActivity" />
         <activity
             android:name=".KeyBoardActivity"
+            android:theme="@style/AppTheme2"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".EmptyViewActivity"></activity>
+        <meta-data
+            android:name="d"
+            android:value="33d" />
     </application>
 
 </manifest>

@@ -108,6 +108,16 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
     }
 
     /**
+     * 获取前一个activity
+     *
+     * @return
+     */
+    public Activity beforeActivity() {
+        Activity activity = activities.elementAt(activities.size() - 2);
+        return activity;
+    }
+
+    /**
      * 移除Activity
      */
     public void removeActivity(Activity activity) {
@@ -147,6 +157,7 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
 
     public interface LifecycleListener {
         void onActivityResumed(Activity activity);
+
         void onActivityPaused(Activity activity);
     }
 }

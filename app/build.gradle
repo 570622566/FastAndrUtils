@@ -33,6 +33,5 @@ dependencies {
     compile project(':fastandrutils')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.lovedise:permissiongen:0.0.6'
     testCompile 'junit:junit:4.12'
 }
