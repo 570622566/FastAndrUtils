@@ -1,0 +1,7 @@
+这是asstes的test.txt的内容
+1.使用FAssetsARawUtils.getAssetsToString() 方法可以获取assets相关文件的内容字符串
+2.使用FAssetsARawUtils.assetsDataToSD() 方法可以把assets内容拷贝到文件夹
+3.使用FAssetsARawUtils.readAssetsByteArray() 方法可以把assets内容转成byte数组输出
+
+
+

@@ -121,7 +121,7 @@ public final class FCleanUtils {
     }
 
     public static String getCacheSize(File file) throws Exception {
-        return FConvertUtils.getFormatSize(getFolderSize(file));
+        return FConvertUtils.binaryFormatSize(getFolderSize(file));
     }
 
 

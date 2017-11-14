@@ -107,7 +107,7 @@ public final class FImageUtils {
      * @return
      */
     public static Bitmap base64ToBitmap(String base64) {
-        byte[] base64ToByte = FConvertUtils.base64ToByte(base64);
+        byte[] base64ToByte = FEncryptUtils.base64ToByte(base64);
         return bytes2Bitmap(base64ToByte);
     }
 
@@ -268,8 +268,6 @@ public final class FImageUtils {
         } else {
             return null;
         }
-
-
     }
 
     /**

@@ -2,6 +2,11 @@ package cn.hotapk.fastandrutils.utils;
 
 import android.util.Base64;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,51 +31,14 @@ import java.util.Map;
 public final class FConvertUtils {
 
     private static final int KB = 1024;
+    private static final int MAX_BLOB_LENGTH = 512;
+
+    private static final String UNKNOWN_BLOB_LABEL = "{blob}";
 
     private FConvertUtils() {
 
     }
 
-
-    /**
-     * 对字符串md5加密
-     *
-     * @param str
-     * @return
-     */
-    public static String string2MD5(String str) {
-        try {
-            // 生成一个MD5加密计算摘要
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            // 计算md5函数
-            md.update(str.getBytes());
-            // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
-            // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
-            return new BigInteger(1, md.digest()).toString(16);
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    /**
-     * String转Base64字符串
-     *
-     * @param message the message
-     * @return the string
-     */
-    public static String stringToBase64(String message) {
-        return Base64.encodeToString(message.getBytes(), Base64.DEFAULT);
-    }
-
-    /**
-     * Base64字符串转bytes
-     *
-     * @param base64Message the message
-     * @return the string
-     */
-    public static byte[] base64ToByte(String base64Message) {
-        return Base64.decode(base64Message, Base64.DEFAULT);
-    }
 
     /**
      * 将px值转换为dip或dp值，保证尺寸大小不变
@@ -309,10 +277,13 @@ public final class FConvertUtils {
         return map;
     }
 
+
     /**
-     * 方法名称:transMapToString
-     * 传入参数:map
-     * 返回值:String 形如 username'chenziwen^password'1234
+     * map转成字符串
+     *
+     * @param map
+     * @param filterls 过滤一些值
+     * @return
      */
     public static String map2String(Map map, List<String> filterls) {
         java.util.Map.Entry entry;
@@ -341,12 +312,12 @@ public final class FConvertUtils {
     }
 
     /**
-     * 格式化单位
+     * 二进制单位转换
      *
      * @param size
      * @return
      */
-    public static String getFormatSize(double size) {
+    public static String binaryFormatSize(double size) {
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
             return size + "Byte";
@@ -393,5 +364,44 @@ public final class FConvertUtils {
         return true;
     }
 
+    /**
+     * json格式化
+     *
+     * @param uglyJSONString
+     * @return
+     */
+    public static String jsonFormatter(String uglyJSONString) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser jp = new JsonParser();
+        JsonElement je = jp.parse(uglyJSONString);
+        String prettyJsonString = gson.toJson(je);
+        return prettyJsonString;
+    }
 
+    /**
+     * blob转字符串
+     * @param blob
+     * @return
+     */
+    public static String blobToString(byte[] blob) {
+        if (blob.length <= MAX_BLOB_LENGTH) {
+            if (fastIsAscii(blob)) {
+                try {
+                    return new String(blob, "US-ASCII");
+                } catch (UnsupportedEncodingException ignored) {
+
+                }
+            }
+        }
+        return UNKNOWN_BLOB_LABEL;
+    }
+
+    public static boolean fastIsAscii(byte[] blob) {
+        for (byte b : blob) {
+            if ((b & ~0x7f) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

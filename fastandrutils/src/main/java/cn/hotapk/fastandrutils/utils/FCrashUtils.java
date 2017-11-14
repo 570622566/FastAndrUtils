@@ -152,7 +152,7 @@ public final class FCrashUtils implements UncaughtExceptionHandler {
 
         StringBuffer sb = new StringBuffer();
         JSONObject jsonObject = new JSONObject(infos);
-        sb.append(jsonObject.toString());
+        sb.append(FConvertUtils.jsonFormatter(jsonObject.toString()));
         Writer writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
         ex.printStackTrace(printWriter);
@@ -163,7 +163,7 @@ public final class FCrashUtils implements UncaughtExceptionHandler {
         }
         printWriter.close();
         String result = writer.toString();
-        sb.append(result);
+        sb.append("\n" + result);
         FLogUtils.getInstance().setCrash(sb.toString());
 
     }

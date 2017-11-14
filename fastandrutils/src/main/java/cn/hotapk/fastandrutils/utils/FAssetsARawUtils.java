@@ -43,6 +43,20 @@ public final class FAssetsARawUtils {
         return null;
     }
 
+    /**
+     * 读取assets文件转InputStream
+     *
+     * @param assetsName
+     * @return
+     */
+    public static InputStream getAssetsToInp(String assetsName) {
+        try {
+            return FUtils.getAppContext().getAssets().open(assetsName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * 读取assets文件 转byte数组
@@ -93,14 +107,13 @@ public final class FAssetsARawUtils {
      * @param rawId
      * @param outPutFileAbs
      */
-    public static void copyRawFileToSdcard(int rawId, String outPutFileAbs) {
+    public static boolean copyRawFileToSdcard(String outPutFileAbs, int rawId) {
         InputStream inputStream = null;
-
         inputStream = FUtils.getAppContext().getResources().openRawResource(rawId);
         if (inputStream != null) {
-            FFileUtils.inputStreamToFile(inputStream, outPutFileAbs);
+            return FFileUtils.inputStreamToFile(inputStream, outPutFileAbs);
         }
-
+        return false;
     }
 
 

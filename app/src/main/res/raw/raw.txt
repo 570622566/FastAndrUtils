@@ -1,0 +1,4 @@
+这是raw里的内容
+1.使用FAssetsARawUtils.getRawToString() 方法可以获取raw相关文件的内容字符串
+2.使用FAssetsARawUtils.readRawFileToByteArray() 方法可以把raw内容转成byte数组输出
+3.使用FAssetsARawUtils.copyRawFileToSdcard() 方法可以把raw内容拷贝到文件夹

@@ -1,6 +1,9 @@
 package cn.hotapk.fastandrutils.utils;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +20,7 @@ import java.util.concurrent.Executors;
  * 日志操作类
  */
 public class FLogUtils {
+    private static final String Tag = "www.hotapk.cn";
     private String TOP_LINE = "" +
             "\n^^^^^^^^^^^^^less code,less bug^^^^^^^^^^^^^^\n" +
             "                   _ooOoo_\n" +
@@ -40,14 +44,13 @@ public class FLogUtils {
             "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n" +
             "            佛祖保佑       永无BUG\n" +
             "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
-    private String TOP_BORDER = "╔══════════════════════════════════════════════════════════════════════════════════════════════════════════";
-    private String LEFT_BORDER = "║ ";
-    private String BOTTOM_BORDER = "╚══════════════════════════════════════════════════════════════════════════════════════════════════════════";
+    private String TOP_BORDER = "═══════════════════════════════════════════════════════════════════════════════════════════════════════════";
+    private String BOTTOM_BORDER = "═══════════════════════════════════════════════════════════════════════════════════════════════════════════";
+    private String logDir = "";//设置文件存储目录
     private boolean debug = true;//是否打印log
     private boolean savesd = false;//是否存log到sd卡
     private boolean savecrash = true;//是否存crash信息到sd卡
-    private int CHUNK_SIZE = 106; //设置字节数
-    private String logDir = "";//设置文件存储目录
+    private int CHUNK_SIZE = 120; //设置字节数
     private long logSize = 1 * 1024 * 1024L;//设置log文件大小 k
     private ExecutorService execu = Executors.newFixedThreadPool(1);
 
@@ -67,7 +70,7 @@ public class FLogUtils {
     }
 
     private FLogUtils() {
-        Log.e("www.hotapk.cn_log", TOP_LINE);
+        Log.e(Tag, TOP_LINE);
         initLogFile();
     }
 
@@ -76,107 +79,82 @@ public class FLogUtils {
         FFileUtils.mkDir(logDir);
     }
 
+    public void v(@NonNull Object objMsg) {
+        v(Tag, objMsg);
+    }
+
+    public void d(@NonNull Object objMsg) {
+        d(Tag, objMsg);
+    }
+
+    public void i(@NonNull Object objMsg) {
+        i(Tag, objMsg);
+    }
+
+    public void w(@NonNull Object objMsg) {
+        w(Tag, objMsg);
+    }
+
+    public void e(@NonNull Object objMsg) {
+        e(Tag, objMsg);
+    }
+
+    public void v(String tag, @NonNull Object objMsg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.v(tag, msgFormat(stackstr, objMsg));
+        }
+        if (savesd) {
+            saveToSd(stackstr, objMsg);
+        }
+    }
+
+    public void d(String tag, @NonNull Object objMsg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.d(tag, msgFormat(stackstr, objMsg));
+        }
+        if (savesd) {
+            saveToSd(stackstr, objMsg);
+        }
+    }
+
+    public void i(String tag, @NonNull Object objMsg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.i(tag, msgFormat(stackstr, objMsg));
+        }
+        if (savesd) {
+            saveToSd(stackstr, objMsg);
+        }
+    }
+
+    public void w(String tag, @NonNull Object objMsg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.w(tag, msgFormat(stackstr, objMsg));
+        }
+        if (savesd) {
+            saveToSd(stackstr, objMsg);
+        }
+    }
+
+
+    public void e(String tag, @NonNull Object objMsg) {
+        String stackstr = targetStackTraceMSg();
+        if (debug) {
+            Log.e(tag, msgFormat(stackstr, objMsg));
+        }
+        if (savesd) {
+            saveToSd(stackstr, objMsg);
+        }
+    }
+
     /**
-     * 启动log的WebServer服务
+     * app异常时使用
      *
-     * @param port 端口号
+     * @param msg
      */
-    public void startLogServer(int port) {
-        if (testHttpd == null) {
-            synchronized (FLogUtils.class) {
-                if (testHttpd == null) {
-                    testHttpd = new FLogNetServer(port);
-                }
-            }
-        }
-        try {
-            testHttpd.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * 关闭log的WebServer服务
-     */
-    public void stopLogServer() {
-        if (testHttpd != null && testHttpd.isAlive()) {
-            testHttpd.stop();
-        }
-    }
-
-    public void v(String msg) {
-        v("www.hotapk.cn", msg);
-    }
-
-    public void d(String msg) {
-        d("www.hotapk.cn", msg);
-    }
-
-    public void i(String msg) {
-        i("www.hotapk.cn", msg);
-    }
-
-    public void w(String msg) {
-        w("www.hotapk.cn", msg);
-    }
-
-    public void e(String msg) {
-        e("www.hotapk.cn", msg);
-    }
-
-    public void v(String tag, String msg) {
-        String stackstr = targetStackTraceMSg();
-        if (debug) {
-            Log.v(tag, msgFormat(stackstr, msg));
-        }
-        if (savesd) {
-            saveToSd(stackstr, msg);
-        }
-    }
-
-    public void d(String tag, String msg) {
-        String stackstr = targetStackTraceMSg();
-        if (debug) {
-            Log.d(tag, msgFormat(stackstr, msg));
-        }
-        if (savesd) {
-            saveToSd(stackstr, msg);
-        }
-    }
-
-    public void i(String tag, String msg) {
-        String stackstr = targetStackTraceMSg();
-        if (debug) {
-            Log.i(tag, msgFormat(stackstr, msg));
-        }
-        if (savesd) {
-            saveToSd(stackstr, msg);
-        }
-    }
-
-    public void w(String tag, String msg) {
-        String stackstr = targetStackTraceMSg();
-        if (debug) {
-            Log.w(tag, msgFormat(stackstr, msg));
-        }
-        if (savesd) {
-            saveToSd(stackstr, msg);
-        }
-    }
-
-
-    public void e(String tag, String msg) {
-        String stackstr = targetStackTraceMSg();
-        if (debug) {
-            Log.e(tag, msgFormat(stackstr, msg));
-        }
-        if (savesd) {
-            saveToSd(stackstr, msg);
-        }
-    }
-
     public void setCrash(String msg) {
         String stackstr = targetStackTraceMSg();
         if (debug) {
@@ -253,6 +231,38 @@ public class FLogUtils {
         return logDir;
     }
 
+
+    /**
+     * 启动log的WebServer服务
+     *
+     * @param port 端口号
+     */
+    public void startLogServer(int port) {
+        if (testHttpd == null) {
+            synchronized (FLogUtils.class) {
+                if (testHttpd == null) {
+                    testHttpd = new FLogNetServer(port);
+                }
+            }
+        }
+        try {
+            testHttpd.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * 关闭log的WebServer服务
+     */
+    public void stopLogServer() {
+        if (testHttpd != null && testHttpd.isAlive()) {
+            testHttpd.stop();
+        }
+    }
+
+
     private String targetStackTraceMSg() {
         StackTraceElement targetStackTraceElement = getTargetStackTraceElement();
         if (targetStackTraceElement != null) {
@@ -280,7 +290,14 @@ public class FLogUtils {
         return targetStackTrace;
     }
 
-    private String msgFormat(String stackstr, String msg) {
+    private String msgFormat(String stackstr, Object objMsg) {
+        String msg = "";
+        if (objMsg instanceof String) {
+            msg = objMsg.toString();
+        } else {
+            msg = new Gson().toJson(objMsg);
+            msg = FConvertUtils.jsonFormatter(msg);
+        }
         byte[] bytes = new byte[0];
         try {
             bytes = msg.getBytes("utf-8");
@@ -288,28 +305,28 @@ public class FLogUtils {
             e.printStackTrace();
         }
         int length = bytes.length;
-        String newMsg = TOP_BORDER + "\n" + LEFT_BORDER + "\t" + FTimeUtils.dateToString(new Date()) + "\n" + LEFT_BORDER + "\t" + stackstr;
+        String newMsg = TOP_BORDER + "\n" + FDateUtils.dateToString(new Date()) + "\n" + stackstr;
         if (length > CHUNK_SIZE) {
             int i = 0;
             while (i < length) {
                 int count = Math.min(length - i, CHUNK_SIZE);
                 String tempStr = new String(bytes, i, count);
-                newMsg += "\n" + LEFT_BORDER + "\t" + tempStr;
+                newMsg += "\n" + tempStr;
                 i += CHUNK_SIZE;
             }
         } else {
-            newMsg += "\n" + LEFT_BORDER + "\t" + msg;
+            newMsg += "\n" + msg;
         }
         newMsg += "\n" + BOTTOM_BORDER;
         return newMsg;
 
     }
 
-    private void saveToSd(final String stackstr, final String msg) {
+    private void saveToSd(final String stackstr, final Object objMsg) {
         execu.submit(new Runnable() {
             @Override
             public void run() {
-                String data = FTimeUtils.dateToString(new Date(), "yyyy-MM-dd");
+                String data = FDateUtils.dateToString(new Date(), "yyyy-MM-dd");
                 File[] files = FFileUtils.orderByDate(new File(logDir), true);
                 List<File> filels = FFileUtils.filter(files, data);
                 String filepath;
@@ -328,7 +345,13 @@ public class FLogUtils {
                     filepath = logDir + "/" + "log_" + data + "_1.html";
                     FFileUtils.creatFile(filepath);
                 }
-                FFileUtils.appendText(filepath, "<div class=\"dotted\">" + "\n<div class=\"exp\">\n" + FTimeUtils.dateToString(new Date()) + "\n</div><div>\n" + stackstr + "\n</div><div class=\"redcolor\">\n" + msg + "\n</div></div>", true);
+                String msg = "";
+                if (objMsg instanceof String) {
+                    msg = objMsg.toString();
+                } else {
+                    msg = FConvertUtils.jsonFormatter(new Gson().toJson(objMsg));
+                }
+                FFileUtils.appendText(filepath, "<div class=\"dotted\">" + "\n<div class=\"exp\">\n" + FDateUtils.dateToString(new Date()) + "\n</div><div>\n" + stackstr + "\n</div><div class=\"redcolor\">\n" + msg.replaceAll("\n", "<br />") + "\n</div></div>", true);
             }
         });
 

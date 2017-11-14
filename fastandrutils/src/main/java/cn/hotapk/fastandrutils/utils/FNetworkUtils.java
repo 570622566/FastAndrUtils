@@ -141,19 +141,6 @@ public final class FNetworkUtils {
         return false;
     }
 
-    /**
-     * 只是判断WIFI
-     *
-     * @return 是否打开Wifi
-     */
-    public static boolean isWiFi() {
-        ConnectivityManager manager = (ConnectivityManager) FUtils.getAppContext()
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo.State wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-                .getState();
-        return wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING;
-
-    }
 
     /**
      * 打开或关闭移动数据
@@ -284,7 +271,7 @@ public final class FNetworkUtils {
     /**
      * 获取ip地址
      */
-    private String getIPAddress() {
+    public static String getIPAddress() {
         WifiManager wifiManager = (WifiManager) FUtils.getAppContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
         final String formatedIpAddress = String.format("%d.%d.%d.%d", (ipAddress & 0xff), (ipAddress >> 8 & 0xff), (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));

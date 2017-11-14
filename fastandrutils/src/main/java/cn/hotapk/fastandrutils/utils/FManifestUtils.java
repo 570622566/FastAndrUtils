@@ -14,6 +14,7 @@ import java.util.List;
  * @author laijian
  * @version 2017/10/24
  * @Copyright (C)上午10:46 , www.hotapk.cn
+ * 获取AndroidManifest.xml的部分数据
  */
 public class FManifestUtils {
 

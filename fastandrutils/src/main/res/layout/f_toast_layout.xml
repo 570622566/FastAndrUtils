@@ -8,27 +8,27 @@
 
     <LinearLayout
         android:id="@+id/f_toast_bg"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingBottom="4dp"
+        android:paddingBottom="10dp"
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
-        android:paddingTop="4dp">
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/f_toast_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginRight="8dp"
+            android:maxHeight="42dp"
+            android:maxWidth="42dp"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/f_toast_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:text="This is a custom toast!"
             android:textSize="18sp" />
     </LinearLayout>

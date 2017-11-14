@@ -51,6 +51,9 @@ public class FPermissionUtils {
             showRationale();
         }
 
+        /**
+         * 重新请求权限
+         */
         public void requestPermissionsAgain() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 ((Activity) context).requestPermissions(permissions, requestCode);
@@ -58,11 +61,28 @@ public class FPermissionUtils {
         }
     }
 
+    /**
+     * 请求权限
+     *
+     * @param context
+     * @param requestCode
+     * @param permissions
+     * @param listener
+     */
     public static void requestPermissions(Context context, int requestCode
             , String[] permissions, OnPermissionListener listener) {
         requestPermissions(context, requestCode, permissions, listener, null);
     }
 
+    /**
+     * 请求权限
+     *
+     * @param context
+     * @param requestCode
+     * @param permissions
+     * @param listener
+     * @param handler
+     */
     public static void requestPermissions(Context context, int requestCode
             , String[] permissions, OnPermissionListener listener, RationaleHandler handler) {
 
@@ -119,6 +139,7 @@ public class FPermissionUtils {
      * @return
      */
     private static String[] manifestUnPermission(String[] manifestPer, String[] permissions) {
+
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < permissions.length; i++) {
             map.put(permissions[i], i);
@@ -138,7 +159,7 @@ public class FPermissionUtils {
     }
 
     /**
-     * 检测添加的权限是否在manifest中注册
+     * 检测添加的权限是否在manifest中注册如果没有就删掉该权限
      */
     private static String[] checkManifestPermission(final String[] permissions) {
         String[] manifestpers = FManifestUtils.getRegPermission();

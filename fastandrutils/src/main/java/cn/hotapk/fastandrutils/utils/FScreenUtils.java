@@ -226,14 +226,4 @@ public final class FScreenUtils {
         }
     }
 
-    /**
-     * 判断是否是平板
-     *
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
-    public static boolean isTablet() {
-        return (FUtils.getAppContext().getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
 }

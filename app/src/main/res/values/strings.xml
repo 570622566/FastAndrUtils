@@ -1,3 +1,27 @@
 <resources>
-    <string name="app_name">FastAndrUtils</string>
+    <string name="app_name">FAUIS</string>
+    <string name="log">log日志类
+    \n1.可配置log日志保存路径
+    \n2.可配置每个log文件大小等
+    \n3.可对象转为json字符串及格式化输出
+    \n4.可局域网内远程访问log日志
+    \n5.可显示log日志行号
+    \n6.点击行号可快速定位到代码</string>
+    <string name="paddingtop">在titleview上添加statusbsr高度的padding值</string>
+    <string name="changebar"> 设置状态栏的透明的随着标题栏的高度变化而变化
+     \n 这方法不和DrawerLayout兼容
+    \n 要有个参照的titleview，
+    \n不要配置android:fitsSystemWindows</string>
+    <string name="drawerbar">不会在状态栏上显示阴影
+        \n 注：1、xml的顶部控件必须为drawerLayout
+      \n2、drawerLayout第一个控件必须为装载内容的控件
+     \n3、内容的控件必须为linearlayout,,FrameLayout放在LinearLayout里</string>
+    <string name="margintopbar_name">1、这样就不用在 xml 添加 android:fitsSystemWindows="true"\n2、不兼容DrawerLayout,DrawerLayout无法在最顶部显示</string>
+    <string name="keyeditstr">软键盘结合EditText\n
+        1.点击软键盘外可隐藏软键盘\n
+        2.EditText 如果被软键盘遮挡会在软键盘上显示填写的内容\n
+        3.manifext.xml 使用的activity添加android:windowSoftInputMode="adjustResize"\n
+        4.对于2的特性不能很好的兼容和android:gravity="bottom" 这样相对的布局使用
+    </string>
+
 </resources>
