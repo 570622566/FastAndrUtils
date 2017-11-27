@@ -36,6 +36,14 @@ public class FDateActivity extends FBaseActivity {
         stringBuffer.append("\n获取本月最后天：" + FDateUtils.getLastDayOfMonth(FDateUtils.FORMAT_YMD));
         // 星期天为第一天
         stringBuffer.append("\n获取每月的第一周天数：" + FDateUtils.getFirstWeekdayOfMonth(2017, 11));
+       // 本周一0点时间
+        stringBuffer.append("\n获取本周一0点时间：" + FDateUtils.dateToString(FDateUtils.getTimesWeekmorning()));
+      //本周日24点时间
+        stringBuffer.append("\n获取本周日24点时间：" + FDateUtils.dateToString(FDateUtils.getTimesWeeknight()));
+       //获取前7天
+        stringBuffer.append("\n获取前7天时间：" + FDateUtils.dateToString(FDateUtils.getBefore(new Date())));
+        //获取后7天
+        stringBuffer.append("\n获取后7天时间：" + FDateUtils.dateToString(FDateUtils.getAfterDate(new Date())));
 
         date_tv.setText(stringBuffer);
     }

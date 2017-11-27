@@ -53,7 +53,6 @@
         <activity android:name=".FValidatorActivity" />
         <activity android:name=".FImageActivity" />
         <activity android:name=".FNetworkActivity" />
-        <activity android:name=".FDatabaseDebugActivity"></activity>
     </application>
 
 </manifest>

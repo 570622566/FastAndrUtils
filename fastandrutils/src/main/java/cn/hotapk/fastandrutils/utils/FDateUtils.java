@@ -356,6 +356,61 @@ public final class FDateUtils {
         return lastDayOfMonth != null ? lastDayOfMonth : "";
     }
 
+    // 获得本周一0点时间
+    public static Date getTimesWeekmorning() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        return cal.getTime();
+    }
+
+    // 获得本周日24点时间
+    public static Date getTimesWeeknight() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getTimesWeekmorning());
+        cal.add(Calendar.DAY_OF_WEEK, 7);
+        return cal.getTime();
+    }
+
+
+    // 获得昨天0点时间
+    public static Date getYesterdaymorning(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(stringToDate(getFristDayTime(FORMAT_YMDHMS, dateToString(date))).getTime() - 3600 * 24 * 1000);
+        return cal.getTime();
+    }
+
+    // 获得距当天前n天时间
+    public static Date getBefore(Date date, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(stringToDate(getFristDayTime(FORMAT_YMDHMS, dateToString(date))).getTime() - 3600 * 24 * 1000 * day);
+        return cal.getTime();
+    }
+
+    // 获得距当天前7天时间
+    public static Date getBefore(Date date) {
+        return getBefore(date, 7);
+    }
+
+    //获取明天
+    public static Date getTomorrowMorning(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(stringToDate(getFristDayTime(FORMAT_YMDHMS, dateToString(date))).getTime() + 3600 * 24 * 1000);
+        return cal.getTime();
+    }
+
+    // 获得距当天后n天时间
+    public static Date getAfterDate(Date date, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(stringToDate(getFristDayTime(FORMAT_YMDHMS, dateToString(date))).getTime() + 3600 * 24 * 1000 * day);
+        return cal.getTime();
+    }
+
+    // 获得距当天后7天时间
+    public static Date getAfterDate(Date date) {
+        return getAfterDate(date, 7);
+    }
+
     /**
      * 判断日期是否有效,包括闰年的情况
      *

@@ -485,6 +485,7 @@ public class FFileUtils {
      */
     public static InputStream file2Inp(String absPath) {
         File file = new File(absPath);
+        FLogUtils.getInstance().e(file.length());
         if (!file.exists()) {
             return null;
         }
@@ -495,14 +496,6 @@ public class FFileUtils {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
-        } finally {
-            try {
-                if (is != null) {
-                    is.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
 

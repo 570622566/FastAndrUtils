@@ -76,7 +76,6 @@ public class FMainActivity extends FBaseActivity {
         titleInfors.add(new TitleInfor("简单数据校验相关"));
         titleInfors.add(new TitleInfor("图片相关"));
         titleInfors.add(new TitleInfor("网络相关"));
-        titleInfors.add(new TitleInfor("数据库管理"));
     }
 
     private void setAutoRVAdapter() {
@@ -136,10 +135,7 @@ public class FMainActivity extends FBaseActivity {
             intent = new Intent(this, FImageActivity.class);
         } else if (position == 15) {
             intent = new Intent(this, FNetworkActivity.class);
-        } else if (position == 16) {
-            intent = new Intent(this, FDatabaseDebugActivity.class);
         }
-
         startActivity(intent);
 
     }

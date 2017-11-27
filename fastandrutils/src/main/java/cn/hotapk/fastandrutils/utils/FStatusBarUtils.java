@@ -123,7 +123,6 @@ public class FStatusBarUtils {
     }
 
 
-
     /**
      * 兼容drawerLayout的状态栏
      * 注：1、xml的顶部控件必须为drawerLayout
@@ -200,12 +199,12 @@ public class FStatusBarUtils {
             return false;
         }
         // 小米和魅族4.4 以上版本支持沉浸式
-        if (FDeviceUtils.isMeizu() || FDeviceUtils.isMIUI()) {
-            Window window = activity.getWindow();
-            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            return true;
-        }
+//        if (FDeviceUtils.isMeizu() || FDeviceUtils.isMIUI()) {
+//            Window window = activity.getWindow();
+//            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+//                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            return true;
+//        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
@@ -364,6 +363,15 @@ public class FStatusBarUtils {
         return statusBarView;
     }
 
+    /**
+     * 添加一个状态栏大小的view
+     * @param rootview
+     * @param color
+     * @param viewposition
+     */
+    public static void addBarView(ViewGroup rootview, final int color,int viewposition){
+        rootview.addView(createColorStatusBarView(rootview.getContext(), color),viewposition);
+    }
 
     /**
      * 设置状态栏黑色字体图标，

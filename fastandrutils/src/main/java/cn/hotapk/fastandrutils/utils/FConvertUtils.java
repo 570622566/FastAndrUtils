@@ -14,9 +14,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -250,33 +252,77 @@ public final class FConvertUtils {
      * @param obj
      * @return
      */
-    public static Map<String, String> obj2Map(Object obj) {
-        Map<String, String> map = new HashMap<String, String>();
+    public static Map<String, Object> obj2Map(Object obj) throws Exception {
+        if (obj == null) {
+            return null;
+        }
+        //获取关联的所有类，本类以及所有父类
+        boolean ret = true;
+        Class oo = obj.getClass();
+        List<Class> clazzs = new ArrayList<Class>();
+        while (ret) {
+            clazzs.add(oo);
+            oo = oo.getSuperclass();
+            if (oo == null || oo == Object.class) break;
+        }
 
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (int i = 0, len = fields.length; i < len; i++) {
-            String varName = fields[i].getName();
-            try {
-                // 获取原来的访问控制权限
-                boolean accessFlag = fields[i].isAccessible();
-                // 修改访问控制权限
-                fields[i].setAccessible(true);
-                // 获取在对象f中属性fields[i]对应的对象中的变量
-                Object o = fields[i].get(obj);
-                if (o != null)
-                    map.put(varName, o.toString());
-                // System.out.println("传入的对象中包含一个如下的变量：" + varName + " = " + o);
-                // 恢复访问控制权限
-                fields[i].setAccessible(accessFlag);
-            } catch (IllegalArgumentException ex) {
-                ex.printStackTrace();
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        for (int i = 0; i < clazzs.size(); i++) {
+            Field[] declaredFields = clazzs.get(i).getDeclaredFields();
+            for (Field field : declaredFields) {
+                int mod = field.getModifiers();
+                //过滤 static 和 final 类型
+                if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
+                    continue;
+                }
+                field.setAccessible(true);
+                map.put(field.getName(), field.get(obj));
             }
         }
+
         return map;
     }
 
+    /**
+     * map 转对象
+     *
+     * @param map
+     * @param beanClass
+     * @return
+     * @throws Exception
+     */
+    public static Object map2Obj(Map<String, String> map, Class<?> beanClass) throws Exception {
+        if (map == null || map.size() <= 0)
+            return null;
+
+        Object obj = beanClass.newInstance();
+        //获取关联的所有类，本类以及所有父类
+        boolean ret = true;
+        Class oo = obj.getClass();
+        List<Class> clazzs = new ArrayList<Class>();
+        while (ret) {
+            clazzs.add(oo);
+            oo = oo.getSuperclass();
+            if (oo == null || oo == Object.class) break;
+        }
+
+        for (int i = 0; i < clazzs.size(); i++) {
+            Field[] fields = clazzs.get(i).getDeclaredFields();
+            for (Field field : fields) {
+                int mod = field.getModifiers();
+                if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
+                    continue;
+                }
+                //由字符串转换回对象对应的类型
+                if (field != null) {
+                    field.setAccessible(true);
+                    field.set(obj, map.get(field.getName()));
+                }
+            }
+        }
+        return obj;
+    }
 
     /**
      * map转成字符串
@@ -380,6 +426,7 @@ public final class FConvertUtils {
 
     /**
      * blob转字符串
+     *
      * @param blob
      * @return
      */

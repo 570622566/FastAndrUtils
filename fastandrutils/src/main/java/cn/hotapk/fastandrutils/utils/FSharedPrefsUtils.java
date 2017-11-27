@@ -1,8 +1,15 @@
 package cn.hotapk.fastandrutils.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -11,8 +18,8 @@ import java.util.Set;
  * @Copyright (C)下午2:32 , www.hotapk.cn
  * SharedPreferences 工具类
  */
-public final class FSharedPreferencesUtils {
-    private FSharedPreferencesUtils() {
+public final class FSharedPrefsUtils {
+    private FSharedPrefsUtils() {
 
     }
 
@@ -78,6 +85,29 @@ public final class FSharedPreferencesUtils {
         return editor.commit();
     }
 
+    public static int getInt(String key) {
+        return getInt(name, key, 0);
+    }
+
+    public static boolean getBoolean(String key) {
+        return getBoolean(name, key, false);
+    }
+
+    public static float getFloat(String key) {
+        return getFloat(name, key, 0);
+    }
+
+    public static long getLong(String key) {
+        return getLong(name, key, 0);
+    }
+
+    public static String getString(String key) {
+        return getString(name, key, null);
+    }
+
+    public static Set<String> getStringSet(String key) {
+        return getStringSet(name, key, null);
+    }
 
     public static int getInt(String name, String key) {
         return getInt(name, key, 0);
@@ -173,6 +203,60 @@ public final class FSharedPreferencesUtils {
     public static boolean clearByKey(String name, String key) {
         SharedPreferences.Editor editor = getSharedPreferences(name).edit().remove(key);
         return editor.commit();
+    }
+
+
+    /**
+     * 获取SharedPreference xml数据
+     *
+     * @return
+     */
+    public static List<String> getSharedPreferenceXMl() {
+
+        ArrayList<String> tags = new ArrayList<>();
+        String rootPath = FUtils.getAppContext().getApplicationInfo().dataDir + "/shared_prefs";
+        File root = new File(rootPath);
+        if (root.exists()) {
+            for (File file : root.listFiles()) {
+                String fileName = file.getName();
+                if (fileName.endsWith(".xml")) {
+                    tags.add(fileName);
+                }
+            }
+        }
+        Collections.sort(tags);
+        return tags;
+    }
+    /**
+     * 获取pref的数据
+     *
+     * @param prefname
+     * @return
+     */
+    public static List<Map<String, Object>> getPrefData(String prefname) {
+        SharedPreferences preferences = FUtils.getAppContext().getSharedPreferences(prefname.replace(".xml", ""), Context.MODE_PRIVATE);
+        Map<String, ?> entries = preferences.getAll();
+        List<Map<String, Object>> datas = new ArrayList<>();
+        for (Map.Entry<String, ?> entry : entries.entrySet()) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("Key", entry.getKey());
+            map.put("Value", entry.getValue().toString());
+            if (entry.getValue() instanceof Integer) {
+                map.put("dataType", "integer");
+            } else if (entry.getValue() instanceof Long) {
+                map.put("dataType", "long");
+            } else if (entry.getValue() instanceof Float) {
+                map.put("dataType","float");
+            } else if (entry.getValue() instanceof Boolean) {
+                map.put("dataType", "boolean");
+            } else if (entry.getValue() instanceof Set) {
+                map.put("dataType", "set");
+            } else {
+                map.put("dataType", "string");
+            }
+            datas.add(map);
+        }
+        return datas;
     }
 
 

@@ -22,4 +22,9 @@ public class TitleInfor {
     public void setTitleName(String titleName) {
         this.titleName = titleName;
     }
+
+    @Override
+    public String toString() {
+        return "titleName=="+titleName;
+    }
 }

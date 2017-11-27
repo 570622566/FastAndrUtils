@@ -4,6 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.hotapk.fastandrutils.bean.TitleInfor;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import cn.hotapk.fastandrutils.utils.FConvertUtils;
 
 /**
@@ -26,6 +31,20 @@ public class FConvertActivity extends FBaseActivity {
         sb.append("\n10 px值转换为dp值：" + FConvertUtils.px2dip(10));
         sb.append("\n10 px值转换为sp值：" + FConvertUtils.px2sp(10));
         sb.append("\n102345 转换为网速格式：" + FConvertUtils.binaryFormatSize(102345));
+        TitleInfor titleInfor = new TitleInfor();
+        titleInfor.setTitleName("对象转map");
+
+        try {
+            sb.append("\n对象转啊map：" + FConvertUtils.obj2Map(titleInfor));
+            Map<String, String> map = new HashMap<>();
+            map.put("titleName", "map转对象");
+            TitleInfor titleInfor2 = (TitleInfor) FConvertUtils.map2Obj(map, TitleInfor.class);
+            sb.append("\nmap转对象：" + titleInfor2.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         convert_tv.setText(sb.toString());
 
     }
