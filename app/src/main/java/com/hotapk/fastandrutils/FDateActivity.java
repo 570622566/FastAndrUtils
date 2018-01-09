@@ -32,8 +32,8 @@ public class FDateActivity extends FBaseActivity {
         stringBuffer.append("\n字符串转Date：" + FDateUtils.stringToDate(FDateUtils.dateToString(new Date())));
         // 格式：年－月－日
         stringBuffer.append("\n字符串转Date：" + FDateUtils.stringToDate(FDateUtils.dateToString(new Date()), FDateUtils.FORMAT_YMD));
-        stringBuffer.append("\n获取本月第一天：" + FDateUtils.getFirstDayOfMonth(FDateUtils.FORMAT_YMD));
-        stringBuffer.append("\n获取本月最后天：" + FDateUtils.getLastDayOfMonth(FDateUtils.FORMAT_YMD));
+        stringBuffer.append("\n获取本月第一天：" + FDateUtils.getFirstDayOfMonth(FDateUtils.FORMAT_YMDHMS));
+        stringBuffer.append("\n获取本月最后天：" + FDateUtils.getLastDayOfMonth(FDateUtils.FORMAT_YMDHMS));
         // 星期天为第一天
         stringBuffer.append("\n获取每月的第一周天数：" + FDateUtils.getFirstWeekdayOfMonth(2017, 11));
        // 本周一0点时间

@@ -337,6 +337,9 @@ public final class FDateUtils {
     public static String getFirstDayOfMonth(String format) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DATE, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
         String firstDayOfMonth = dateToString(cal.getTime(), format);
         return firstDayOfMonth != null ? firstDayOfMonth : "";
     }
@@ -352,6 +355,9 @@ public final class FDateUtils {
         cal.set(Calendar.DATE, 1);
         cal.add(Calendar.MONTH, 1);
         cal.add(Calendar.DATE, -1);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
         String lastDayOfMonth = dateToString(cal.getTime(), format);
         return lastDayOfMonth != null ? lastDayOfMonth : "";
     }

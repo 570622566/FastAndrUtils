@@ -14,7 +14,7 @@ Fastandrutils 是一套整理修改整合的android开发常用的工具类。
 ## 使用
 1. Gradle 添加
 
-    compile 'cn.hotapk:fastandrutils:0.4.0'
+    compile 'cn.hotapk:fastandrutils:1.0.0'
 
 2. androidmanifest.xml 的 application 添加
 
