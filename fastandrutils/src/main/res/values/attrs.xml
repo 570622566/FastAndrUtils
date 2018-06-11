@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="EmptyLayout">
-        <attr name="empty_layout" format="reference" />
-        <attr name="empty_imageView" format="reference" />
-        <attr name="empty_textView" format="reference" />
-        <attr name="empty_button" format="reference" />
-        <attr name="include_layout" format="reference" />
+        <attr name="nodata_layout" format="reference" />
+        <attr name="networkerror_layout" format="reference" />
+        <attr name="loadding_layout" format="reference" />
     </declare-styleable>
 </resources>

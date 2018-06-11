@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="title">#17abe3</color>
     <color name="white">#ffffff</color>
+    <color name="nor_tv">#8a8a8a</color>
+    <color name="sel_tv">#1296db</color>
 </resources>

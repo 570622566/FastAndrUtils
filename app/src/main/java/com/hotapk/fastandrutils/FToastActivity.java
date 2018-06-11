@@ -46,7 +46,7 @@ public class FToastActivity extends FBaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.nol_tv:
-                FToastUtils.init().show("正常显示");
+                FToastUtils.init().setDuration(100l).showLong("正常显示");
                 break;
             case R.id.center_tv:
                 FToastUtils.init().setGrivity(Gravity.CENTER).show("居中显示");
@@ -58,7 +58,7 @@ public class FToastActivity extends FBaseActivity implements View.OnClickListene
                 FToastUtils.init().setImgResid(R.mipmap.f_launcher).show("图片文字横向显示");
                 break;
             case R.id.vimg_tv:
-                FToastUtils.init().setImgResid(R.mipmap.f_launcher).setGrivity(Gravity.CENTER).setDirection(LinearLayout.VERTICAL).show("图片文字纵向显示");
+                FToastUtils.init().setImgResid(R.mipmap.f_launcher).setGrivity(Gravity.CENTER).setDirection(LinearLayout.VERTICAL).setDuration(800l).show("图片文字纵向显示");
                 break;
             case R.id.round_tv:
                 FToastUtils.init().setRoundRadius(30).show("自定义圆角");

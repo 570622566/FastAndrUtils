@@ -3,6 +3,7 @@ package cn.hotapk.fastandrutils.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.ColorRes;
@@ -49,6 +50,7 @@ public class FToastUtils {
     private int bgcolor = 0;//背景颜色
     private boolean customView = false;//是否是自定义view
     private int viewDirection = LinearLayout.HORIZONTAL;//图标文字显示方式
+    private long cancelTime = -1;
     private static Handler handler = new Handler(Looper.getMainLooper());
 
     private FToastUtils() {
@@ -57,7 +59,6 @@ public class FToastUtils {
     }
 
     public static FToastUtils init() {
-
         if (toastUtils == null) {
             synchronized (FToastUtils.class) {
                 if (toastUtils == null) {
@@ -73,9 +74,10 @@ public class FToastUtils {
      *
      * @param objMsg
      */
-    public void showLong(Object objMsg) {
+    public FToastUtils showLong(Object objMsg) {
         duration = Toast.LENGTH_LONG;
         show(objMsg);
+        return this;
     }
 
     /**
@@ -83,39 +85,42 @@ public class FToastUtils {
      *
      * @param objMsg
      */
-    public void show(final Object objMsg) {
-        new Thread(new Runnable() {
+    public FToastUtils show(final Object objMsg) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        synchronized (FToastUtils.class) {
-                            cancelCurrentToast();
-                            String msg = "";
-                            if (objMsg instanceof String) {
-                                msg = objMsg.toString();
-                            } else {
-                                msg = new Gson().toJson(objMsg);
-                            }
-                            if (customView) {
-                                toast = new Toast(context);
-                                setLayoutConf(msg);
-                                toast.setView(rootView);//设置自定义的view
-                                toast.setGravity(grivity, xOffset, yOffset);
-                            } else {
-                                toast = Toast.makeText(context.getApplicationContext(), msg, duration);
-                            }
-                            toast.show();
-                            customView = false;
-                            reset();
-
-                        }
+                synchronized (FToastUtils.class) {
+                    cancelCurrentToast();
+                    String msg = "";
+                    if (objMsg instanceof String) {
+                        msg = objMsg.toString();
+                    } else {
+                        msg = new Gson().toJson(objMsg);
                     }
-                });
-            }
-        }).start();
+                    if (customView) {
+                        toast = new Toast(context);
+                        setLayoutConf(msg);
+                        toast.setView(rootView);//设置自定义的view
+                        toast.setGravity(grivity, xOffset, yOffset);
+                    } else {
+                        toast = Toast.makeText(context.getApplicationContext(), msg, duration);
+                    }
+                    toast.show();
+                    if (cancelTime != -1) {
+                        cancelCurrentToast(cancelTime);
+                    }
+                    customView = false;
+                    reset();
 
+                }
+            }
+        });
+//            }
+//        }).start();
+        return this;
     }
 
     /**
@@ -133,7 +138,6 @@ public class FToastUtils {
         LinearLayout.LayoutParams linearParams = null;
         LinearLayout.LayoutParams imgParams = null;
         LinearLayout.LayoutParams tvParams = null;
-
         GradientDrawable gd = new GradientDrawable();// 创建drawable
         gd.setCornerRadius(roundRadius == -1 ? FConvertUtils.dip2px(8) : FConvertUtils.dip2px(roundRadius));
         int fillColor = bgcolor == 0 ? FResourcesUtils.getColorResources("toastbg") : bgcolor;// 内部填充颜色
@@ -191,6 +195,26 @@ public class FToastUtils {
             rootView = null;
             toast = null;
         }
+    }
+
+    /**
+     * 多少秒关闭toast
+     */
+    public void cancelCurrentToast(long time) {
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (toast != null) {
+                    FLogUtils.getInstance().e("fcdddddd");
+                    toast.cancel();
+                    rootView = null;
+                    toast = null;
+                }
+            }
+        }, time);
+
+
     }
 
 
@@ -269,16 +293,16 @@ public class FToastUtils {
     }
 
     /**
-     * 设置显示时间
+     * 自定义关闭时间
      *
-     * @param duration
+     * @param cancelTime
      * @return
      */
-    public FToastUtils setDuration(@Duration int duration) {
-        this.customView = true;
-        this.duration = duration;
+    public FToastUtils setDuration(long cancelTime) {
+        this.cancelTime = cancelTime;
         return this;
     }
+
 
     /**
      * 设置圆角大小
@@ -327,13 +351,8 @@ public class FToastUtils {
         roundRadius = -1;//背景圆角
         bgcolor = 0;//背景颜色
         viewDirection = LinearLayout.HORIZONTAL;
+        cancelTime = -1;
     }
-
-    @IntDef({Toast.LENGTH_SHORT, Toast.LENGTH_LONG})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Duration {
-    }
-
     @IntDef({LinearLayout.HORIZONTAL, LinearLayout.VERTICAL})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Direction {

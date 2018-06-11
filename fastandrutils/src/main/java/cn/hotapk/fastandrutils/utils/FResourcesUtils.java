@@ -12,42 +12,42 @@ import java.lang.reflect.Field;
  */
 public class FResourcesUtils {
 
-    public static int getAnimResources( String animName) {
+    public static int getAnimResources(String animName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(animName, "anim", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getMipmapResources( String mipmapName) {
+    public static int getMipmapResources(String mipmapName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(mipmapName, "mipmap", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getIdResources( String idName) {
+    public static int getIdResources(String idName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(idName, "id", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getDrawableResources( String drawableName) {
+    public static int getDrawableResources(String drawableName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(drawableName, "drawable", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getColorResources(  String colorName) {
+    public static int getColorResources(String colorName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(colorName, "color", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getStringResources( String stringName) {
+    public static int getStringResources(String stringName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(stringName, "string", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getLayoutResources( String LayoutName) {
+    public static int getLayoutResources(String LayoutName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(LayoutName, "layout", FUtils.getAppContext().getPackageName());
     }
 
-    public static int getAttrResources( String attrName) {
+    public static int getAttrResources(String attrName) {
         Resources res = FUtils.getAppContext().getResources();
         return res.getIdentifier(attrName, "attr", FUtils.getAppContext().getPackageName());
     }
@@ -64,9 +64,9 @@ public class FResourcesUtils {
      * @return
      */
 
-    public static int getStyleable( String name) {
+    public static int getStyleable(String name) {
 
-        return ((Integer) getResourceId( name, "styleable")).intValue();
+        return ((Integer) getResourceId(name, "styleable")).intValue();
 
     }
 
@@ -77,9 +77,9 @@ public class FResourcesUtils {
      * @param name
      * @return
      */
-    public static int[] getStyleableArray( String name) {
+    public static int[] getStyleableArray(String name) {
 
-        return (int[]) getResourceId( name, "styleable");
+        return (int[]) getResourceId(name, "styleable");
 
     }
 
@@ -90,7 +90,7 @@ public class FResourcesUtils {
      * @param type
      * @return
      */
-    private static Object getResourceId( String name, String type) {
+    private static Object getResourceId(String name, String type) {
 
         String className = FUtils.getAppContext().getPackageName() + ".R";
 
@@ -108,7 +108,6 @@ public class FResourcesUtils {
 
                         String fieldName = field.getName();
                         if (fieldName.equals(name)) {
-                            System.out.println(fieldName);
                             return field.get(null);
 
                         }

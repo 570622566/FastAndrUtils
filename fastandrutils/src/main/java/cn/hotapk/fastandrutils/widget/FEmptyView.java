@@ -2,37 +2,43 @@ package cn.hotapk.fastandrutils.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.support.annotation.AttrRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import java.util.List;
+
+import cn.hotapk.fastandrutils.utils.FLogUtils;
 import cn.hotapk.fastandrutils.utils.FResourcesUtils;
+
 
 /**
  * @author laijian
- * @version 2017/9/23
- * @Copyright (C)下午1:03 , www.hotapk.cn
+ * @version 2018/6/1
+ * @Copyright (C)上午10:20 , www.hotapk.cn
  * 空提示界面
  */
 
 public class FEmptyView extends FrameLayout {
-    private LinearLayout setdataLay;//设置数据布局
-    private View emptyView;//空布局
-    private ImageView emptyImg;//空布局的ImageView
-    private TextView emptyTv;//空布局的TextView
-    private Button emptyBt;//空布局的Button
+    private LinearLayout emptyLayout;//空界面容器
+    private View emptyView;//空布局布局
+    private View dataView;
     private Context context;
-
+    private int loddingId;
+    private int nodataId;
+    private int networkerrorId;
+    private int otherId;
+    private OnChildViewOnClickListener childViewOnClickListener;
+    private EmptyViewListener emptyViewListener;
 
     public FEmptyView(@NonNull Context context) {
         this(context, null);
@@ -50,34 +56,155 @@ public class FEmptyView extends FrameLayout {
         array.recycle();
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+    }
+
+
+    @Override
+    public void addView(View child, ViewGroup.LayoutParams params) {
+        super.addView(child, params);
+        if (dataView == null) {
+            dataView = child;
+        }
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+    }
+
     /**
      * 初始化布局
      */
     private void initView(TypedArray array) {
-        int emptyViewId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_empty_layout"), FResourcesUtils.getLayoutResources("f_empty_layout"));
-        int emptyImgId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_empty_imageView"), FResourcesUtils.getIdResources("empty_img"));
-        int emptyTvId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_empty_textView"), FResourcesUtils.getIdResources("empty_tv"));
-        int emptyBtId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_empty_button"), FResourcesUtils.getIdResources("empty_bt"));
-        int dataViewId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_include_layout"), 0);
-        //获取空布局View
-        emptyView = View.inflate(context, emptyViewId, null);
-        //获取空布局的imageView
-        emptyImg = (ImageView) emptyView.findViewById(emptyImgId);
-        emptyTv = (TextView) emptyView.findViewById(emptyTvId);
-        emptyBt = (Button) emptyView.findViewById(emptyBtId);
-        setdataLay = new LinearLayout(context);
-        setdataLay.setOrientation(LinearLayout.VERTICAL);
-        setdataLay.setVisibility(GONE);
-        if (dataViewId != 0) {
-            addChildViewid(dataViewId);
-        }
-        addView(setdataLay);
-        addView(emptyView);
+        loddingId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_loadding_layout"), FResourcesUtils.getLayoutResources("f_loadding_view"));
+        networkerrorId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_networkerror_layout"), FResourcesUtils.getLayoutResources("f_networkerror_view"));
+        nodataId = array.getResourceId(FResourcesUtils.getStyleable("EmptyLayout_nodata_layout"), FResourcesUtils.getLayoutResources("f_nodata_view"));
+        initEmptyLayout();
+        addView(emptyLayout);
+    }
+
+    private void initEmptyLayout() {
+        emptyLayout = new LinearLayout(context);
+        FrameLayout.LayoutParams layoutParams = new LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        emptyLayout.setOrientation(LinearLayout.VERTICAL);
+        emptyLayout.setLayoutParams(layoutParams);
+    }
+
+    /**
+     * 加载
+     */
+    public void loadding() {
+        showEmptyView(loddingId);
+    }
+
+    public void loadding(@LayoutRes int loddingId) {
+        this.loddingId = loddingId;
+        showEmptyView(loddingId);
+    }
+
+    /**
+     * 没数据
+     */
+    public void noData() {
+        showEmptyView(nodataId);
+    }
+
+    public void noData(@LayoutRes int nodataId) {
+        this.nodataId = nodataId;
+        showEmptyView(nodataId);
+    }
+
+    /**
+     * 网络出错
+     */
+    public void networkError() {
+        showEmptyView(networkerrorId);
+    }
+
+    public void networkError(@LayoutRes int networkerrorId) {
+        this.networkerrorId = networkerrorId;
+        showEmptyView(networkerrorId);
+    }
+
+    /**
+     * 显示自定义view
+     *
+     * @param otherId
+     */
+    public void showOtherView(@LayoutRes int otherId) {
+        this.otherId = otherId;
+        showEmptyView(otherId);
     }
 
 
-    public View getEmptyView() {
-        return emptyView;
+    /**
+     * 获取加载窗的layout id
+     *
+     * @return
+     */
+    public int getLoddingId() {
+        return loddingId;
+    }
+
+    /**
+     * 获取没数据layout id
+     *
+     * @return
+     */
+    public int getNodataId() {
+        return nodataId;
+    }
+
+    /**
+     * 获取网络异常layout id
+     *
+     * @return
+     */
+    public int getNetworkerrorId() {
+        return networkerrorId;
+    }
+
+    /**
+     * 获取自定义的layout id
+     *
+     * @return
+     */
+    public int getOtherId() {
+        return otherId;
+    }
+
+
+    public void setChildViewOnClickListener(OnChildViewOnClickListener childViewOnClickListener) {
+        this.childViewOnClickListener = childViewOnClickListener;
+
+    }
+
+    public void setEmptyViewListener(EmptyViewListener emptyViewListener) {
+        this.emptyViewListener = emptyViewListener;
+    }
+
+    private void showEmptyView(int viewid) {
+        if (emptyLayout.getChildCount() != 0) {
+            emptyLayout.removeAllViews();
+        }
+        addChildViewid(viewid);
+        emptyLayout.setVisibility(VISIBLE);
+        dataView.setVisibility(GONE);
+
+    }
+
+    /**
+     * 隐藏空界面
+     */
+    public void dismissEmptyView() {
+        emptyLayout.removeAllViews();
+        dataView.setVisibility(VISIBLE);
+        emptyLayout.setVisibility(GONE);
+        emptyView = null;
     }
 
     /**
@@ -85,251 +212,34 @@ public class FEmptyView extends FrameLayout {
      *
      * @param viewid
      */
-    public void addChildViewid(int viewid) {
-        View childView = LayoutInflater.from(context).inflate(viewid, null, true);
-        addChildView(childView);
+    private void addChildViewid(int viewid) {
+        View childView = LayoutInflater.from(context).inflate(viewid, this, false);
+        addChildView(childView, viewid);
     }
 
-    public void addChildView(View childView) {
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        childView.setLayoutParams(layoutParams);
-        setdataLay.addView(childView);
-    }
-
-    /**
-     * 加载数据
-     */
-    public void loadding() {
-        setLoadingShowing(true);
-    }
-
-    /**
-     * 返回自定义emptyView
-     *
-     * @param viewCallBack
-     */
-    public void loadding(ViewCallBack viewCallBack) {
-        setLoadingShowing(true);
-        if (viewCallBack != null) {
-            viewCallBack.emptyViewCallBack(emptyView);
-        }
-    }
-
-    /**
-     * 带返回imageView的加载框
-     *
-     * @param imgCallBack
-     */
-    public void loadding(ImgCallBack imgCallBack) {
-        setLoadingShowing(true);
-        setTitle(null);
-        setBtText(null);
-        setImgCallBack(imgCallBack, 1);
-    }
-
-
-    /**
-     * 只显示title的加框
-     *
-     * @param title
-     */
-    public void loadding(String title) {
-        setLoadingShowing(true);
-        setTitle(title);
-        setBtText(null);
-    }
-
-    /**
-     * 带title，返回imageView的加载框
-     */
-    public void loadding(String title, ImgCallBack imgCallBack) {
-        setLoadingShowing(true);
-        setTitle(title);
-        setBtText(null);
-        setImgCallBack(imgCallBack, 1);
-    }
-
-
-    /**
-     * 加载数据成功
-     */
-    public void loaddingSuccess() {
-        setLoadingShowing(false);
-    }
-
-    public void loaddingSuccess(ImgCallBack imgCallBack) {
-        setLoadingShowing(false);
-        setImgCallBack(imgCallBack, 0);
-    }
-
-    public void loaddingSuccess(ViewCallBack viewCallBack) {
-        setLoadingShowing(false);
-        if (viewCallBack != null) {
-            viewCallBack.emptyViewCallBack(emptyView);
-        }
-    }
-
-    /**
-     * 加载数据失败
-     */
-    public void loaddingFail() {
-        setLoadingShowing(true);
-
-    }
-
-    public void loaddingFail(ViewCallBack viewCallBack) {
-        setLoadingShowing(true);
-        if (viewCallBack != null) {
-            viewCallBack.emptyViewCallBack(emptyView);
-        }
-    }
-
-    public void loaddingFail(String title, ImgCallBack imgCallBack) {
-        setLoadingShowing(true);
-        setTitle(title);
-        setBtText(null);
-        setImgCallBack(imgCallBack, 2);
-    }
-
-
-    public void loaddingFail(String title, String btTitle, OnClickListener onClickListener, ImgCallBack imgCallBack) {
-        setLoadingShowing(true);
-        setTitle(title);
-        setOnClickRefreshListener(btTitle, onClickListener);
-        setImgCallBack(imgCallBack, 2);
-    }
-
-    /**
-     * 是否显示或隐藏空界面
-     *
-     * @param showing
-     */
-    public void setLoadingShowing(boolean showing) {
-        setdataLay.setVisibility(showing ? GONE : VISIBLE);
-        emptyView.setVisibility(showing ? VISIBLE : GONE);
-    }
-
-    private void setImgCallBack(ImgCallBack imgCallBack, int emptyType) {
-        if (imgCallBack != null) {
-            if (emptyImg != null) {
-                imgCallBack.setImg(emptyImg, emptyType);
+    private void addChildView(View childView, int viewid) {
+        emptyView = childView;
+        emptyView.setId(viewid);
+        emptyLayout.addView(childView);
+        emptyView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (childViewOnClickListener != null)
+                    childViewOnClickListener.childViewOnclick(emptyView.getId());
             }
+        });
+        if (emptyViewListener != null) {
+            emptyViewListener.getEmptyView((ViewGroup) emptyView, emptyView.getId());
         }
     }
 
-    /**
-     * 是否在空界面
-     *
-     * @return
-     */
-    public boolean isEmptyViewVisiable() {
-        return emptyView.getVisibility() == VISIBLE;
+    public interface OnChildViewOnClickListener {
+        void childViewOnclick(int viewId);
     }
 
-    /**
-     * 设置标题
-     *
-     * @param title
-     */
-    public void setTitle(String title) {
-        if (emptyTv != null) {
-            emptyTv.setText(title);
-            emptyTv.setVisibility(TextUtils.isEmpty(title) ? GONE : VISIBLE);
-        }
+    public interface EmptyViewListener {
+        void getEmptyView(ViewGroup view, int viewid);
     }
 
 
-    /**
-     * 设置标题字体颜色
-     *
-     * @param color
-     */
-    public void setTitleColor(int color) {
-        if (emptyTv != null) {
-            emptyTv.setTextColor(color);
-        }
-    }
-
-    /**
-     * 设置字体大小
-     *
-     * @param size
-     */
-    public void setTitleSize(float size) {
-        if (emptyTv != null) {
-            emptyTv.setTextSize(size);
-        }
-    }
-
-    /**
-     * 设置button的标题
-     *
-     * @param btTitle
-     */
-    public void setBtText(String btTitle) {
-        if (emptyBt != null) {
-            emptyBt.setText(btTitle);
-            emptyBt.setVisibility(TextUtils.isEmpty(btTitle) ? GONE : VISIBLE);
-        }
-    }
-
-    /**
-     * 设置button字体颜色
-     *
-     * @param btColor
-     */
-    public void setBtTitleColor(int btColor) {
-        if (emptyBt != null) {
-            emptyBt.setTextColor(btColor);
-        }
-    }
-
-    /**
-     * 设置button字体大小
-     *
-     * @param btSize
-     */
-    public void setBtTitleSize(float btSize) {
-        if (emptyBt != null) {
-            emptyBt.setTextSize(btSize);
-        }
-    }
-
-    /**
-     * 设置button的背景颜色
-     *
-     * @param btResid
-     */
-    public void setBtBackground(int btResid) {
-        if (emptyBt != null) {
-            emptyBt.setBackgroundResource(btResid);
-        }
-    }
-
-    /**
-     * 刷新数据
-     *
-     * @param onClickListener
-     */
-    public void setOnClickRefreshListener(String btTitle, OnClickListener onClickListener) {
-        if (emptyBt != null) {
-            setBtText(btTitle);
-            emptyBt.setOnClickListener(onClickListener);
-        }
-    }
-
-
-    /**
-     * ImagView 回调
-     */
-    public interface ImgCallBack {
-        void setImg(ImageView img, int emptyType);
-    }
-
-    /**
-     * emptyView 回调
-     */
-    public interface ViewCallBack {
-        void emptyViewCallBack(View view);
-    }
 }

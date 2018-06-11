@@ -76,6 +76,9 @@ public class FMainActivity extends FBaseActivity {
         titleInfors.add(new TitleInfor("简单数据校验相关"));
         titleInfors.add(new TitleInfor("图片相关"));
         titleInfors.add(new TitleInfor("网络相关"));
+        titleInfors.add(new TitleInfor("空界面"));
+        titleInfors.add(new TitleInfor("弹窗"));
+        titleInfors.add(new TitleInfor("Tablayout"));
     }
 
     private void setAutoRVAdapter() {
@@ -135,6 +138,12 @@ public class FMainActivity extends FBaseActivity {
             intent = new Intent(this, FImageActivity.class);
         } else if (position == 15) {
             intent = new Intent(this, FNetworkActivity.class);
+        } else if (position == 16) {
+            intent = new Intent(this, FEmptyActivity.class);
+        } else if (position == 17) {
+            intent = new Intent(this, FDialogFragmentActivity.class);
+        } else if (position == 18) {
+            intent = new Intent(this, TabLayoutActivity.class);
         }
         startActivity(intent);
 

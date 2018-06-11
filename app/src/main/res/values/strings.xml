@@ -24,4 +24,7 @@
         4.对于2的特性不能很好的兼容和android:gravity="bottom" 这样相对的布局使用
     </string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

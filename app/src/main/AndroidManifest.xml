@@ -53,6 +53,9 @@
         <activity android:name=".FValidatorActivity" />
         <activity android:name=".FImageActivity" />
         <activity android:name=".FNetworkActivity" />
+        <activity android:name=".FEmptyActivity" />
+        <activity android:name=".FDialogFragmentActivity" />
+        <activity android:name=".TabLayoutActivity"></activity>
     </application>
 
 </manifest>
