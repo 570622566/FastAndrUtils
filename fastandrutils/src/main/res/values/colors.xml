@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bgcolor">#00000000</color>
     <color name="toastbg">#66000000</color>
+    <color name="dialogbg">#88000000</color>
+    <color name="read_color">#e90a0a</color>
+    <color name="tran_color">#00000000</color>
+    <color name="white_color">#ffffff</color>
 
 </resources>

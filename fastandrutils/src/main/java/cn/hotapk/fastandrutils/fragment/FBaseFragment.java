@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * @Copyright (C)下午4:47 , www.hotapk.cn
  *
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class FBaseFragment extends Fragment {
 
     protected View mRootView;
 

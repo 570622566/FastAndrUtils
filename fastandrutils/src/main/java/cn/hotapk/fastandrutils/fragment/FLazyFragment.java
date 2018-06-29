@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 public abstract class FLazyFragment extends Fragment {
 
     private View rootView;
-    private boolean isInitData = true;//是否已经初始化数据
+    private boolean needInitData = true;//是否已经初始化数据
     private boolean isInitView = false;//是否初始化view
 
     public FLazyFragment() {
@@ -47,8 +47,8 @@ public abstract class FLazyFragment extends Fragment {
     }
 
     private void lazyLoad() {
-        if (getUserVisibleHint() && isInitData && isInitView) {
-            isInitData = false;
+        if (getUserVisibleHint() && needInitData && isInitView) {
+            needInitData = false;
             if (rootView != null) {
                 initView(rootView);
             }

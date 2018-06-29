@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <cn.hotapk.fastandrutils.widget.FLinearLayout
+        android:id="@+id/lin"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:bgColor="@color/colorPrimaryDark"
+        app:radius="3dp"
+        app:stroke="2dp"
+        app:strokeColor="@color/read_color"
+        />
+
+
+</LinearLayout>

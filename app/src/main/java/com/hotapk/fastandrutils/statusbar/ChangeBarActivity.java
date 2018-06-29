@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.hotapk.fastandrutils.R;
 
+import cn.hotapk.fastandrutils.utils.FScreenUtils;
 import cn.hotapk.fastandrutils.utils.FStatusBarUtils;
 
 /**
@@ -20,6 +21,7 @@ public class ChangeBarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_bar);
+        FStatusBarUtils.paddingTopStatusBar(this,findViewById(R.id.title_name));
         FStatusBarUtils.setAlphaStatusBar(this, findViewById(R.id.title_name), ContextCompat.getColor(this, R.color.colorAccent));
     }
 }

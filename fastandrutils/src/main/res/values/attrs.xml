@@ -5,4 +5,22 @@
         <attr name="networkerror_layout" format="reference" />
         <attr name="loadding_layout" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="FLinearLayout">
+        <attr name="bgColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="stroke" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="FButton">
+        <attr name="btBgColor" format="color" />
+        <attr name="btStrokeColor" format="color" />
+        <attr name="btRadius" format="dimension" />
+        <attr name="btStroke" format="dimension" />
+        <attr name="btselbgColor" format="color" />
+        <attr name="btPressAlpha" format="integer" />
+    </declare-styleable>
+
+
 </resources>

@@ -157,6 +157,7 @@ public class FStatusBarUtils {
         if (!allowtranslucent(activity, 0x40000000)) {
             return;
         }
+
         titleview.getViewTreeObserver().addOnScrollChangedListener(
                 new ViewTreeObserver.OnScrollChangedListener() {
                     @Override
@@ -171,6 +172,7 @@ public class FStatusBarUtils {
                         addStatusBarColor(activity, statusBarColor, alpha);
                     }
                 });
+
     }
 
 
@@ -270,9 +272,11 @@ public class FStatusBarUtils {
     private static void addPaddingTopEqualStatusBarHeight(@NonNull final View view) {
         Object haveSetOffset = view.getTag(TAG_OFFSETPADDING);
         if (haveSetOffset != null && (Boolean) haveSetOffset) return;
-        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+        view.post(new Runnable() {
             @Override
-            public void onGlobalLayout() {
+            public void run() {
+
                 view.setPadding(view.getPaddingLeft(),
                         view.getPaddingTop() + FScreenUtils.getStatusHeight(view.getContext()),
                         view.getPaddingRight(),
@@ -282,7 +286,6 @@ public class FStatusBarUtils {
                 view.setLayoutParams(vparam);
                 view.setTag(TAG_OFFSETPADDING, true);
                 FLogUtils.getInstance().e(view.getHeight() + "");
-                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
 
@@ -365,12 +368,13 @@ public class FStatusBarUtils {
 
     /**
      * 添加一个状态栏大小的view
+     *
      * @param rootview
      * @param color
      * @param viewposition
      */
-    public static void addBarView(ViewGroup rootview, final int color,int viewposition){
-        rootview.addView(createColorStatusBarView(rootview.getContext(), color),viewposition);
+    public static void addBarView(ViewGroup rootview, final int color, int viewposition) {
+        rootview.addView(createColorStatusBarView(rootview.getContext(), color), viewposition);
     }
 
     /**

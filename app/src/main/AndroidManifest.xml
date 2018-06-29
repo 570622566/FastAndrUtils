@@ -55,7 +55,10 @@
         <activity android:name=".FNetworkActivity" />
         <activity android:name=".FEmptyActivity" />
         <activity android:name=".FDialogFragmentActivity" />
-        <activity android:name=".TabLayoutActivity"></activity>
+        <activity android:name=".TabLayoutActivity" />
+        <activity android:name=".LinearLayoutActivity" />
+        <activity android:name=".FButtonActivity" />
+        <activity android:name=".DialogActivity"></activity>
     </application>
 
 </manifest>

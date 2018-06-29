@@ -16,6 +16,7 @@ import com.hotapk.fastandrutils.bean.TitleInfor;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.hotapk.fastandrutils.fragment.FTipsDialogFragment;
 import cn.hotapk.fastandrutils.utils.FLogUtils;
 import cn.hotapk.fastandrutils.utils.FPermissionUtils;
 
@@ -79,6 +80,9 @@ public class FMainActivity extends FBaseActivity {
         titleInfors.add(new TitleInfor("空界面"));
         titleInfors.add(new TitleInfor("弹窗"));
         titleInfors.add(new TitleInfor("Tablayout"));
+        titleInfors.add(new TitleInfor("自定义linearlayout"));
+        titleInfors.add(new TitleInfor("自定义button"));
+        titleInfors.add(new TitleInfor("自定义Dialog"));
     }
 
     private void setAutoRVAdapter() {
@@ -144,6 +148,12 @@ public class FMainActivity extends FBaseActivity {
             intent = new Intent(this, FDialogFragmentActivity.class);
         } else if (position == 18) {
             intent = new Intent(this, TabLayoutActivity.class);
+        } else if (position == 19) {
+            intent = new Intent(this, LinearLayoutActivity.class);
+        } else if (position == 20) {
+            intent = new Intent(this, FButtonActivity.class);
+        }else if (position == 21) {
+            intent = new Intent(this, DialogActivity.class);
         }
         startActivity(intent);
 
