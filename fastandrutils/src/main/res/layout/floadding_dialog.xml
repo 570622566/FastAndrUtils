@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical"
-        app:bgColor="#99000000"
+        app:bgColor="#aa000000"
         app:radius="8dp">
 
         <ProgressBar

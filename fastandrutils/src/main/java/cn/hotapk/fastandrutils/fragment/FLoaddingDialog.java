@@ -66,7 +66,7 @@ public class FLoaddingDialog extends FBaseDialogFragment {
         private String title = "加载中。。。";
         private float alpha;
         //是否点击外部关闭
-        private boolean canceledOutside = true;
+        private boolean canceledOutside = false;
         //是否可以点击返回键
         private boolean dialogCancelable = true;
 

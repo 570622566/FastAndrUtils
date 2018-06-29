@@ -16,7 +16,6 @@ import com.hotapk.fastandrutils.bean.TitleInfor;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.hotapk.fastandrutils.fragment.FTipsDialogFragment;
 import cn.hotapk.fastandrutils.utils.FLogUtils;
 import cn.hotapk.fastandrutils.utils.FPermissionUtils;
 
@@ -152,7 +151,7 @@ public class FMainActivity extends FBaseActivity {
             intent = new Intent(this, LinearLayoutActivity.class);
         } else if (position == 20) {
             intent = new Intent(this, FButtonActivity.class);
-        }else if (position == 21) {
+        } else if (position == 21) {
             intent = new Intent(this, DialogActivity.class);
         }
         startActivity(intent);

@@ -26,9 +26,9 @@ public class DialogActivity extends AppCompatActivity {
         fButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FLoaddingDialog creat = new LoaddingBuilder().setTitle("正在加载。。。")
-                        .setCanceledOutside(false)
-                        .setAlpha(0.1f)
+                FLoaddingDialog creat = new LoaddingBuilder()
+                        .setTitle("正在加载。。。")
+                        .setAlpha(0.2f)
                         .creat();
                 creat.showDialog(DialogActivity.this);
 
