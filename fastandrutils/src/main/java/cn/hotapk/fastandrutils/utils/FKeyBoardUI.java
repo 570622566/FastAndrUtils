@@ -35,16 +35,15 @@ public class FKeyBoardUI implements FKeyBoardHeightUtils.KeyBoardVisiableListene
     private int screenWeight = 0;//屏幕宽度
     private FKeyBoardHeightUtils keyBoardHeightUtils;
 
-    public static FKeyBoardUI buildKeyBoardUI(Activity activity) {
-        return new FKeyBoardUI(activity);
-    }
-
-
     private FKeyBoardUI(Activity activity) {
         this.activity = activity;
         getScreen();
         initDialog();
         keyBoardHeightUtils = FKeyBoardHeightUtils.setKeyBoardHeigthListener(activity, this);
+    }
+
+    public static FKeyBoardUI buildKeyBoardUI(Activity activity) {
+        return new FKeyBoardUI(activity);
     }
 
     private void getScreen() {

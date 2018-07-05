@@ -1,6 +1,5 @@
 package com.hotapk.fastandrutils;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -9,7 +8,6 @@ import java.io.IOException;
 
 import cn.hotapk.fastandrutils.utils.FAssetsARawUtils;
 import cn.hotapk.fastandrutils.utils.FCleanUtils;
-import cn.hotapk.fastandrutils.utils.FToastUtils;
 import cn.hotapk.fastandrutils.utils.FUtils;
 
 

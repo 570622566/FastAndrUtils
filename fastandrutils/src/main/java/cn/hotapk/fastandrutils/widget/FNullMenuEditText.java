@@ -18,30 +18,6 @@ import android.widget.EditText;
  */
 public class FNullMenuEditText extends EditText {
 
-    boolean canPaste() {
-        return false;
-    }
-
-    boolean canCut() {
-        return false;
-    }
-
-    boolean canCopy() {
-        return false;
-    }
-
-    boolean canSelectAllText() {
-        return false;
-    }
-
-    boolean canSelectText() {
-        return false;
-    }
-
-    boolean textCanBeSelected() {
-        return false;
-    }
-
     public FNullMenuEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLongClickable(false);
@@ -68,6 +44,30 @@ public class FNullMenuEditText extends EditText {
             }
         });
 
+    }
+
+    boolean canPaste() {
+        return false;
+    }
+
+    boolean canCut() {
+        return false;
+    }
+
+    boolean canCopy() {
+        return false;
+    }
+
+    boolean canSelectAllText() {
+        return false;
+    }
+
+    boolean canSelectText() {
+        return false;
+    }
+
+    boolean textCanBeSelected() {
+        return false;
     }
 
     @Override

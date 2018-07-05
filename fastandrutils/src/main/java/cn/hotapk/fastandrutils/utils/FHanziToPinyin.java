@@ -6,6 +6,7 @@ import android.util.Log;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Locale;
+
 /**
  * @author laijian
  * @version 2017/9/19
@@ -291,40 +292,6 @@ public class FHanziToPinyin {
     private static FHanziToPinyin sInstance;
     private final boolean mHasChinaCollator;
 
-    public static class Token {
-        /**
-         * Separator between target string for each source char
-         */
-        public static final String SEPARATOR = " ";
-
-        public static final int LATIN = 1;
-        public static final int PINYIN = 2;
-        public static final int UNKNOWN = 3;
-
-        public Token() {
-        }
-
-        public Token(int type, String source, String target) {
-            this.type = type;
-            this.source = source;
-            this.target = target;
-        }
-
-        /**
-         * Type of this token, ASCII, PINYIN or UNKNOWN.
-         */
-        public int type;
-        /**
-         * Original string before translation.
-         */
-        public String source;
-        /**
-         * Translated string of source. For Han, target is corresponding Pinyin.
-         * Otherwise target is original string in source.
-         */
-        public String target;
-    }
-
     protected FHanziToPinyin(boolean hasChinaCollator) {
         mHasChinaCollator = hasChinaCollator;
     }
@@ -479,6 +446,37 @@ public class FHanziToPinyin {
         String str = sb.toString();
         tokens.add(new Token(tokenType, str, str));
         sb.setLength(0);
+    }
+
+    public static class Token {
+        /**
+         * Separator between target string for each source char
+         */
+        public static final String SEPARATOR = " ";
+
+        public static final int LATIN = 1;
+        public static final int PINYIN = 2;
+        public static final int UNKNOWN = 3;
+        /**
+         * Type of this token, ASCII, PINYIN or UNKNOWN.
+         */
+        public int type;
+        /**
+         * Original string before translation.
+         */
+        public String source;
+        /**
+         * Translated string of source. For Han, target is corresponding Pinyin.
+         * Otherwise target is original string in source.
+         */
+        public String target;
+        public Token() {
+        }
+        public Token(int type, String source, String target) {
+            this.type = type;
+            this.source = source;
+            this.target = target;
+        }
     }
 
 }

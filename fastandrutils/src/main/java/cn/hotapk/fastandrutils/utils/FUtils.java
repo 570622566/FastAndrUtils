@@ -9,9 +9,8 @@ import android.app.Application;
  */
 public class FUtils {
 
-    private Application application;
-
     private volatile static FUtils fUtils;
+    private Application application;
 
     private FUtils(Application application) {
         this.application = application;

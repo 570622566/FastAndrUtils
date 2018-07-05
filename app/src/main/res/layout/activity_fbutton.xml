@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".FButtonActivity">
@@ -15,6 +16,6 @@
         android:text="点击"
         android:textColor="@color/white_color"
         app:btBgColor="@color/colorPrimaryDark"
-        app:btPressAlpha="230"
+        app:btPressAlpha="0.5"
         app:btRadius="3dp" />
 </LinearLayout>

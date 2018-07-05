@@ -19,11 +19,11 @@ import java.util.Set;
  * SharedPreferences 工具类
  */
 public final class FSharedPrefsUtils {
+    private static String name = "hotapk.cn";
+
     private FSharedPrefsUtils() {
 
     }
-
-    private static String name = "hotapk.cn";
 
     public static boolean putInt(String key, int value) {
         return putInt(name, key, value);
@@ -227,6 +227,7 @@ public final class FSharedPrefsUtils {
         Collections.sort(tags);
         return tags;
     }
+
     /**
      * 获取pref的数据
      *
@@ -246,7 +247,7 @@ public final class FSharedPrefsUtils {
             } else if (entry.getValue() instanceof Long) {
                 map.put("dataType", "long");
             } else if (entry.getValue() instanceof Float) {
-                map.put("dataType","float");
+                map.put("dataType", "float");
             } else if (entry.getValue() instanceof Boolean) {
                 map.put("dataType", "boolean");
             } else if (entry.getValue() instanceof Set) {

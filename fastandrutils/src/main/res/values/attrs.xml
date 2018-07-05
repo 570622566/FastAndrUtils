@@ -19,7 +19,7 @@
         <attr name="btRadius" format="dimension" />
         <attr name="btStroke" format="dimension" />
         <attr name="btselbgColor" format="color" />
-        <attr name="btPressAlpha" format="integer" />
+        <attr name="btPressAlpha" format="float" />
     </declare-styleable>
 
 

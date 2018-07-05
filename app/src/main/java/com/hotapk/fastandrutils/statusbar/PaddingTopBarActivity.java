@@ -1,7 +1,7 @@
 package com.hotapk.fastandrutils.statusbar;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.hotapk.fastandrutils.R;
 

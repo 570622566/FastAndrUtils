@@ -17,11 +17,11 @@
             android:id="@+id/ed_text"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:paddingLeft="6dp"
             android:background="#ffffff"
             android:gravity="center_vertical"
             android:inputType="text"
             android:maxLines="1"
+            android:paddingLeft="6dp"
             android:scrollHorizontally="true"
             android:textSize="16sp" />
     </LinearLayout>

@@ -11,7 +11,6 @@ import android.view.ViewGroup;
  * @author laijian
  * @version 2018/6/8
  * @Copyright (C)下午4:47 , www.hotapk.cn
- *
  */
 public abstract class FBaseFragment extends Fragment {
 
@@ -23,7 +22,7 @@ public abstract class FBaseFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         if (mRootView == null) {
             mRootView = inflater.inflate(setLayoutRes(), container, false);
-            initView(mRootView,savedInstanceState);
+            initView(mRootView, savedInstanceState);
         }
         ViewGroup parent = (ViewGroup) mRootView.getParent();
         if (parent != null) {
@@ -33,5 +32,6 @@ public abstract class FBaseFragment extends Fragment {
     }
 
     public abstract int setLayoutRes();
-    public abstract void initView(View rootView,Bundle savedInstanceState);
+
+    public abstract void initView(View rootView, Bundle savedInstanceState);
 }

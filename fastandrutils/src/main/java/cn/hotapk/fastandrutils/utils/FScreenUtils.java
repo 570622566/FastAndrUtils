@@ -132,6 +132,15 @@ public final class FScreenUtils {
     }
 
     /**
+     * 判断是否横屏
+     *
+     * @return {@code true}: 是<br>{@code false}: 否
+     */
+    public static boolean isLandscape() {
+        return FUtils.getAppContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    /**
      * 设置屏幕为横屏
      * <p>还有一种就是在Activity中加属性android:screenOrientation="landscape"</p>
      * <p>不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次</p>
@@ -146,30 +155,21 @@ public final class FScreenUtils {
     }
 
     /**
-     * 设置屏幕为竖屏
-     *
-     * @param activity activity
-     */
-    public static void setPortrait(final Activity activity) {
-        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    /**
-     * 判断是否横屏
-     *
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
-    public static boolean isLandscape() {
-        return FUtils.getAppContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    }
-
-    /**
      * 判断是否竖屏
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isPortrait() {
         return FUtils.getAppContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    }
+
+    /**
+     * 设置屏幕为竖屏
+     *
+     * @param activity activity
+     */
+    public static void setPortrait(final Activity activity) {
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     /**
@@ -203,16 +203,6 @@ public final class FScreenUtils {
     }
 
     /**
-     * 设置进入休眠时长
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.WRITE_SETTINGS" />}</p>
-     *
-     * @param duration 时长
-     */
-    public static void setSleepDuration(final int duration) {
-        Settings.System.putInt(FUtils.getAppContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, duration);
-    }
-
-    /**
      * 获取进入休眠时长
      *
      * @return 进入休眠时长，报错返回-123
@@ -224,6 +214,16 @@ public final class FScreenUtils {
             e.printStackTrace();
             return -123;
         }
+    }
+
+    /**
+     * 设置进入休眠时长
+     * <p>需添加权限 {@code <uses-permission android:name="android.permission.WRITE_SETTINGS" />}</p>
+     *
+     * @param duration 时长
+     */
+    public static void setSleepDuration(final int duration) {
+        Settings.System.putInt(FUtils.getAppContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, duration);
     }
 
 }

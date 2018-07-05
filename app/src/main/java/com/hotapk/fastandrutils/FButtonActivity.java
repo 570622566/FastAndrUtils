@@ -1,9 +1,7 @@
 package com.hotapk.fastandrutils;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import cn.hotapk.fastandrutils.utils.FToastUtils;
 import cn.hotapk.fastandrutils.widget.FButton;
@@ -14,7 +12,7 @@ import cn.hotapk.fastandrutils.widget.FButton;
  * @Copyright (C)2018-06-27 14:43:57 , www.hotapk.cn
  */
 
-public class FButtonActivity extends AppCompatActivity {
+public class FButtonActivity extends FBaseActivity {
     FButton fButton;
 
     @Override

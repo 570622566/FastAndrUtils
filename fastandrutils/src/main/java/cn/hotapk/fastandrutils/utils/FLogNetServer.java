@@ -28,7 +28,7 @@ public class FLogNetServer extends NanoHTTPD {
         br.append(header);
         String filedir = FLogUtils.getInstance().getLogFileDir();
         if (file_name.isEmpty()) {
-            File[] files = FFileUtils.orderByDate(new File(filedir),true);
+            File[] files = FFileUtils.orderByDate(new File(filedir), true);
             if (files != null) {
                 for (int i = 0; i < files.length; i++) {
                     br.append(

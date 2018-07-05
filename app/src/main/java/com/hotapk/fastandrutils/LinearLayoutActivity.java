@@ -1,6 +1,5 @@
 package com.hotapk.fastandrutils;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,7 +11,7 @@ import cn.hotapk.fastandrutils.utils.FLogUtils;
  * @Copyright (C)2018-06-19 00:46:18 , www.hotapk.cn
  */
 
-public class LinearLayoutActivity extends AppCompatActivity {
+public class LinearLayoutActivity extends FBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,10 +14,10 @@ import java.util.Stack;
  * activity生命周期
  */
 public class FActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
-    private Stack<Activity> activities;
     @SuppressLint("StaticFieldLeak")
     private volatile static FActivityLifecycleCallbacks fActivityLifecycleCallbacks;
     private static int sAnimationId = 0;
+    private Stack<Activity> activities;
     private Application application;
     private LifecycleListener lifecycleListener;
 
@@ -36,15 +36,15 @@ public class FActivityLifecycleCallbacks implements Application.ActivityLifecycl
         }
     }
 
-    public void setLifecycleListener(LifecycleListener lifecycleListener) {
-        this.lifecycleListener = lifecycleListener;
-    }
-
     public static FActivityLifecycleCallbacks getfActivityLifecycle() {
         if (fActivityLifecycleCallbacks == null) {
             new Throwable("must init FActivityLifecycleCallbacks");
         }
         return fActivityLifecycleCallbacks;
+    }
+
+    public void setLifecycleListener(LifecycleListener lifecycleListener) {
+        this.lifecycleListener = lifecycleListener;
     }
 
     @Override

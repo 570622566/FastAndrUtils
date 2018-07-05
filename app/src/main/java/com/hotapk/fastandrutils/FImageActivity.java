@@ -3,7 +3,6 @@ package com.hotapk.fastandrutils;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import cn.hotapk.fastandrutils.utils.FAssetsARawUtils;
@@ -34,7 +33,7 @@ public class FImageActivity extends FBaseActivity {
         Bitmap bitmap = FImageUtils.getBitmap(FAssetsARawUtils.getAssetsToInp("lmq.jpg"));
         nulimg.setImageBitmap(bitmap);
         roundcornerimg.setImageBitmap(FImageUtils.toRoundCorner(bitmap, 60));
-        cornerborderimg.setImageBitmap(FImageUtils.toRoundCorner(bitmap, 60,  20,ContextCompat.getColor(this, R.color.title)));
+        cornerborderimg.setImageBitmap(FImageUtils.toRoundCorner(bitmap, 60, 20, ContextCompat.getColor(this, R.color.title)));
         roundimg.setImageBitmap(FImageUtils.toRound(bitmap));
 
     }

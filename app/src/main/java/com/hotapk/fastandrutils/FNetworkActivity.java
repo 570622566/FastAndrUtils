@@ -1,7 +1,6 @@
 package com.hotapk.fastandrutils;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,7 +12,7 @@ import cn.hotapk.fastandrutils.utils.FNetworkUtils;
  * @Copyright (C)下午4:56 , www.hotapk.cn
  * 网络相关
  */
-public class FNetworkActivity extends AppCompatActivity {
+public class FNetworkActivity extends FBaseActivity {
 
     private TextView nettv;
     private TextView opentv;

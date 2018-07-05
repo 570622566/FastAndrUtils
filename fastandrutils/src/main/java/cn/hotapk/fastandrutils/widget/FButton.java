@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.ColorRes;
-import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -27,7 +26,7 @@ public class FButton extends Button {
     private int stroke;
     private int strokeColor;
     private int btselbgColor;
-    private int btPressAlpha;
+    private float btPressAlpha;
     private GradientDrawable btDrawable;
 
     public FButton(Context context) {
@@ -52,7 +51,7 @@ public class FButton extends Button {
         stroke = (int) typedArray.getDimension(R.styleable.FButton_btStroke, 0f);
         strokeColor = typedArray.getColor(R.styleable.FButton_btStrokeColor, ContextCompat.getColor(context, R.color.tran_color));
         btselbgColor = typedArray.getColor(R.styleable.FButton_btselbgColor, ContextCompat.getColor(context, R.color.tran_color));
-        btPressAlpha = typedArray.getInt(R.styleable.FButton_btPressAlpha, -1);
+        btPressAlpha = typedArray.getFloat(R.styleable.FButton_btPressAlpha, 1f);
         setBg();
     }
 
@@ -72,12 +71,11 @@ public class FButton extends Button {
                 if (btselbgColor != ContextCompat.getColor(context, R.color.tran_color)) {
                     btDrawable.setColor(btselbgColor);
                 }
-                if (btPressAlpha != -1) {
-                    btDrawable.setAlpha(btPressAlpha);
-                }
+                setAlpha(btPressAlpha);
                 break;
             case MotionEvent.ACTION_UP:
                 btDrawable.setAlpha(255);
+                setAlpha(1f);
                 btDrawable.setColor(bgColor);
                 break;
             default:

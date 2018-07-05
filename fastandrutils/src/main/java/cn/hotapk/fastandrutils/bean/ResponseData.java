@@ -1,4 +1,3 @@
-
 package cn.hotapk.fastandrutils.bean;
 
 import java.util.ArrayList;
@@ -11,10 +10,9 @@ import java.util.Map;
 
 public class ResponseData {
 
-    private List<String> rows = new ArrayList<>();
-    List<FieldInfor> allTablefield =new ArrayList<>();
+    List<FieldInfor> allTablefield = new ArrayList<>();
     List<Map<String, Object>> datas = new ArrayList<>();
-
+    private List<String> rows = new ArrayList<>();
     private boolean isSuccessful;
     private String error;
     private int dbVersion;

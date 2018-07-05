@@ -1,8 +1,8 @@
 package com.hotapk.fastandrutils.statusbar;
 
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.hotapk.fastandrutils.R;
 
@@ -20,6 +20,6 @@ public class MarginTopBarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_margin_top_bar);
-        FStatusBarUtils.marginTopStatusBar(this, findViewById(R.id.title_name), ContextCompat.getColor(this,R.color.title));
+        FStatusBarUtils.marginTopStatusBar(this, findViewById(R.id.title_name), ContextCompat.getColor(this, R.color.title));
     }
 }

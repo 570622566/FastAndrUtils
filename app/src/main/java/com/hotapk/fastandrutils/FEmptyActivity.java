@@ -1,15 +1,13 @@
 package com.hotapk.fastandrutils;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import cn.hotapk.fastandrutils.utils.FLogUtils;
 import cn.hotapk.fastandrutils.widget.FEmptyView;
 
-public class FEmptyActivity extends AppCompatActivity {
+public class FEmptyActivity extends FBaseActivity {
     private FEmptyView empty_layout;
 
     @Override

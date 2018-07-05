@@ -1,7 +1,5 @@
 package cn.hotapk.fastandrutils.utils;
 
-import android.util.Base64;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -16,8 +14,6 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -112,18 +108,6 @@ public final class FConvertUtils {
     }
 
     /**
-     * outputStream转inputStream
-     *
-     * @param out 输出流
-     * @return inputStream子类
-     */
-    public ByteArrayInputStream output2InputStream(final OutputStream out) {
-        if (out == null) return null;
-        return new ByteArrayInputStream(((ByteArrayOutputStream) out).toByteArray());
-    }
-
-
-    /**
      * inputStream转byteArr
      *
      * @param is 输入流
@@ -176,7 +160,6 @@ public final class FConvertUtils {
             FCloseUtils.closeIO(os);
         }
     }
-
 
     /**
      * inputStream转string按编码
@@ -450,5 +433,16 @@ public final class FConvertUtils {
             }
         }
         return true;
+    }
+
+    /**
+     * outputStream转inputStream
+     *
+     * @param out 输出流
+     * @return inputStream子类
+     */
+    public ByteArrayInputStream output2InputStream(final OutputStream out) {
+        if (out == null) return null;
+        return new ByteArrayInputStream(((ByteArrayOutputStream) out).toByteArray());
     }
 }

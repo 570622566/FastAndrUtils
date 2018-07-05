@@ -18,6 +18,26 @@ public class FKeyBoardHeightUtils {
     private View mChildOfContent;//activity 的布局View
     private int usableHeightPrevious;//activity的View的可视高度
     private KeyBoardVisiableListener keyBoardHigthListener;
+    private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+
+        @Override
+        public void onGlobalLayout() {
+            possiblyResizeChildOfContent();
+        }
+    };
+
+    private FKeyBoardHeightUtils(final Activity activity, KeyBoardVisiableListener keyBoardHigthListener) {
+        this.keyBoardHigthListener = keyBoardHigthListener;
+        FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
+        mChildOfContent = content.getChildAt(0);
+        mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);//监听视图高度变化
+        mChildOfContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FKeyBoardUtils.hideInputForce(activity);
+            }
+        });
+    }
 
     public static FKeyBoardHeightUtils setKeyBoardHeigthListener(Activity activity, KeyBoardVisiableListener keyBoardHigthListener) {
         return new FKeyBoardHeightUtils(activity, keyBoardHigthListener);
@@ -34,28 +54,6 @@ public class FKeyBoardHeightUtils {
             mChildOfContent.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
         }
     }
-
-    private FKeyBoardHeightUtils(final Activity activity, KeyBoardVisiableListener keyBoardHigthListener) {
-        this.keyBoardHigthListener = keyBoardHigthListener;
-        FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
-        mChildOfContent = content.getChildAt(0);
-        mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);//监听视图高度变化
-        mChildOfContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FKeyBoardUtils.hideInputForce(activity);
-            }
-        });
-    }
-
-    private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-
-        @Override
-        public void onGlobalLayout() {
-            possiblyResizeChildOfContent();
-        }
-    };
-
 
     private void possiblyResizeChildOfContent() {
         int usableHeightNow = computeUsableHeight();

@@ -6,16 +6,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.hotapk.fastandrutils.baseadapter.AutoRVAdapter;
-import com.hotapk.fastandrutils.baseadapter.RecViewHolder;
 import com.hotapk.fastandrutils.bean.TitleInfor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.hotapk.fastandrutils.recyclerView.FBaseRvAdapter;
+import cn.hotapk.fastandrutils.recyclerView.FSimpleRvAdapter;
+import cn.hotapk.fastandrutils.recyclerView.FViewHolder;
 import cn.hotapk.fastandrutils.utils.FLogUtils;
 import cn.hotapk.fastandrutils.utils.FPermissionUtils;
 
@@ -28,8 +30,8 @@ public class FMainActivity extends FBaseActivity {
 
     private RecyclerView recyclerview;
     private List<TitleInfor> titleInfors = new ArrayList<>();
-    private AutoRVAdapter<TitleInfor> autoRVAdapter;
-
+    private FSimpleRvAdapter autoRVAdapter;
+    private FPermissionUtils fPermissionUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,9 @@ public class FMainActivity extends FBaseActivity {
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         setData();
         setAutoRVAdapter();
+        fPermissionUtils = new FPermissionUtils(this);
 
-        FPermissionUtils.requestPermissions(this, 200, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE}, new FPermissionUtils.OnPermissionListener() {
+        fPermissionUtils.requestPermissions(200, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE}, new FPermissionUtils.OnPermissionListener() {
             @Override
             public void onPermissionGranted() {
 
@@ -85,24 +88,34 @@ public class FMainActivity extends FBaseActivity {
     }
 
     private void setAutoRVAdapter() {
-        autoRVAdapter = new AutoRVAdapter<TitleInfor>(this, titleInfors) {
-            @Override
-            public int setLayoutid(int position) {
-                return R.layout.title_item;
-            }
 
+        autoRVAdapter = new FSimpleRvAdapter<TitleInfor>(this, titleInfors, R.layout.title_item) {
             @Override
-            public void onBindViewHolder(RecViewHolder holder, int position, TitleInfor item) {
-                holder.setTextView(R.id.item_tv, item.getTitleName());
-
+            public void convertHolder(FViewHolder holder, TitleInfor item, int position) {
+                holder.setText(R.id.item_tv, item.getTitleName());
             }
         };
+//
+//        autoRVAdapter.addHeader(R.layout.title2_item, new FBaseRvAdapter.HeaderConvert() {
+//            @Override
+//            public void headerConvert(FViewHolder holder, int position) {
+//                holder.setText(R.id.item_tv, "头部一");
+//            }
+//        });
+//        autoRVAdapter.addFooter(R.layout.title2_item, new FBaseRvAdapter.FooterConvert() {
+//            @Override
+//            public void footerConvert(FViewHolder holder, int position) {
+//                holder.setText(R.id.item_tv, "尾部");
+//            }
+//        });
+
         autoRVAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 setOnItemClick(position);
             }
         });
+
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setAdapter(autoRVAdapter);
     }
@@ -161,6 +174,6 @@ public class FMainActivity extends FBaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        FPermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        fPermissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

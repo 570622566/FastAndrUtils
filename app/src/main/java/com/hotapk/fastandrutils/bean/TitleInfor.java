@@ -6,13 +6,19 @@ package com.hotapk.fastandrutils.bean;
  * @Copyright (C)下午5:42 , www.hotapk.cn
  */
 public class TitleInfor {
-    private String titleName="";
+    private String titleName = "";
+    private int type = 1;
 
     public TitleInfor() {
     }
 
     public TitleInfor(String titleName) {
         this.titleName = titleName;
+    }
+
+    public TitleInfor(String titleName, int type) {
+        this.titleName = titleName;
+        this.type = type;
     }
 
     public String getTitleName() {
@@ -23,8 +29,17 @@ public class TitleInfor {
         this.titleName = titleName;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
-        return "titleName=="+titleName;
+        return "titleName==" + titleName;
     }
+
 }

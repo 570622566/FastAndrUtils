@@ -24,10 +24,10 @@ import java.util.Map;
  * @Copyright (C)下午3:14 , www.hotapk.cn
  */
 public final class FCrashUtils implements UncaughtExceptionHandler {
-    // 系统默认的UncaughtException处理类
-    private Thread.UncaughtExceptionHandler mDefaultHandler;
     // CrashHandler实例
     private static FCrashUtils fCrashUtils;
+    // 系统默认的UncaughtException处理类
+    private Thread.UncaughtExceptionHandler mDefaultHandler;
     // 用来存储设备信息和异常信息
     private Map<String, String> infos = new HashMap<>();
 

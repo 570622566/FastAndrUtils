@@ -1,19 +1,15 @@
 package com.hotapk.fastandrutils.fragment;
 
 
-import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hotapk.fastandrutils.R;
 
+import cn.hotapk.fastandrutils.config.FLoaddingBuilder;
 import cn.hotapk.fastandrutils.fragment.FLazyFragment;
 import cn.hotapk.fastandrutils.utils.FLogUtils;
+import cn.hotapk.fastandrutils.widget.FButton;
 
 /**
  * @author laijian
@@ -21,13 +17,9 @@ import cn.hotapk.fastandrutils.utils.FLogUtils;
  */
 public class TabOneFragment extends FLazyFragment {
     private TextView tv_text;
+    private FButton fButton;
 
     public TabOneFragment() {
-    }
-
-    @Override
-    public int setLayoutRes() {
-        return R.layout.fragment_tab_one;
     }
 
     public static TabOneFragment newInstance() {
@@ -36,10 +28,22 @@ public class TabOneFragment extends FLazyFragment {
     }
 
     @Override
+    public int setLayoutRes() {
+        return R.layout.fragment_tab_one;
+    }
+
+    @Override
     public void initView(View view) {
         FLogUtils.getInstance().e("数据加载1");
         tv_text = view.findViewById(R.id.tv_text);
+        fButton = view.findViewById(R.id.dialog_bt);
         tv_text.setText("第一个frame加载数据");
+        fButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new FLoaddingBuilder(getActivity()).creat().show();
+            }
+        });
     }
 
     @Override

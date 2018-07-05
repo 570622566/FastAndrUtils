@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/title"
+        android:gravity="center"
+        android:text="TabLayout"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_lay"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        app:tabMode="scrollable"
-        />
+        app:tabMode="scrollable" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
         android:background="#eeeeee" />
-<android.support.v4.view.ViewPager
-    android:id="@+id/pager_lay"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <!--<FrameLayout-->
-        <!--android:id="@+id/frame"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+    <!--android:id="@+id/frame"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
 
 </LinearLayout>

@@ -3,7 +3,6 @@ package cn.hotapk.fastandrutils.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.ColorRes;
@@ -33,6 +32,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class FToastUtils {
     private volatile static FToastUtils toastUtils;
+    private static Handler handler = new Handler(Looper.getMainLooper());
     private Toast toast;
     private Context context;
     private View rootView;
@@ -51,7 +51,6 @@ public class FToastUtils {
     private boolean customView = false;//是否是自定义view
     private int viewDirection = LinearLayout.HORIZONTAL;//图标文字显示方式
     private long cancelTime = -1;
-    private static Handler handler = new Handler(Looper.getMainLooper());
 
     private FToastUtils() {
         this.context = FUtils.getAppContext();
@@ -353,6 +352,7 @@ public class FToastUtils {
         viewDirection = LinearLayout.HORIZONTAL;
         cancelTime = -1;
     }
+
     @IntDef({LinearLayout.HORIZONTAL, LinearLayout.VERTICAL})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Direction {

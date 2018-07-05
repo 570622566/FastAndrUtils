@@ -1,6 +1,5 @@
 package com.hotapk.fastandrutils;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import cn.hotapk.fastandrutils.utils.FKeyBoardUI;

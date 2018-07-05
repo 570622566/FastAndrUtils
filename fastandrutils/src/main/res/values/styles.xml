@@ -14,10 +14,18 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="dialog_translucent" parent="@android:style/Theme.Dialog">
+    <style name="fdialog" parent="@android:style/Theme.Dialog">
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
         <item name="android:windowBackground">@color/tran_color</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:padding">0dp</item>
     </style>
+
+    <style name="mystyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
 </resources>

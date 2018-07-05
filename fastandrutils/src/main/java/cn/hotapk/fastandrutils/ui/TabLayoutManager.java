@@ -15,12 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.List;
-
-import cn.hotapk.fastandrutils.utils.FLogUtils;
 
 /**
  * @author laijian
@@ -47,6 +44,7 @@ public class TabLayoutManager {
     private Fragment tempFragment;
     private TabFragmentAdapter tabFragmentAdapter;
     private boolean isViewPagerSel = false;
+
     /**
      * @param activity
      * @param tabLayout
@@ -208,7 +206,7 @@ public class TabLayoutManager {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (!isViewPagerSel) {
-                viewPager.setCurrentItem(tab.getPosition(),false);
+                    viewPager.setCurrentItem(tab.getPosition(), false);
                 }
                 isViewPagerSel = false;
                 setViewChange(tabPosition, false);
@@ -250,7 +248,6 @@ public class TabLayoutManager {
         for (int i = 0; i < titles.length; i++) {
             tabLayout.addTab(tabLayout.newTab().setCustomView(getTabView(activity.getBaseContext(), i)));
         }
-
 
 
     }
@@ -338,7 +335,6 @@ public class TabLayoutManager {
         public Fragment getItem(int position) {
             return fragments.get(position);
         }
-
 
 
         @Override

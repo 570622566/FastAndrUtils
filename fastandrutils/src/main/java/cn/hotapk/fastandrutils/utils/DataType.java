@@ -25,9 +25,6 @@ package cn.hotapk.fastandrutils.utils;
 
 public class DataType {
 
-    private DataType() {
-        // This class in not publicly instantiable
-    }
     public static final String INTEGER = "integer";
     public static final String BOOLEAN = "boolean";
     public static final String FLOAT = "float";
@@ -36,4 +33,7 @@ public class DataType {
     public static final String STRING_SET = "set";
     public static final String BLOB = "blob";
     public static final String REAL = "real";
+    private DataType() {
+        // This class in not publicly instantiable
+    }
 }

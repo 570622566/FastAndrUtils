@@ -21,6 +21,7 @@ import java.util.concurrent.Executors;
  */
 public class FLogUtils {
     private static final String Tag = "www.hotapk.cn";
+    private volatile static FLogUtils fLogUtils;
     private String TOP_LINE = "" +
             "\n^^^^^^^^^^^^^less code,less bug^^^^^^^^^^^^^^\n" +
             "                   _ooOoo_\n" +
@@ -53,10 +54,12 @@ public class FLogUtils {
     private int CHUNK_SIZE = 120; //设置字节数
     private long logSize = 1 * 1024 * 1024L;//设置log文件大小 k
     private ExecutorService execu = Executors.newFixedThreadPool(1);
-
-    private volatile static FLogUtils fLogUtils;
-
     private FLogNetServer testHttpd;
+
+    private FLogUtils() {
+        Log.e(Tag, TOP_LINE);
+        initLogFile();
+    }
 
     public static FLogUtils getInstance() {
         if (fLogUtils == null) {
@@ -67,11 +70,6 @@ public class FLogUtils {
             }
         }
         return fLogUtils;
-    }
-
-    private FLogUtils() {
-        Log.e(Tag, TOP_LINE);
-        initLogFile();
     }
 
     private void initLogFile() {

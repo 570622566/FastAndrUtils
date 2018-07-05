@@ -1,10 +1,9 @@
 package com.hotapk.fastandrutils;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.hotapk.fastandrutils.fragment.TabFiveFragment;
 import com.hotapk.fastandrutils.fragment.TabFourthFragment;
@@ -24,7 +23,7 @@ import cn.hotapk.fastandrutils.ui.TabLayoutManager;
  * @Copyright (C)2018-06-06 20:54:44 , www.hotapk.cn
  */
 
-public class TabLayoutActivity extends AppCompatActivity {
+public class TabLayoutActivity extends FBaseActivity {
 
     private TabLayout tabLayout;
     private TabLayoutManager tabLayoutManager;

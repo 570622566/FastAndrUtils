@@ -2,17 +2,12 @@ package com.hotapk.fastandrutils.fragment;
 
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +19,7 @@ public class MyDialogFragment extends DialogFragment {
 
     private int bottom;
     private TextView textView;
+
     public MyDialogFragment() {
         // Required empty public constructor
     }
@@ -54,10 +50,10 @@ public class MyDialogFragment extends DialogFragment {
 
     private void initView(View view) {
         textView = view.findViewById(R.id.tev);
-        LinearLayout.LayoutParams layoutParams =new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        layoutParams.setMargins(0,bottom,0,0);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams.setMargins(0, bottom, 0, 0);
         textView.setLayoutParams(layoutParams);
-        FLogUtils.getInstance().e("---+"+bottom);
+        FLogUtils.getInstance().e("---+" + bottom);
     }
 
     @Override

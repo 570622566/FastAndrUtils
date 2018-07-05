@@ -25,12 +25,38 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public final class FEncryptUtils {
 
-    private FEncryptUtils() {
-
-    }
+    private static final String DES_Algorithm = "DES";
     ///////////////////////////////////////////////////////////////////////////
     // 哈希加密相关
     ///////////////////////////////////////////////////////////////////////////
+    private static final String TripleDES_Algorithm = "DESede";
+    private static final String AES_Algorithm = "AES";
+    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    /**
+     * DES转变
+     * <p>法算法名称/加密模式/填充方式</p>
+     * <p>加密模式有：电子密码本模式ECB、加密块链模式CBC、加密反馈模式CFB、输出反馈模式OFB</p>
+     * <p>填充方式有：NoPadding、ZerosPadding、PKCS5Padding</p>
+     */
+    public static String DES_Transformation = "DES/ECB/NoPadding";
+    /**
+     * 3DES转变
+     * <p>法算法名称/加密模式/填充方式</p>
+     * <p>加密模式有：电子密码本模式ECB、加密块链模式CBC、加密反馈模式CFB、输出反馈模式OFB</p>
+     * <p>填充方式有：NoPadding、ZerosPadding、PKCS5Padding</p>
+     */
+    public static String TripleDES_Transformation = "DESede/ECB/NoPadding";
+    /**
+     * AES转变
+     * <p>法算法名称/加密模式/填充方式</p>
+     * <p>加密模式有：电子密码本模式ECB、加密块链模式CBC、加密反馈模式CFB、输出反馈模式OFB</p>
+     * <p>填充方式有：NoPadding、ZerosPadding、PKCS5Padding</p>
+     */
+    public static String AES_Transformation = "AES/ECB/NoPadding";
+
+    private FEncryptUtils() {
+
+    }
 
     /**
      * MD2加密
@@ -479,6 +505,10 @@ public final class FEncryptUtils {
         return hmacTemplate(data, key, "HmacSHA256");
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // DES加密相关
+    ///////////////////////////////////////////////////////////////////////////
+
     /**
      * HmacSHA384加密
      *
@@ -566,19 +596,6 @@ public final class FEncryptUtils {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // DES加密相关
-    ///////////////////////////////////////////////////////////////////////////
-
-    /**
-     * DES转变
-     * <p>法算法名称/加密模式/填充方式</p>
-     * <p>加密模式有：电子密码本模式ECB、加密块链模式CBC、加密反馈模式CFB、输出反馈模式OFB</p>
-     * <p>填充方式有：NoPadding、ZerosPadding、PKCS5Padding</p>
-     */
-    public static String DES_Transformation = "DES/ECB/NoPadding";
-    private static final String DES_Algorithm = "DES";
-
     /**
      * DES加密后转为Base64编码
      *
@@ -589,6 +606,10 @@ public final class FEncryptUtils {
     public static byte[] encryptDES2Base64(final byte[] data, final byte[] key) {
         return base64Encode(encryptDES(data, key));
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // 3DES加密相关
+    ///////////////////////////////////////////////////////////////////////////
 
     /**
      * DES加密后转为16进制
@@ -645,20 +666,6 @@ public final class FEncryptUtils {
         return desTemplate(data, key, DES_Algorithm, DES_Transformation, false);
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 3DES加密相关
-    ///////////////////////////////////////////////////////////////////////////
-
-    /**
-     * 3DES转变
-     * <p>法算法名称/加密模式/填充方式</p>
-     * <p>加密模式有：电子密码本模式ECB、加密块链模式CBC、加密反馈模式CFB、输出反馈模式OFB</p>
-     * <p>填充方式有：NoPadding、ZerosPadding、PKCS5Padding</p>
-     */
-    public static String TripleDES_Transformation = "DESede/ECB/NoPadding";
-    private static final String TripleDES_Algorithm = "DESede";
-
-
     /**
      * 3DES加密后转为Base64编码
      *
@@ -692,6 +699,10 @@ public final class FEncryptUtils {
         return desTemplate(data, key, TripleDES_Algorithm, TripleDES_Transformation, true);
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // AES加密相关
+    ///////////////////////////////////////////////////////////////////////////
+
     /**
      * 3DES解密Base64编码密文
      *
@@ -724,20 +735,6 @@ public final class FEncryptUtils {
     public static byte[] decrypt3DES(final byte[] data, final byte[] key) {
         return desTemplate(data, key, TripleDES_Algorithm, TripleDES_Transformation, false);
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // AES加密相关
-    ///////////////////////////////////////////////////////////////////////////
-
-    /**
-     * AES转变
-     * <p>法算法名称/加密模式/填充方式</p>
-     * <p>加密模式有：电子密码本模式ECB、加密块链模式CBC、加密反馈模式CFB、输出反馈模式OFB</p>
-     * <p>填充方式有：NoPadding、ZerosPadding、PKCS5Padding</p>
-     */
-    public static String AES_Transformation = "AES/ECB/NoPadding";
-    private static final String AES_Algorithm = "AES";
-
 
     /**
      * AES加密后转为Base64编码
@@ -828,8 +825,6 @@ public final class FEncryptUtils {
             return null;
         }
     }
-
-    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     private static String bytes2HexString(final byte[] bytes) {
         if (bytes == null) return null;

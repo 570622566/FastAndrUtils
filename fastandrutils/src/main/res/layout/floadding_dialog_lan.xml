@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <cn.hotapk.fastandrutils.widget.FLinearLayout
         android:id="@+id/mylin"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="horizontal"
-        app:bgColor="#aa000000"
-        app:radius="8dp">
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        app:bgColor="#CC000000"
+        app:radius="4dp">
 
         <ProgressBar
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:indeterminateDrawable="@drawable/f_progressbar"
             android:indeterminateDuration="2500" />
 

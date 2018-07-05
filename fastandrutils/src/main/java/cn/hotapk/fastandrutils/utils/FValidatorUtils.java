@@ -13,9 +13,6 @@ import java.util.regex.Pattern;
  */
 public final class FValidatorUtils {
 
-    private FValidatorUtils() {
-    }
-
     /**
      * 正则：手机号（简单）
      */
@@ -65,7 +62,6 @@ public final class FValidatorUtils {
      * 正则：IP地址
      */
     public static final String REGEX_IP = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
-
     /**
      * 正则：双字节字符(包括汉字在内)
      */
@@ -110,7 +106,8 @@ public final class FValidatorUtils {
      * 正则：负浮点数
      */
     public static final String REGEX_NEGATIVE_FLOAT = "^-[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
-
+    private FValidatorUtils() {
+    }
 
     /**
      * 验证手机号（简单）

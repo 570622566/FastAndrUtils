@@ -51,6 +51,24 @@ public final class FDeviceUtils {
     private static boolean sIsTabletChecked = false;
     private static boolean sIsTabletValue = false;
 
+    static {
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(new File(Environment.getRootDirectory(), "build.prop"));
+            Properties properties = new Properties();
+            properties.load(fileInputStream);
+            Class<?> clzSystemProperties = Class.forName("android.os.SystemProperties");
+            Method getMethod = clzSystemProperties.getDeclaredMethod("get", String.class);
+            // miui
+            sMiuiVersionName = getLowerCaseName(properties, getMethod, KEY_MIUI_VERSION_NAME);
+            //flyme
+            sFlymeVersionName = getLowerCaseName(properties, getMethod, KEY_FLYME_VERSION_NAME);
+
+        } catch (Exception e) {
+        } finally {
+            FCloseUtils.closeIO(fileInputStream);
+        }
+    }
 
     private FDeviceUtils() {
     }
@@ -212,26 +230,6 @@ public final class FDeviceUtils {
         str += "SubscriberId(IMSI) = " + tm.getSubscriberId() + "\n";
         str += "VoiceMailNumber = " + tm.getVoiceMailNumber() + "\n";
         return str;
-    }
-
-
-    static {
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(new File(Environment.getRootDirectory(), "build.prop"));
-            Properties properties = new Properties();
-            properties.load(fileInputStream);
-            Class<?> clzSystemProperties = Class.forName("android.os.SystemProperties");
-            Method getMethod = clzSystemProperties.getDeclaredMethod("get", String.class);
-            // miui
-            sMiuiVersionName = getLowerCaseName(properties, getMethod, KEY_MIUI_VERSION_NAME);
-            //flyme
-            sFlymeVersionName = getLowerCaseName(properties, getMethod, KEY_FLYME_VERSION_NAME);
-
-        } catch (Exception e) {
-        } finally {
-            FCloseUtils.closeIO(fileInputStream);
-        }
     }
 
     private static boolean _isTablet(Context context) {

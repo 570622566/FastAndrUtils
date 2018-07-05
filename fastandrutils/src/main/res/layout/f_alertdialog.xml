@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <cn.hotapk.fastandrutils.widget.FLinearLayout
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        app:bgColor="@color/white_color">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="18dp"
+            android:text="标题"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="14dp"
+            android:gravity="top|left"
+            android:maxLines="6"
+            android:minLines="2"
+            android:text="有新的版本，确定更新么？"
+            android:textColor="#555555"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="18dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <cn.hotapk.fastandrutils.widget.FButton
+                android:id="@+id/left_bt"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#1296db"
+                android:textSize="14sp"
+                app:btPressAlpha="0.8" />
+
+            <cn.hotapk.fastandrutils.widget.FButton
+                android:id="@+id/right_bt"
+                android:layout_width="66dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#1296db"
+                android:textSize="14sp"
+                app:btPressAlpha="0.8" />
+        </LinearLayout>
+    </cn.hotapk.fastandrutils.widget.FLinearLayout>
+</LinearLayout>

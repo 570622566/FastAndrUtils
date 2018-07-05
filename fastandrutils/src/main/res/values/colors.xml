@@ -5,5 +5,8 @@
     <color name="read_color">#e90a0a</color>
     <color name="tran_color">#00000000</color>
     <color name="white_color">#ffffff</color>
+    <color name="title_color">#333333</color>
+    <color name="content_color">#555555</color>
+    <color name="dialogbt_color">#1296db</color>
 
 </resources>

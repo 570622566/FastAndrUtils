@@ -2,8 +2,9 @@ package com.hotapk.fastandrutils;
 
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import org.litepal.LitePal;
-import org.litepal.crud.DataSupport;
 
 import cn.hotapk.fastandrutils.utils.FUtils;
 
@@ -18,5 +19,6 @@ public class MyApplication extends Application {
         super.onCreate();
         FUtils.init(this);
         LitePal.initialize(this);
+        LeakCanary.install(this);
     }
 }

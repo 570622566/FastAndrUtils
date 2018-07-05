@@ -1,17 +1,12 @@
 package com.hotapk.fastandrutils;
 
-import android.Manifest;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.hotapk.fastandrutils.baseadapter.AutoRVAdapter;
-import com.hotapk.fastandrutils.baseadapter.RecViewHolder;
 import com.hotapk.fastandrutils.bean.TitleInfor;
 import com.hotapk.fastandrutils.statusbar.ChangeBarActivity;
 import com.hotapk.fastandrutils.statusbar.DrawerBarActivity;
@@ -23,8 +18,9 @@ import com.hotapk.fastandrutils.statusbar.TransBarActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.hotapk.fastandrutils.recyclerView.FSimpleRvAdapter;
+import cn.hotapk.fastandrutils.recyclerView.FViewHolder;
 import cn.hotapk.fastandrutils.utils.FLogUtils;
-import cn.hotapk.fastandrutils.utils.FPermissionUtils;
 import cn.hotapk.fastandrutils.utils.FStatusBarUtils;
 
 /**
@@ -38,8 +34,7 @@ public class FStatusBarActivity extends FBaseActivity {
 
     private RecyclerView recyclerview;
     private List<TitleInfor> titleInfors = new ArrayList<>();
-    private AutoRVAdapter<TitleInfor> autoRVAdapter;
-
+    private FSimpleRvAdapter<TitleInfor> autoRVAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +43,6 @@ public class FStatusBarActivity extends FBaseActivity {
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         setData();
         setAutoRVAdapter();
-
-        FPermissionUtils.requestPermissions(this, 200, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE}, new FPermissionUtils.OnPermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-
-            }
-
-            @Override
-            public void onPermissionDenied(String[] deniedPermissions) {
-
-            }
-
-            @Override
-            public void manifestUnPermission(String[] unpermission) {
-
-            }
-        });
         TitleInfor s = new TitleInfor("s");
         FLogUtils.getInstance().e(s);
     }
@@ -81,18 +59,15 @@ public class FStatusBarActivity extends FBaseActivity {
     }
 
     private void setAutoRVAdapter() {
-        autoRVAdapter = new AutoRVAdapter<TitleInfor>(this, titleInfors) {
-            @Override
-            public int setLayoutid(int position) {
-                return R.layout.title_item;
-            }
 
+        autoRVAdapter = new FSimpleRvAdapter<TitleInfor>(this, titleInfors, R.layout.title_item) {
             @Override
-            public void onBindViewHolder(RecViewHolder holder, int position, TitleInfor item) {
-                holder.setTextView(R.id.item_tv, item.getTitleName());
-
+            public void convertHolder(FViewHolder holder, TitleInfor item, int position) {
+                holder.setText(R.id.item_tv, item.getTitleName());
             }
         };
+
+
         autoRVAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -130,9 +105,4 @@ public class FStatusBarActivity extends FBaseActivity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        FPermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-    }
 }

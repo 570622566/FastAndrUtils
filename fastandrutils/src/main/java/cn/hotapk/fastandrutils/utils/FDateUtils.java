@@ -15,9 +15,6 @@ import java.util.regex.Pattern;
  * 时间操作类
  */
 public final class FDateUtils {
-    private FDateUtils() {
-    }
-
     // 格式：年－月－日 时：分：秒
     public static String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";
     // 格式：年－月－日
@@ -30,6 +27,9 @@ public final class FDateUtils {
     public static String FORMAT2_YMD = "yyyy/MM/dd";
     // 格式：年/月/日 时:分
     public static String FORMAT2_YMDHM = "yyyy/MM/dd HH:mm";
+
+    private FDateUtils() {
+    }
 
     /**
      * 字符串转日期类型

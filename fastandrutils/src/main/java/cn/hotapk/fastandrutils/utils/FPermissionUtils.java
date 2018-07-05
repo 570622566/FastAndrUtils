@@ -1,12 +1,8 @@
 package cn.hotapk.fastandrutils.utils;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PermissionInfo;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -26,101 +22,68 @@ import java.util.Set;
 public class FPermissionUtils {
     private static int mRequestCode = -1;
 
-    private static OnPermissionListener mOnPermissionListener;
+    private OnPermissionListener mOnPermissionListener;
 
-    public interface OnPermissionListener {
+    private Activity activity;
 
-        void onPermissionGranted();
-
-        void onPermissionDenied(String[] deniedPermissions);
-
-        void manifestUnPermission(String[] unpermission);
-    }
-
-    public abstract static class RationaleHandler {
-        private Context context;
-        private int requestCode;
-        private String[] permissions;
-
-        protected abstract void showRationale();
-
-        void showRationale(Context context, int requestCode, String[] permissions) {
-            this.context = context;
-            this.requestCode = requestCode;
-            this.permissions = permissions;
-            showRationale();
-        }
-
-        /**
-         * 重新请求权限
-         */
-        public void requestPermissionsAgain() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                ((Activity) context).requestPermissions(permissions, requestCode);
-            }
-        }
+    public FPermissionUtils(Activity activity) {
+        this.activity = activity;
     }
 
     /**
      * 请求权限
      *
-     * @param context
      * @param requestCode
      * @param permissions
      * @param listener
      */
-    public static void requestPermissions(Context context, int requestCode
+    public void requestPermissions(int requestCode
             , String[] permissions, OnPermissionListener listener) {
-        requestPermissions(context, requestCode, permissions, listener, null);
+        requestPermissions(requestCode, permissions, listener, null);
     }
 
     /**
      * 请求权限
      *
-     * @param context
      * @param requestCode
      * @param permissions
      * @param listener
      * @param handler
      */
-    public static void requestPermissions(Context context, int requestCode
+    public void requestPermissions(int requestCode
             , String[] permissions, OnPermissionListener listener, RationaleHandler handler) {
 
-        if (context instanceof Activity) {
-            mRequestCode = requestCode;
-            mOnPermissionListener = listener;
-            if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                if (mOnPermissionListener != null) {
-                    mOnPermissionListener.onPermissionGranted();
-                }
-            } else {
-                String[] deniedPermissions = getDeniedPermissions(context, permissions);
-                if (deniedPermissions.length > 0) {
-                    boolean rationale = shouldShowRequestPermissionRationale(context, deniedPermissions);
-                    if (rationale && handler != null) {
-                        handler.showRationale(context, requestCode, deniedPermissions);
-                    } else {
-                        ((Activity) context).requestPermissions(deniedPermissions, requestCode);
-                    }
-                } else {
-                    if (mOnPermissionListener != null)
-                        mOnPermissionListener.onPermissionGranted();
-                }
+        mRequestCode = requestCode;
+        mOnPermissionListener = listener;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            if (mOnPermissionListener != null) {
+                mOnPermissionListener.onPermissionGranted();
             }
         } else {
-            throw new RuntimeException("Context must be an Activity");
+            String[] deniedPermissions = getDeniedPermissions(permissions);
+            if (deniedPermissions.length > 0) {
+                boolean rationale = shouldShowRequestPermissionRationale(deniedPermissions);
+                if (rationale && handler != null) {
+                    handler.showRationale(activity, requestCode, deniedPermissions);
+                } else {
+                    activity.requestPermissions(deniedPermissions, requestCode);
+                }
+            } else {
+                if (mOnPermissionListener != null)
+                    mOnPermissionListener.onPermissionGranted();
+            }
         }
     }
 
     /**
      * 请求权限结果，对应Activity中onRequestPermissionsResult()方法。
      */
-    public static void onRequestPermissionsResult(Activity context, int requestCode, String[] permissions, int[]
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]
             grantResults) {
         if (mRequestCode != -1 && requestCode == mRequestCode) {
             if (mOnPermissionListener != null) {
                 String[] manifestPer = checkManifestPermission(permissions);
-                String[] deniedPermissions = getDeniedPermissions(context, manifestPer);
+                String[] deniedPermissions = getDeniedPermissions(manifestPer);
                 if (deniedPermissions.length > 0) {
                     mOnPermissionListener.onPermissionDenied(deniedPermissions);
                 } else {
@@ -138,7 +101,7 @@ public class FPermissionUtils {
      * @param permissions
      * @return
      */
-    private static String[] manifestUnPermission(String[] manifestPer, String[] permissions) {
+    private String[] manifestUnPermission(String[] manifestPer, String[] permissions) {
 
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < permissions.length; i++) {
@@ -161,7 +124,7 @@ public class FPermissionUtils {
     /**
      * 检测添加的权限是否在manifest中注册如果没有就删掉该权限
      */
-    private static String[] checkManifestPermission(final String[] permissions) {
+    private String[] checkManifestPermission(final String[] permissions) {
         String[] manifestpers = FManifestUtils.getRegPermission();
         List<String> manigestls = new ArrayList<>();
         for (int i = 0; i < permissions.length; i++) {
@@ -177,10 +140,10 @@ public class FPermissionUtils {
     /**
      * 获取请求权限中需要授权的权限
      */
-    private static String[] getDeniedPermissions(final Context context, final String[] permissions) {
+    private String[] getDeniedPermissions(final String[] permissions) {
         List<String> deniedPermissions = new ArrayList<>();
         for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED) {
+            if (ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_DENIED) {
                 deniedPermissions.add(permission);
             }
         }
@@ -190,9 +153,9 @@ public class FPermissionUtils {
     /**
      * 是否彻底拒绝了某项权限
      */
-    public static boolean hasAlwaysDeniedPermission(final Context context, final String... deniedPermissions) {
+    public boolean hasAlwaysDeniedPermission(final String... deniedPermissions) {
         for (String deniedPermission : deniedPermissions) {
-            if (!shouldShowRequestPermissionRationale(context, deniedPermission)) {
+            if (!shouldShowRequestPermissionRationale(deniedPermission)) {
                 return true;
             }
         }
@@ -202,14 +165,47 @@ public class FPermissionUtils {
     /**
      * 是否有权限需要说明提示
      */
-    private static boolean shouldShowRequestPermissionRationale(final Context context, final String... deniedPermissions) {
+    private boolean shouldShowRequestPermissionRationale(final String... deniedPermissions) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false;
         boolean rationale;
         for (String permission : deniedPermissions) {
-            rationale = ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission);
+            rationale = ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
             if (rationale) return true;
         }
         return false;
+    }
+
+    public interface OnPermissionListener {
+
+        void onPermissionGranted();
+
+        void onPermissionDenied(String[] deniedPermissions);
+
+        void manifestUnPermission(String[] unpermission);
+    }
+
+    public abstract class RationaleHandler {
+        private Context context;
+        private int requestCode;
+        private String[] permissions;
+
+        protected abstract void showRationale();
+
+        void showRationale(Context context, int requestCode, String[] permissions) {
+            this.context = context;
+            this.requestCode = requestCode;
+            this.permissions = permissions;
+            showRationale();
+        }
+
+        /**
+         * 重新请求权限
+         */
+        public void requestPermissionsAgain() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                ((Activity) context).requestPermissions(permissions, requestCode);
+            }
+        }
     }
 
 

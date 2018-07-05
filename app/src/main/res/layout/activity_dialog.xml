@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".DialogActivity">
 
-    <cn.hotapk.fastandrutils.widget.FButton
-        android:id="@+id/dialog_bt"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        app:btBgColor="@color/colorPrimary"
-        app:btPressAlpha="230"
-        app:btRadius="6dp" />
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/title"
+        android:gravity="center"
+        android:text="dialog"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
