@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,12 +29,13 @@ import java.util.List;
 public class TabLayoutManager {
 
     private OnTabItemSelectedListener onTabItemSelectedListener;
+    private OnTabFragmetnSelectedListener onTabFragmetnSelectedListener;
     private AppCompatActivity activity;
     private TabLayout tabLayout;
-    private List<Fragment> fragments;
-    private String[] titles;
-    private int[] resNors;
-    private int[] resSels;
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<String> titles = new ArrayList<>();
+    private List<Integer> resNors = new ArrayList<>();
+    private List<Integer> resSels = new ArrayList<>();
     private int frameIdRes = -1;
     private int layoutRes = -1;
     private int imgResid = -1;
@@ -62,6 +64,106 @@ public class TabLayoutManager {
      */
     public TabLayoutManager setFrames(List<Fragment> fragments) {
         this.fragments = fragments;
+        return this;
+    }
+
+    /**
+     * 添加fragment
+     *
+     * @param fragment
+     * @return
+     */
+    public TabLayoutManager addFrames(Fragment fragment) {
+        this.fragments.add(fragment);
+        return this;
+    }
+
+    public TabLayoutManager changeFrames(int position, Fragment fragment) {
+        fragments.set(position, fragment);
+        return this;
+    }
+
+
+    /**
+     * 添加标题
+     *
+     * @param titles
+     * @return
+     */
+    public TabLayoutManager setTitles(List<String> titles) {
+        this.titles.addAll(titles);
+        return this;
+    }
+
+    /**
+     * 添加标题
+     *
+     * @param title
+     * @return
+     */
+    public TabLayoutManager addTitles(String title) {
+        this.titles.add(title);
+        return this;
+    }
+
+    public TabLayoutManager changeTitles(int position, String title) {
+        this.titles.set(position, title);
+        return this;
+    }
+
+
+    /**
+     * 设置默认图片
+     *
+     * @param resNors
+     * @return
+     */
+    public TabLayoutManager setImgNorDrawable(@DrawableRes List<Integer> resNors) {
+        this.resNors.addAll(resNors);
+        return this;
+    }
+
+    /**
+     * 设置默认图片
+     *
+     * @param resNor
+     * @return
+     */
+    public TabLayoutManager addImgNorDrawable(@DrawableRes int resNor) {
+        this.resNors.add(resNor);
+        return this;
+    }
+
+    public TabLayoutManager changeImgNorDrawable(int position, @DrawableRes int resNor) {
+        this.resNors.set(position, resNor);
+        return this;
+    }
+
+
+    /**
+     * 设置选中图片
+     *
+     * @param resSels
+     * @return
+     */
+    public TabLayoutManager setImgSelDrawable(@DrawableRes List<Integer> resSels) {
+        this.resSels.addAll(resSels);
+        return this;
+    }
+
+    /**
+     * 设置选中图片
+     *
+     * @param resSel
+     * @return
+     */
+    public TabLayoutManager addImgSelDrawable(@DrawableRes int resSel) {
+        this.resSels.add(resSel);
+        return this;
+    }
+
+    public TabLayoutManager changeImgSelDrawable(int position, @DrawableRes int resSel) {
+        this.resSels.set(position, resSel);
         return this;
     }
 
@@ -110,16 +212,6 @@ public class TabLayoutManager {
         return this;
     }
 
-    /**
-     * 添加标题
-     *
-     * @param titles
-     * @return
-     */
-    public TabLayoutManager setTitles(String[] titles) {
-        this.titles = titles;
-        return this;
-    }
 
     /**
      * 默认字体颜色
@@ -144,26 +236,27 @@ public class TabLayoutManager {
     }
 
 
-    /**
-     * 设置默认图片
-     *
-     * @param resNors
-     * @return
-     */
-    public TabLayoutManager setImgNorDrawable(@DrawableRes int[] resNors) {
-        this.resNors = resNors;
-        return this;
+    public void addTab() {
+        tabLayout.addTab(tabLayout.newTab().setCustomView(getTabView(activity.getBaseContext(), titles.size() - 1)));
     }
 
-    /**
-     * 设置选中图片
-     *
-     * @param resSels
-     * @return
-     */
-    public TabLayoutManager setImgSelDrawable(@DrawableRes int[] resSels) {
-        this.resSels = resSels;
-        return this;
+    public void changeTab(int position) {
+        tabLayout.getTabAt(position).setCustomView(getTabView(activity.getBaseContext(), position));
+    }
+
+    public void removeTab(int position) {
+        fragments.remove(position);
+        titles.remove(position);
+        resNors.remove(position);
+        resSels.remove(position);
+        tabLayout.removeTabAt(position);
+        tabPosition = tabLayout.getSelectedTabPosition();
+
+    }
+
+    public void changeTabFrame(int postion, Fragment fragment) {
+        fragments.set(postion, fragment);
+        changeTab(postion);
     }
 
 
@@ -173,9 +266,12 @@ public class TabLayoutManager {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
+                if (onTabFragmetnSelectedListener == null) {
+                    onTabItemSelected(tab.getPosition());
+                } else {
+                    onTabFragmetnSelectedListener.tabItemSelect(tabPosition, tab.getPosition());
+                }
                 setViewChange(tabPosition, false);
-
-                onTabItemSelected(tab.getPosition());
 
                 if (onTabItemSelectedListener != null) {
                     onTabItemSelectedListener.tabItemSelect(tab.getPosition(), tabLayout.getTabAt(tab.getPosition()).getCustomView());
@@ -194,8 +290,14 @@ public class TabLayoutManager {
             }
         });
         // 提供自定义的布局添加Tab
-        for (int i = 0; i < titles.length; i++) {
+        for (int i = 0; i < titles.size(); i++) {
             tabLayout.addTab(tabLayout.newTab().setCustomView(getTabView(activity.getBaseContext(), i)));
+        }
+    }
+
+    public void adapterNotify() {
+        if (tabFragmentAdapter != null) {
+            tabFragmentAdapter.notifyDataSetChanged();
         }
     }
 
@@ -245,7 +347,7 @@ public class TabLayoutManager {
             }
         });
         // 提供自定义的布局添加Tab
-        for (int i = 0; i < titles.length; i++) {
+        for (int i = 0; i < titles.size(); i++) {
             tabLayout.addTab(tabLayout.newTab().setCustomView(getTabView(activity.getBaseContext(), i)));
         }
 
@@ -267,7 +369,7 @@ public class TabLayoutManager {
         }
         if (!sel) {
             if (tabIcon != null) {
-                tabIcon.setImageResource(resNors[position]);
+                tabIcon.setImageResource(resNors.get(position));
             }
             if (tabText != null) {
                 tabText.setTextColor(activity.getResources().getColor(colorNor));
@@ -276,7 +378,7 @@ public class TabLayoutManager {
             setViewChange(tabPosition, true);
         } else {
             if (tabIcon != null) {
-                tabIcon.setImageResource(resSels[position]);
+                tabIcon.setImageResource(resSels.get(position));
             }
             if (tabText != null) {
                 tabText.setTextColor(activity.getResources().getColor(colorSel));
@@ -308,22 +410,32 @@ public class TabLayoutManager {
         this.onTabItemSelectedListener = onTabItemSelectedListener;
     }
 
+    public void setOnTabFragmetnSelectedListener(OnTabFragmetnSelectedListener onTabFragmetnSelectedListener) {
+        this.onTabFragmetnSelectedListener = onTabFragmetnSelectedListener;
+    }
+
     private View getTabView(Context context, int position) {
         View view = LayoutInflater.from(context).inflate(layoutRes, null);
         if (imgResid != -1) {
             ImageView tabIcon = view.findViewById(imgResid);
-            tabIcon.setImageResource(resNors[position]);
+            tabIcon.setImageResource(resNors.get(position));
         }
         if (textResid != -1) {
             TextView tabText = view.findViewById(textResid);
-            tabText.setText(titles[position]);
+            tabText.setText(titles.get(position));
         }
         return view;
     }
 
+
     public interface OnTabItemSelectedListener {
         void tabItemSelect(int position, View selView);
     }
+
+    public interface OnTabFragmetnSelectedListener {
+        void tabItemSelect(int oldPosition, int position);
+    }
+
 
     class TabFragmentAdapter extends FragmentPagerAdapter {
 
@@ -333,6 +445,7 @@ public class TabLayoutManager {
 
         @Override
         public Fragment getItem(int position) {
+            System.out.println("000----" + position);
             return fragments.get(position);
         }
 

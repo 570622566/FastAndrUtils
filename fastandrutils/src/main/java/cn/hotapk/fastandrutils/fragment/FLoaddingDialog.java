@@ -20,7 +20,16 @@ public class FLoaddingDialog extends FBaseDialogFragment {
     public static final int VERTICAL = 1;
     public static final String LOADDINGTITLE = "LOADDINGTITLE";
     public static final String LOADDINGORIENTATION = "LOADDINGORIENTATION";
+    public TextView textView;
+
     public FLoaddingDialog() {
+    }
+
+    @Override
+    public void show(String title) {
+        if (textView != null) {
+            textView.setText(title);
+        }
     }
 
     @Override
@@ -41,8 +50,9 @@ public class FLoaddingDialog extends FBaseDialogFragment {
 
     @Override
     public void initView(View view) {
+        textView = view.findViewById(R.id.loadding_tv);
         if (getArguments() != null) {
-            ((TextView) view.findViewById(R.id.loadding_tv)).setText(getArguments().getString(LOADDINGTITLE, "加载中。。。"));
+            textView.setText(getArguments().getString(LOADDINGTITLE, "加载中。。。"));
         }
     }
 
@@ -50,5 +60,6 @@ public class FLoaddingDialog extends FBaseDialogFragment {
     @Retention(RetentionPolicy.SOURCE)
     public @interface OrientationMode {
     }
+
 
 }

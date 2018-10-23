@@ -34,4 +34,10 @@ public abstract class FBaseFragment extends Fragment {
     public abstract int setLayoutRes();
 
     public abstract void initView(View rootView, Bundle savedInstanceState);
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRootView = null;
+    }
 }

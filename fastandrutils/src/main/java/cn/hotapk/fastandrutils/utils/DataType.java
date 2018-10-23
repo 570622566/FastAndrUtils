@@ -33,6 +33,7 @@ public class DataType {
     public static final String STRING_SET = "set";
     public static final String BLOB = "blob";
     public static final String REAL = "real";
+
     private DataType() {
         // This class in not publicly instantiable
     }

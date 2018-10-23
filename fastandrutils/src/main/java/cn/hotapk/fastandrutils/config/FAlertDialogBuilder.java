@@ -39,6 +39,7 @@ public class FAlertDialogBuilder extends FBaseDialogBuilder<FAlertDialogBuilder,
     private int visibilityTitle = View.VISIBLE;
     private FAlertDialog.OnLeftClickListener onLeftClickListener;
     private FAlertDialog.OnRightClickListener onRightClickListener;
+
     public FAlertDialogBuilder(FragmentActivity appCompatActivity) {
         super(appCompatActivity);
     }

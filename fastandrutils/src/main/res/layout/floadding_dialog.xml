@@ -6,8 +6,8 @@
 
     <cn.hotapk.fastandrutils.widget.FLinearLayout
         android:id="@+id/mylin"
-        android:layout_width="100dp"
-        android:layout_height="90dp"
+        android:layout_width="140dp"
+        android:layout_height="120dp"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical"
@@ -15,8 +15,8 @@
         app:radius="4dp">
 
         <ProgressBar
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:indeterminateDrawable="@drawable/f_progressbar"
             android:indeterminateDuration="2500" />
 
@@ -27,7 +27,7 @@
             android:layout_marginTop="4dp"
             android:text="请稍后。。。"
             android:textColor="@color/white_color"
-            android:textSize="10sp" />
+            android:textSize="14sp" />
 
     </cn.hotapk.fastandrutils.widget.FLinearLayout>
 

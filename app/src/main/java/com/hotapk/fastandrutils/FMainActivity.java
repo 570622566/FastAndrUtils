@@ -6,18 +6,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.hotapk.fastandrutils.bean.TitleInfor;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.hotapk.fastandrutils.recyclerView.FBaseRvAdapter;
 import cn.hotapk.fastandrutils.recyclerView.FSimpleRvAdapter;
 import cn.hotapk.fastandrutils.recyclerView.FViewHolder;
+import cn.hotapk.fastandrutils.utils.FFileUtils;
 import cn.hotapk.fastandrutils.utils.FLogUtils;
 import cn.hotapk.fastandrutils.utils.FPermissionUtils;
 
@@ -58,8 +58,9 @@ public class FMainActivity extends FBaseActivity {
 
             }
         });
-        TitleInfor s = new TitleInfor("s");
-        FLogUtils.getInstance().e(s);
+        FLogUtils.getInstance().e(FFileUtils.storageToal(new File(FFileUtils.getRootDir())));
+        FLogUtils.getInstance().e(FFileUtils.storageUse(new File(FFileUtils.getRootDir())));
+
     }
 
     private void setData() {
@@ -85,6 +86,7 @@ public class FMainActivity extends FBaseActivity {
         titleInfors.add(new TitleInfor("自定义linearlayout"));
         titleInfors.add(new TitleInfor("自定义button"));
         titleInfors.add(new TitleInfor("自定义Dialog"));
+        titleInfors.add(new TitleInfor("系统分享"));
     }
 
     private void setAutoRVAdapter() {
@@ -166,6 +168,8 @@ public class FMainActivity extends FBaseActivity {
             intent = new Intent(this, FButtonActivity.class);
         } else if (position == 21) {
             intent = new Intent(this, DialogActivity.class);
+        } else if (position == 22) {
+            intent = new Intent(this, FShareActivity.class);
         }
         startActivity(intent);
 

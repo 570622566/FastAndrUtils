@@ -58,7 +58,8 @@
         <activity android:name=".TabLayoutActivity" />
         <activity android:name=".LinearLayoutActivity" />
         <activity android:name=".FButtonActivity" />
-        <activity android:name=".DialogActivity"></activity>
+        <activity android:name=".DialogActivity" />
+        <activity android:name=".FShareActivity"></activity>
     </application>
 
 </manifest>

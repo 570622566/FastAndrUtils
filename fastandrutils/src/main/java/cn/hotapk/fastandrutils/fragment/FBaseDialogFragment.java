@@ -73,7 +73,10 @@ public abstract class FBaseDialogFragment extends DialogFragment {
 
     public void show() {
         this.show(fragmentManager, dialogTag);
+    }
 
+    public void show(String title) {
+        this.show(fragmentManager, dialogTag);
     }
 
     @LayoutRes
@@ -162,6 +165,12 @@ public abstract class FBaseDialogFragment extends DialogFragment {
         this.fragmentManager = fragmentManager;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        mRootView = null;
+    }
+
     @IntDef({Gravity.TOP, Gravity.LEFT, Gravity.BOTTOM, Gravity.RIGHT, Gravity.CENTER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface DialogGravity {
@@ -173,6 +182,5 @@ public abstract class FBaseDialogFragment extends DialogFragment {
 
     public interface DialogDismissListener {
         void onDismiss();
-
     }
 }

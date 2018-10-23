@@ -10,8 +10,6 @@ import android.widget.AdapterView;
 import java.util.Collections;
 import java.util.List;
 
-import cn.hotapk.fastandrutils.utils.FLogUtils;
-
 /**
  * @author laijian
  * @version 2018/7/4
@@ -87,7 +85,6 @@ public class FBaseRvAdapter<T> extends RecyclerView.Adapter<FViewHolder> {
     @Override
     public FViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return FViewHolder.createViewHolder(context, parent, fItemTypeDelegateManager.getViewResouce(viewType));
-
     }
 
     @Override

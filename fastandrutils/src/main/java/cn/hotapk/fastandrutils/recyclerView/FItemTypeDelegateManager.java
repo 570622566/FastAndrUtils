@@ -18,7 +18,7 @@ public class FItemTypeDelegateManager<T> {
         if (delegates.get(delegate.getViewType()) != null) {
 
             throw new IllegalArgumentException(
-                    "An FItemTypeDelegate is already registered for the viewType = "
+                    "already registered for the viewType = "
                             + delegate.getViewType());
         }
         delegates.put(delegate.getViewType(), delegate);
@@ -46,7 +46,8 @@ public class FItemTypeDelegateManager<T> {
     public int getItemViewType(T item, int postion) {
 
         int delegatesCount = delegates.size();
-        for (int i = delegatesCount - 1; i >= 0; i--) {
+
+        for (int i = 0; i < delegatesCount; i++) {
             FItemTypeDelegate<T> delegate = delegates.valueAt(i);
             if (delegate.isForViewType(item, postion)) {
                 return delegate.getViewType();

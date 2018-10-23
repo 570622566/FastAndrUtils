@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import cn.hotapk.fastandrutils.utils.FLogUtils;
+
 /**
  * @author laijian
  * @Copyright (C)2018-06-08 16:33:51 , www.hotapk.cn
@@ -57,4 +59,10 @@ public abstract class FLazyFragment extends Fragment {
 
     public abstract void initView(View view);
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        rootView = null;
+        FLogUtils.getInstance().e("ppp000");
+    }
 }

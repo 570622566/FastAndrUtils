@@ -1,6 +1,9 @@
 package cn.hotapk.fastandrutils.utils;
 
+import android.content.Context;
 import android.os.Environment;
+import android.os.StatFs;
+import android.os.storage.StorageManager;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -16,6 +19,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -39,6 +44,67 @@ public class FFileUtils {
             return "";
         }
     }
+
+    /**
+     * 获取扩展内存的路径
+     *
+     * @return
+     */
+    public static String getStoragePath() {
+
+        StorageManager mStorageManager = (StorageManager) FUtils.getAppContext().getSystemService(Context.STORAGE_SERVICE);
+        Class<?> storageVolumeClazz = null;
+        try {
+            storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
+            Method getVolumeList = mStorageManager.getClass().getMethod("getVolumeList");
+            Method getPath = storageVolumeClazz.getMethod("getPath");
+            Method isRemovable = storageVolumeClazz.getMethod("isRemovable");
+            Object result = getVolumeList.invoke(mStorageManager);
+            final int length = Array.getLength(result);
+            for (int i = 0; i < length; i++) {
+                Object storageVolumeElement = Array.get(result, i);
+                String path = (String) getPath.invoke(storageVolumeElement);
+                boolean removable = (Boolean) isRemovable.invoke(storageVolumeElement);
+                if (removable) {
+                    return path;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 获取存储空间总容量
+     *
+     * @param filePath
+     * @return
+     */
+    public static long storageToal(File filePath) {
+        StatFs stat = new StatFs(filePath.getPath()); // 创建StatFs对象
+        long blockSize = stat.getBlockSize(); // 获取block的size
+        long totalBlocks = stat.getBlockCount(); // 获取block的总数
+        return blockSize * totalBlocks;
+    }
+
+
+    /**
+     * 获取存储空间使用量
+     *
+     * @param filePath
+     * @return
+     */
+    public static long storageUse(File filePath) {
+        StatFs stat = new StatFs(filePath.getPath()); // 创建StatFs对象
+        long availableBlocks = stat.getAvailableBlocks(); // 获取可用块大小
+        long blockSize = stat.getBlockSize(); // 获取block的size
+        long totalBlocks = stat.getBlockCount(); // 获取block的总数
+        return ((totalBlocks - availableBlocks) * blockSize);
+
+    }
+
 
     /**
      * 可创建多个文件夹
